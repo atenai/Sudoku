@@ -7,15 +7,27 @@ public class Title : MonoBehaviour
 {
 	private const string MainGame_Scene_Name = "MainGameScene";
 
-	[SerializeField] private Button button;
+	[SerializeField] TitleUI titleUI;
 
 	private void Start()
 	{
-		button.onClick.AddListener(OnClick);
+		titleUI.EasyButton.onClick.AddListener(OnClickEasyButton);
+		titleUI.NormalButton.onClick.AddListener(OnClickNormalButton);
+		titleUI.HardButton.onClick.AddListener(OnClickHardButton);
 	}
 
-	private void OnClick()
+	private void OnClickEasyButton()
 	{
 		GameManager.SingletonInstance.ChangeScene(new MainGameSetting(MainGameSetting.DifficultyType.Easy), MainGame_Scene_Name);
+	}
+
+	private void OnClickNormalButton()
+	{
+		GameManager.SingletonInstance.ChangeScene(new MainGameSetting(MainGameSetting.DifficultyType.Normal), MainGame_Scene_Name);
+	}
+
+	private void OnClickHardButton()
+	{
+		GameManager.SingletonInstance.ChangeScene(new MainGameSetting(MainGameSetting.DifficultyType.Hard), MainGame_Scene_Name);
 	}
 }

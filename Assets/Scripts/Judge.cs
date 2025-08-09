@@ -26,7 +26,7 @@ public class Judge
 
 	public Judge(MainGame mainGame, MainGameSetting.DifficultyType difficultyType)
 	{
-		Debug.Log("<color=red>ジャッジクラス！</color>");
+		//Debug.Log("<color=red>ジャッジクラス！</color>");
 		this.mainGame = mainGame;
 		SetMissNumber(difficultyType);
 	}
