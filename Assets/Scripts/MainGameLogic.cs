@@ -27,8 +27,16 @@ public class MainGameLogic
 	/// </summary>
 	public int[,] QuestionGrid => questionGrid;
 
-	public MainGameLogic(MainGameSetting.DifficultyType difficultyType)
+	private MainGameInput mainGameInput;
+	private Judge judge;
+
+	public MainGameInput MainGameInput => mainGameInput;
+	public Judge Judge => judge;
+
+	public MainGameLogic(MainGame mainGame, MainGameSetting.DifficultyType difficultyType)
 	{
 		GenerateGrid generateGrid = new GenerateGrid(answerGrid, questionGrid, difficultyType);
+		mainGameInput = new MainGameInput(mainGame);
+		judge = new Judge(mainGame, difficultyType);
 	}
 }

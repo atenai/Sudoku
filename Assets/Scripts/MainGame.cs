@@ -3,11 +3,6 @@ using UnityEngine;
 public class MainGame : MonoBehaviour
 {
 	/// <summary>
-	/// メモモード切替
-	/// </summary>
-	public bool memoMode = false;
-
-	/// <summary>
 	/// マス数
 	/// </summary>
 	public static readonly int Cell_Number = 9;
@@ -17,19 +12,24 @@ public class MainGame : MonoBehaviour
 	/// </summary>
 	[SerializeField] private Board board;
 
-	MainGameInput mainGameInput;
-	Judge judge;
+	private MainGameLogic mainGameLogic;
+	public MainGameLogic MainGameLogic => mainGameLogic;
 
-	public MainGameInput MainGameInput => mainGameInput;
-	public Judge Judge => judge;
+	/// <summary>
+	/// メモモード切替
+	/// </summary>
+	private bool memoMode = false;
+	public bool MemoMode
+	{
+		get { return memoMode; }
+		set { memoMode = value; }
+	}
 
 	private void Start()
 	{
 		if (GameManager.SingletonInstance.GetSetting() is MainGameSetting mainGameSetting)
 		{
-			MainGameLogic mainGameLogic = new MainGameLogic(mainGameSetting.Difficulty);
-			mainGameInput = new MainGameInput(this);
-			judge = new Judge(this);
+			mainGameLogic = new MainGameLogic(this, mainGameSetting.Difficulty);
 			board.CreateCell(mainGameLogic.AnswerGrid, mainGameLogic.QuestionGrid);
 		}
 		else

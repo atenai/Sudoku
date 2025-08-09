@@ -38,7 +38,7 @@ public class MemoButton : MonoBehaviour
 	/// </summary>
 	private void OnClick()
 	{
-		mainGame.MainGameInput.ToggleMemoMode();
+		mainGame.MainGameLogic.MainGameInput.ToggleMemoMode();
 		UpdateVisual();
 	}
 
@@ -47,7 +47,7 @@ public class MemoButton : MonoBehaviour
 	/// </summary>
 	private void UpdateVisual()
 	{
-		if (mainGame.memoMode == true)
+		if (mainGame.MemoMode == true)
 		{
 			if (text != null)
 			{

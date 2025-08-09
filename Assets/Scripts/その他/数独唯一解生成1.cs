@@ -311,7 +311,7 @@ public class 数独唯一解生成1 : MonoBehaviour
 			}
 		}
 
-		mainGame.Judge.RegisterCells(cells);
+		mainGame.MainGameLogic.Judge.RegisterCells(cells);
 	}
 
 	/// <summary>

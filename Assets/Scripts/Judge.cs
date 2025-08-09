@@ -24,9 +24,31 @@ public class Judge
 
 	private MainGame mainGame;
 
-	public Judge(MainGame mainGame)
+	public Judge(MainGame mainGame, MainGameSetting.DifficultyType difficultyType)
 	{
+		Debug.Log("<color=red>ジャッジクラス！</color>");
 		this.mainGame = mainGame;
+		SetMissNumber(difficultyType);
+	}
+
+	/// <summary>
+	/// ミス数をセットする
+	/// </summary>
+	/// <param name="difficultyType"></param>
+	private void SetMissNumber(MainGameSetting.DifficultyType difficultyType)
+	{
+		switch (difficultyType)
+		{
+			case MainGameSetting.DifficultyType.Easy:
+				missNumber = 10;
+				break;
+			case MainGameSetting.DifficultyType.Normal:
+				missNumber = 10;
+				break;
+			case MainGameSetting.DifficultyType.Hard:
+				missNumber = 20;
+				break;
+		}
 	}
 
 	/// <summary>
@@ -46,7 +68,7 @@ public class Judge
 	/// <param name="number"></param>
 	public void CheckAnswer(CellButton cell, int number)
 	{
-		if (mainGame.memoMode) return; // メモ入力時は判定しない
+		if (mainGame.MemoMode) return; // メモ入力時は判定しない
 		if (number == 0) return; // 入力を消した場合は判定しない
 
 		if (cell.AnswerNumber == number)

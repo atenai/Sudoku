@@ -46,7 +46,7 @@ public class MainGameInput
 	{
 		if (selectedCurrentCell != null)
 		{
-			if (mainGame.memoMode && number != 0)
+			if (mainGame.MemoMode && number != 0)
 			{
 				//入力後ハイライト解除
 				selectedCurrentCell.Highlight(false);
@@ -68,7 +68,7 @@ public class MainGameInput
 
 	public void ToggleMemoMode()
 	{
-		mainGame.memoMode = !mainGame.memoMode;
-		Debug.Log("メモモード: " + (mainGame.memoMode ? "ON" : "OFF"));
+		mainGame.MemoMode = !mainGame.MemoMode;
+		Debug.Log("メモモード: " + (mainGame.MemoMode ? "ON" : "OFF"));
 	}
 }
