@@ -16,6 +16,6 @@ public class Title : MonoBehaviour
 
 	private void OnClick()
 	{
-		GameManager.SingletonInstance.ChangeScene(new MainGameSetting(), MainGame_Scene_Name);
+		GameManager.SingletonInstance.ChangeScene(new MainGameSetting(MainGameSetting.DifficultyType.Easy), MainGame_Scene_Name);
 	}
 }

@@ -2039,6 +2039,7 @@ GameObject:
   - component: {fileID: 1017346348}
   - component: {fileID: 1017346347}
   - component: {fileID: 1017346346}
+  - component: {fileID: 1017346349}
   m_Layer: 5
   m_Name: Image_Board
   m_TagString: Untagged
@@ -2127,6 +2128,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1017346344}
   m_CullTransparentMesh: 1
+--- !u!114 &1017346349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017346344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4786a1c113e4b940ac56c938bba2de9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BoardTransform: {fileID: 1017346345}
+  cellButtonPrefab: {fileID: 1006129044220685062, guid: 8d05f4575a1e1b640a1d57fdbd7c7423, type: 3}
+  mainGame: {fileID: 1275434859}
 --- !u!1 &1063595147
 GameObject:
   m_ObjectHideFlags: 0
@@ -2341,9 +2357,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1275434851}
-  - component: {fileID: 1275434858}
   - component: {fileID: 1275434859}
-  - component: {fileID: 1275434860}
   m_Layer: 0
   m_Name: MainGame
   m_TagString: Untagged
@@ -2366,23 +2380,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1275434858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1275434849}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce03f95200879da4781f0c5d531482ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  emptyCell: 55
-  backtrackMethod: {fileID: 1275434860}
-  buttonPrefab: {fileID: 1006129044220685062, guid: 8d05f4575a1e1b640a1d57fdbd7c7423, type: 3}
-  parrentTransform: {fileID: 1017346345}
-  mainGame: {fileID: 1275434859}
 --- !u!114 &1275434859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2396,18 +2393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   memoMode: 0
---- !u!114 &1275434860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1275434849}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b81a48fb51d0eee4790eda1697afd7db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  board: {fileID: 1017346349}
 --- !u!1 &1279769201
 GameObject:
   m_ObjectHideFlags: 1

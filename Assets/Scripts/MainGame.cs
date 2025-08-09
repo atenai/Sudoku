@@ -28,6 +28,29 @@ public class MainGame : MonoBehaviour
 	public bool memoMode = false;
 
 	/// <summary>
+	/// マス数
+	/// </summary>
+	public static readonly int Cell_Number = 9;
+
+	/// <summary>
+	/// ボード
+	/// </summary>
+	[SerializeField] private Board board;
+
+	private void Start()
+	{
+		if (GameManager.SingletonInstance.GetSetting() is MainGameSetting mainGameSetting)
+		{
+			MainGameLogic mainGameLogic = new MainGameLogic(mainGameSetting.Difficulty);
+			board.CreateCell(mainGameLogic.AnswerGrid, mainGameLogic.QuestionGrid);
+		}
+		else
+		{
+			Debug.LogError("メインゲームに必要な値を取得できませんでした。");
+		}
+	}
+
+	/// <summary>
 	/// マスを登録
 	/// </summary>
 	/// <param name="cells"></param>
