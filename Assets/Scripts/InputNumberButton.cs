@@ -16,6 +16,6 @@ public class InputNumberButton : MonoBehaviour
 	private void OnClick()
 	{
 		//2
-		mainGame.InputNumber(number);
+		mainGame.MainGameInput.InputNumber(number);
 	}
 }

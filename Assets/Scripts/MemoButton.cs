@@ -32,7 +32,7 @@ public class MemoButton : MonoBehaviour
 
 	private void OnClick()
 	{
-		mainGame.ToggleMemoMode();
+		mainGame.MainGameInput.ToggleMemoMode();
 		UpdateVisual();
 	}
 

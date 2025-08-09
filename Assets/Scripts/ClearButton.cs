@@ -20,6 +20,7 @@ public class ClearButton : MonoBehaviour
 
 	private void OnClick()
 	{
-		mainGame.InputNumber(0); //number=0で選択セルをクリア
+		//number=0で選択セルをクリア
+		mainGame.MainGameInput.InputNumber(0);
 	}
 }

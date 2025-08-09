@@ -59,7 +59,7 @@ public class CellButton : MonoBehaviour
 		Debug.Log($"答え番号: {answerNumber}");
 		Debug.Log($"問題番号: {questionNumber}");
 
-		mainGame.SelectCell(this);
+		mainGame.MainGameInput.SelectCell(this);
 	}
 
 	//5
