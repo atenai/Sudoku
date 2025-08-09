@@ -77,7 +77,7 @@ public class CellButton : MonoBehaviour
 
 		//6
 		// 入力ごとに判定する
-		mainGame.CheckAnswer(this, number);
+		mainGame.Judge.CheckAnswer(this, number);
 	}
 
 	/// <summary>

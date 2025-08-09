@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// 答え入力ボタンクラス
+/// </summary>
 public class InputNumberButton : MonoBehaviour
 {
 	[SerializeField] private Button button;
@@ -13,6 +16,9 @@ public class InputNumberButton : MonoBehaviour
 	}
 
 	//1
+	/// <summary>
+	/// 答え入力ボタンを押した際の処理
+	/// </summary>
 	private void OnClick()
 	{
 		//2

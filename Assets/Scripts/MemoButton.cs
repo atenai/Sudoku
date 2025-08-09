@@ -2,6 +2,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/// <summary>
+/// メモボタンクラス
+/// </summary>
 public class MemoButton : MonoBehaviour
 {
 	/// <summary>
@@ -30,6 +33,9 @@ public class MemoButton : MonoBehaviour
 		UpdateVisual();//初期状態を反映
 	}
 
+	/// <summary>
+	/// メモボタンを押した際の処理
+	/// </summary>
 	private void OnClick()
 	{
 		mainGame.MainGameInput.ToggleMemoMode();

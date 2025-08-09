@@ -41,6 +41,6 @@ public class Board : MonoBehaviour
 			}
 		}
 
-		mainGame.RegisterCells(cells);
+		mainGame.Judge.RegisterCells(cells);
 	}
 }

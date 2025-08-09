@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// クリアーボタン（消しゴム）クラス
+/// </summary>
 public class ClearButton : MonoBehaviour
 {
 	/// <summary>
@@ -18,6 +21,9 @@ public class ClearButton : MonoBehaviour
 		button.onClick.AddListener(OnClick);
 	}
 
+	/// <summary>
+	/// クリアーボタン（消しゴム）を押した際の処理
+	/// </summary>
 	private void OnClick()
 	{
 		//number=0で選択セルをクリア
