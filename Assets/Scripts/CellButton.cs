@@ -7,7 +7,7 @@ public class CellButton : MonoBehaviour
 {
 	[SerializeField] private Image image;
 	[SerializeField] private Button button;
-	[SerializeField] private TextMeshProUGUI buttonText;
+	[SerializeField] private TextMeshProUGUI numberText;
 	/// <summary>
 	/// 9個の小テキスト
 	/// </summary>
@@ -43,7 +43,7 @@ public class CellButton : MonoBehaviour
 		this.questionNumber = questionNumber;
 		this.mainGame = mainGame;
 
-		buttonText.text = questionNumber == 0 ? "" : questionNumber.ToString();
+		numberText.text = questionNumber == 0 ? "" : questionNumber.ToString();
 		button.onClick.AddListener(OnClick);
 
 		// 問題に数字があるセルは入力不可にする
@@ -70,7 +70,7 @@ public class CellButton : MonoBehaviour
 	public void SetNumber(int number)
 	{
 		Debug.Log("<color=green>入力番号 : " + number + "</color>");
-		buttonText.text = number == 0 ? "" : number.ToString();
+		numberText.text = number == 0 ? "" : number.ToString();
 
 		// 数字を入れたらメモを全消去
 		ClearMemos();
@@ -94,7 +94,7 @@ public class CellButton : MonoBehaviour
 
 		memoActive[index] = !memoActive[index];
 		memoTexts[index].gameObject.SetActive(memoActive[index]);
-		buttonText.text = "";
+		numberText.text = "";
 	}
 
 	/// <summary>
