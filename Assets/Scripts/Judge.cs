@@ -24,6 +24,9 @@ public class Judge
 
 	private MainGame mainGame;
 
+	public int MissNumber => missNumber;
+	public int MissCount => missCount;
+
 	public Judge(MainGame mainGame, MainGameSetting.DifficultyType difficultyType)
 	{
 		//Debug.Log("<color=red>ジャッジクラス！</color>");
