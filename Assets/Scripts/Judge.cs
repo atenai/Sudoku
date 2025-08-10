@@ -32,6 +32,9 @@ public class Judge
 		//Debug.Log("<color=red>ジャッジクラス！</color>");
 		this.mainGame = mainGame;
 		SetMissNumber(difficultyType);
+
+		mainGame.MissUI.SetMissCount(missCount);
+		mainGame.MissUI.SetMissNumber(missNumber);
 	}
 
 	/// <summary>
@@ -93,6 +96,7 @@ public class Judge
 			Debug.Log("<color=red>不正解！</color>");
 			cell.SetColor(Color.red);
 			missCount++;
+			mainGame.MissUI.SetMissCount(missCount);
 			if (missNumber <= missCount)
 			{
 				Debug.Log("<color=red>ゲームオーバー！</color>");

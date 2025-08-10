@@ -2755,6 +2755,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   board: {fileID: 1017346349}
+  missUI: {fileID: 1012782340}
 --- !u!1 &1279769201
 GameObject:
   m_ObjectHideFlags: 1

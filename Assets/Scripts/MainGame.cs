@@ -12,6 +12,15 @@ public class MainGame : MonoBehaviour
 	/// </summary>
 	[SerializeField] private Board board;
 
+	/// <summary>
+	/// ミスUI
+	/// </summary>
+	[SerializeField] private MissUI missUI;
+	public MissUI MissUI => missUI;
+
+	/// <summary>
+	/// メインゲームロジック
+	/// </summary>
 	private MainGameLogic mainGameLogic;
 	public MainGameLogic MainGameLogic => mainGameLogic;
 
@@ -31,10 +40,16 @@ public class MainGame : MonoBehaviour
 		{
 			mainGameLogic = new MainGameLogic(this, mainGameSetting.Difficulty);
 			board.CreateCell(mainGameLogic.AnswerGrid, mainGameLogic.QuestionGrid);
+			//missUI.SetMissNumber(mainGameLogic.Judge.MissNumber);
 		}
 		else
 		{
 			Debug.LogError("メインゲームに必要な値を取得できませんでした。");
 		}
+	}
+
+	private void Update()
+	{
+
 	}
 }
