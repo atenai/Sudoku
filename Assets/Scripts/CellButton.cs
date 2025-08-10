@@ -87,10 +87,14 @@ public class CellButton : MonoBehaviour
 	public void ToggleMemo(int number)
 	{
 		int index = number - 1;
-		if (index < 0 || index >= 9) return;
+		if (index < 0 || 9 <= index)
+		{
+			return;
+		}
 
 		memoActive[index] = !memoActive[index];
 		memoTexts[index].gameObject.SetActive(memoActive[index]);
+		buttonText.text = "";
 	}
 
 	/// <summary>
