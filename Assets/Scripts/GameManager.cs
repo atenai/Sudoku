@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
 
 	private ISetting setting;
 
+	/// <summary>
+	/// 初期化処理
+	/// </summary>
 	private void Awake()
 	{
 		//staticな変数instanceはメモリ領域は確保されていますが、初回では中身が入っていないので、中身を入れます。
@@ -25,6 +28,10 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// そのシーンに必要な値のクラスを取得する
+	/// </summary>
+	/// <returns></returns>
 	public ISetting GetSetting()
 	{
 		return setting;
@@ -35,6 +42,11 @@ public class GameManager : MonoBehaviour
 	// 	this.setting = setting;
 	// }
 
+	/// <summary>
+	/// シーン切り替え
+	/// </summary>
+	/// <param name="setting">そのシーン先で必要な値のクラス</param>
+	/// <param name="sceneName">遷移先のシーン名</param>
 	public void ChangeScene(ISetting setting, string sceneName)
 	{
 		this.setting = setting;

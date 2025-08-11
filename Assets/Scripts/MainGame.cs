@@ -34,6 +34,9 @@ public class MainGame : MonoBehaviour
 		set { memoMode = value; }
 	}
 
+	/// <summary>
+	/// 初期化処理
+	/// </summary>
 	private void Start()
 	{
 		if (GameManager.SingletonInstance.GetSetting() is MainGameSetting mainGameSetting)

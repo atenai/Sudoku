@@ -16,12 +16,18 @@ public class TitleUI : MonoBehaviour
 	public Button NormalButton => normalButton;
 	public Button HardButton => hardButton;
 
-	void Start()
+	/// <summary>
+	/// 初期化処理
+	/// </summary>
+	private void Start()
 	{
 		difficultyImage.gameObject.SetActive(false);
 		playButton.onClick.AddListener(OnClickPlay);
 	}
 
+	/// <summary>
+	/// プレイボタンを押した際の処理
+	/// </summary>
 	private void OnClickPlay()
 	{
 		difficultyImage.gameObject.SetActive(true);

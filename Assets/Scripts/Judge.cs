@@ -27,6 +27,11 @@ public class Judge
 	public int MissNumber => missNumber;
 	public int MissCount => missCount;
 
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	/// <param name="mainGame"></param>
+	/// <param name="difficultyType">設定した難易度</param>
 	public Judge(MainGame mainGame, MainGameSetting.DifficultyType difficultyType)
 	{
 		//Debug.Log("<color=red>ジャッジクラス！</color>");
@@ -40,7 +45,7 @@ public class Judge
 	/// <summary>
 	/// ミス数をセットする
 	/// </summary>
-	/// <param name="difficultyType"></param>
+	/// <param name="difficultyType">設定した難易度</param>
 	private void SetMissNumber(MainGameSetting.DifficultyType difficultyType)
 	{
 		switch (difficultyType)
@@ -60,7 +65,7 @@ public class Judge
 	/// <summary>
 	/// マスを登録
 	/// </summary>
-	/// <param name="cells"></param>
+	/// <param name="cells">登録した全てのセル</param>
 	public void RegisterCells(CellButton[,] cells)
 	{
 		allCells = cells;
@@ -70,8 +75,8 @@ public class Judge
 	/// <summary>
 	/// 正誤判定処理
 	/// </summary>
-	/// <param name="cell"></param>
-	/// <param name="number"></param>
+	/// <param name="cell">選択したセル</param>
+	/// <param name="number">入力番号</param>
 	public void CheckAnswer(CellButton cell, int number)
 	{
 		if (mainGame.MemoMode) return; // メモ入力時は判定しない

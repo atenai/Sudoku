@@ -16,6 +16,9 @@ public class ClearButton : MonoBehaviour
 	/// </summary>
 	[SerializeField] private MainGame mainGame;
 
+	/// <summary>
+	/// 初期化処理
+	/// </summary>
 	private void Start()
 	{
 		button.onClick.AddListener(OnClick);

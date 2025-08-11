@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class TitleSetting : ISetting
 {
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
 	public TitleSetting()
 	{
 

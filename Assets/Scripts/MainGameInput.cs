@@ -11,6 +11,10 @@ public class MainGameInput
 
 	MainGame mainGame;
 
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	/// <param name="mainGame"></param>
 	public MainGameInput(MainGame mainGame)
 	{
 		this.mainGame = mainGame;
@@ -66,6 +70,9 @@ public class MainGameInput
 		}
 	}
 
+	/// <summary>
+	/// メモモードの切り替え
+	/// </summary>
 	public void ToggleMemoMode()
 	{
 		mainGame.MemoMode = !mainGame.MemoMode;

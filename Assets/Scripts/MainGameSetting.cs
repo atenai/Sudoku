@@ -7,6 +7,9 @@ using UnityEngine;
 /// </summary>
 public class MainGameSetting : ISetting
 {
+	/// <summary>
+	/// 難易度タイプ
+	/// </summary>
 	public enum DifficultyType
 	{
 		Easy,
@@ -17,6 +20,10 @@ public class MainGameSetting : ISetting
 	private DifficultyType difficulty = DifficultyType.Easy;
 	public DifficultyType Difficulty => difficulty;
 
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	/// <param name="difficulty">設定した難易度</param>
 	public MainGameSetting(DifficultyType difficulty)
 	{
 		this.difficulty = difficulty;

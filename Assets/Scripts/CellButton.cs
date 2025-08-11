@@ -53,6 +53,9 @@ public class CellButton : MonoBehaviour
 		ClearMemos();
 	}
 
+	/// <summary>
+	/// マス（セル）が押された行う処理
+	/// </summary>
 	public void OnClick()
 	{
 		Debug.Log($"ボタン (縦:{row}, 横:{col}) がクリックされました!");
@@ -83,17 +86,21 @@ public class CellButton : MonoBehaviour
 	/// <summary>
 	/// メモON/OFF切り替え
 	/// </summary>
-	/// <param name="number"></param>
+	/// <param name="number">入力番号</param>
 	public void ToggleMemo(int number)
 	{
+		//メモテキストは配列で0～8で指定している為-1している
 		int index = number - 1;
+		//indexが0以下　または　indexが9と同じかそれ以上　なら切り上げる（だって対応したメモテキストが無いから）
 		if (index < 0 || 9 <= index)
 		{
 			return;
 		}
 
 		memoActive[index] = !memoActive[index];
+
 		memoTexts[index].gameObject.SetActive(memoActive[index]);
+		//メモを入力したらメインの数字はOFFにする
 		numberText.text = "";
 	}
 
@@ -109,6 +116,10 @@ public class CellButton : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// 選択したセルをハイライト
+	/// </summary>
+	/// <param name="isSelected">選択中か？</param>
 	public void Highlight(bool isSelected)
 	{
 		if (isSelected)
@@ -124,7 +135,7 @@ public class CellButton : MonoBehaviour
 	/// <summary>
 	/// セルの背景色を変更する（正解・不正解・選択状態）
 	/// </summary>
-	/// <param name="color"></param>
+	/// <param name="color">セットする色</param>
 	public void SetColor(Color color)
 	{
 		if (image != null)

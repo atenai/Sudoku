@@ -14,6 +14,12 @@ public class GenerateGrid
 	/// </summary>
 	private int emptyCell = 55;
 
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	/// <param name="aGrid"></param>
+	/// <param name="qGrid"></param>
+	/// <param name="difficultyType"></param>
 	public GenerateGrid(int[,] aGrid, int[,] qGrid, MainGameSetting.DifficultyType difficultyType)
 	{
 		// 0. 難易度設定

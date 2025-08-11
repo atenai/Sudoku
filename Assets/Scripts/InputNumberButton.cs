@@ -10,6 +10,9 @@ public class InputNumberButton : MonoBehaviour
 	[SerializeField] int number;
 	[SerializeField] MainGame mainGame;
 
+	/// <summary>
+	/// 初期化処理
+	/// </summary>
 	void Start()
 	{
 		button.onClick.AddListener(OnClick);
