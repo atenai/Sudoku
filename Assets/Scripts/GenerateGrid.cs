@@ -176,7 +176,8 @@ public class GenerateGrid
 			int backup = qGrid[cell.x, cell.y];
 			qGrid[cell.x, cell.y] = 0;
 
-			int solutions = CountSolutions((int[,])qGrid.Clone());
+			int[,] copyGrid = (int[,])qGrid.Clone();
+			int solutions = CountSolutions(copyGrid);
 			if (solutions == 1)
 			{
 				removed++;
@@ -192,12 +193,12 @@ public class GenerateGrid
 	/// <summary>
 	/// 解の数
 	/// </summary>
-	/// <param name="board"></param>
+	/// <param name="copyGrid">コピーグリッド</param>
 	/// <returns></returns>
-	private int CountSolutions(int[,] board)
+	private int CountSolutions(int[,] copyGrid)
 	{
 		int count = 0;
-		CheckSolutions(0, 0, board, ref count);
+		CheckSolutions(0, 0, copyGrid, ref count);
 		return count;
 	}
 
@@ -215,10 +216,10 @@ public class GenerateGrid
 	/// </remarks>
 	/// <param name="row"></param>
 	/// <param name="col"></param>
-	/// <param name="board"></param>
+	/// <param name="copyGrid">コピーグリッド</param>
 	/// <param name="count"></param>
 	/// <returns></returns>
-	private bool CheckSolutions(int row, int col, int[,] board, ref int count)
+	private bool CheckSolutions(int row, int col, int[,] copyGrid, ref int count)
 	{
 		if (count >= 2)
 		{
@@ -249,18 +250,18 @@ public class GenerateGrid
 		int nextCol = (col + 1) % MainGame.Cell_Number;
 
 		//「すでに数字が入っているマスは飛ばして、次のマスの探索に進む」
-		//board[row, col]が0なら「空白マス」という意味。
+		//copyGrid[row, col]が0なら「空白マス」という意味。
 		//このマスに1〜9を順番に試す処理に入ります（バックトラック探索）。
-		//board[row, col]が0でないなら、
+		//copyGrid[row, col]が0でないなら、
 		//そのマスは、
 		//・元々の問題（クエスチョン）で固定された数字
 		//・または すでに探索中に数字を仮置きした状態
 		//のどちらかです。
 		//こういうマスは「これ以上数字を変えられない」ので、
 		//数字を試す処理はスキップして、次の座標（nextRow, nextCol）へ再帰します。
-		if (board[row, col] != 0)
+		if (copyGrid[row, col] != 0)
 		{
-			return CheckSolutions(nextRow, nextCol, board, ref count);
+			return CheckSolutions(nextRow, nextCol, copyGrid, ref count);
 		}
 
 		//1.マス (row, col) に 1 を試す
@@ -276,23 +277,23 @@ public class GenerateGrid
 		{
 			//CheckNumber() は、その数字 num が行・列・3×3ブロックのルールに反していないかを確認します。
 			//true なら「このマスに num を置いてもOK」。
-			if (CheckNumber(row, col, num, board) == true)
+			if (CheckNumber(row, col, num, copyGrid) == true)
 			{
 				//この「置く→進む→戻す」を機械的に繰り返すのがバックトラッキングです。
 
-				//実際に盤面 board に num を入れます。
+				//実際に盤面 copyGrid に num を入れます。
 				//この時点ではあくまで仮置きで、次のマスを埋められるか試すための一時的な状態です。
 				//① 仮置き：その場でやってみる
-				board[row, col] = num;
+				copyGrid[row, col] = num;
 				//再帰呼び出しで次のマスを解こうとする。
 				//count は解の個数カウント用。ref なので呼び出し先で加算されると呼び出し元にも反映されます。
 				//もしここで解が完成したら count が増える。
 				//② 再帰：次のマスがちゃんと埋め切れるか検証
-				CheckSolutions(nextRow, nextCol, board, ref count);
+				CheckSolutions(nextRow, nextCol, copyGrid, ref count);
 				//「この数字でやってみたけど解が確定しなかった」または「他の解を探したい」場合は、そのマスを空（0）に戻す。
 				//これにより他の数字（num+1 など）を試せる。
 				//③ 戻す：ダメだった時や、他の解も探すために“状態を元に戻す”
-				board[row, col] = 0;
+				copyGrid[row, col] = 0;
 			}
 		}
 		return false;
