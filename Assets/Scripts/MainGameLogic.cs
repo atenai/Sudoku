@@ -20,12 +20,12 @@ public class MainGameLogic
 	/// <summary>
 	/// 答えグリッドのプロパティ
 	/// </summary>
-	public int[,] AnswerGrid => answerGrid;
+	//public int[,] AnswerGrid => answerGrid;
 
 	/// <summary>
 	/// 問題グリッドのプロパティ
 	/// </summary>
-	public int[,] QuestionGrid => questionGrid;
+	//public int[,] QuestionGrid => questionGrid;
 
 	private MainGameInput mainGameInput;
 	private Judge judge;
@@ -43,5 +43,23 @@ public class MainGameLogic
 		GenerateGrid generateGrid = new GenerateGrid(answerGrid, questionGrid, difficultyType);
 		mainGameInput = new MainGameInput(mainGame);
 		judge = new Judge(mainGame, difficultyType);
+	}
+
+	/// <summary>
+	/// 答えグリッドのコピー
+	/// </summary>
+	/// <returns>答えグリッドのコピー</returns>
+	public int[,] GetCreateAnswerGridCopy()
+	{
+		return (int[,])answerGrid.Clone();
+	}
+
+	/// <summary>
+	/// 問題グリッドのコピー
+	/// </summary>
+	/// <returns>問題グリッドのコピー</returns>
+	public int[,] GetCreateQuestionGridCopy()
+	{
+		return (int[,])questionGrid.Clone();
 	}
 }
