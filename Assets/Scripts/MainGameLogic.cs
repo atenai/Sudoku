@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// メインゲームロジッククラス
 /// </summary>
-public class MainGameLogic
+public class MainGameLogic : IGridData
 {
 	/// <summary>
 	/// 答えグリッド
@@ -16,16 +16,6 @@ public class MainGameLogic
 	/// 問題グリッド
 	/// </summary>
 	private int[,] questionGrid = new int[MainGame.Cell_Number, MainGame.Cell_Number];
-
-	/// <summary>
-	/// 答えグリッドのプロパティ
-	/// </summary>
-	//public int[,] AnswerGrid => answerGrid;
-
-	/// <summary>
-	/// 問題グリッドのプロパティ
-	/// </summary>
-	//public int[,] QuestionGrid => questionGrid;
 
 	private MainGameInput mainGameInput;
 	private Judge judge;
@@ -46,20 +36,27 @@ public class MainGameLogic
 	}
 
 	/// <summary>
-	/// 答えグリッドのコピー
+	/// 答えグリッドの数値
 	/// </summary>
-	/// <returns>答えグリッドのコピー</returns>
-	public int[,] GetCreateAnswerGridCopy()
+	/// </remarks>
+	/// <param name="row">横</param>
+	/// <param name="col">縦</param>
+	/// <returns>答えグリッドの数値</returns>
+	public int GetAnswerGridNumber(int row, int col)
 	{
-		return (int[,])answerGrid.Clone();
+		int[,] answerGridCopy = (int[,])answerGrid.Clone();
+		return answerGridCopy[row, col];
 	}
 
 	/// <summary>
-	/// 問題グリッドのコピー
+	/// 問題グリッドの数値
 	/// </summary>
-	/// <returns>問題グリッドのコピー</returns>
-	public int[,] GetCreateQuestionGridCopy()
+	/// <param name="row">横</param>
+	/// <param name="col">縦</param>
+	/// <returns>問題グリッドの数値</returns>
+	public int GetQuestionGridNumber(int row, int col)
 	{
-		return (int[,])questionGrid.Clone();
+		int[,] questionGridCopy = (int[,])questionGrid.Clone();
+		return questionGridCopy[row, col];
 	}
 }

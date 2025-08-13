@@ -25,7 +25,7 @@ public class Board : MonoBehaviour
 	/// </summary>
 	/// <param name="aGrid">答えグリッド</param>
 	/// <param name="qGrid">問題グリッド</param>
-	public void CreateCell(int[,] aGrid, int[,] qGrid)
+	public void CreateCell(IGridData gridData)
 	{
 		CellButton[,] cells = new CellButton[MainGame.Cell_Number, MainGame.Cell_Number];
 
@@ -36,7 +36,7 @@ public class Board : MonoBehaviour
 				GameObject newButton = Instantiate(cellButtonPrefab);
 				newButton.transform.SetParent(BoardTransform, false);
 				CellButton cellButton = newButton.GetComponent<CellButton>();
-				cellButton.Initialize(r, c, aGrid[r, c], qGrid[r, c], mainGame);
+				cellButton.Initialize(r, c, gridData.GetAnswerGridNumber(r, c), gridData.GetQuestionGridNumber(r, c), mainGame);
 				cells[r, c] = cellButton;
 			}
 		}
