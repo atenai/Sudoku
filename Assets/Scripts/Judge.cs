@@ -15,7 +15,7 @@ public class Judge
 	/// <summary>
 	/// ミス数
 	/// </summary>
-	private int missNumber = 5;
+	private int failNumber = 5;
 
 	/// <summary>
 	/// ミスカウント
@@ -24,7 +24,7 @@ public class Judge
 
 	private MainGame mainGame;
 
-	public int MissNumber => missNumber;
+	public int FailNumber => failNumber;
 	public int MissCount => missCount;
 
 	/// <summary>
@@ -38,8 +38,8 @@ public class Judge
 		this.mainGame = mainGame;
 		SetMissNumber(difficultyType);
 
-		mainGame.MissUI.SetMissCount(missCount);
-		mainGame.MissUI.SetMissNumber(missNumber);
+		mainGame.MainGameUI.MissUI.SetMissCount(missCount);
+		mainGame.MainGameUI.MissUI.SetFailNumber(failNumber);
 	}
 
 	/// <summary>
@@ -51,13 +51,13 @@ public class Judge
 		switch (difficultyType)
 		{
 			case MainGameSetting.DifficultyType.Easy:
-				missNumber = 10;
+				failNumber = 10;
 				break;
 			case MainGameSetting.DifficultyType.Normal:
-				missNumber = 10;
+				failNumber = 10;
 				break;
 			case MainGameSetting.DifficultyType.Hard:
-				missNumber = 20;
+				failNumber = 20;
 				break;
 		}
 	}
@@ -101,8 +101,8 @@ public class Judge
 			Debug.Log("<color=red>不正解！</color>");
 			cell.SetColor(Color.red);
 			missCount++;
-			mainGame.MissUI.SetMissCount(missCount);
-			if (missNumber <= missCount)
+			mainGame.MainGameUI.MissUI.SetMissCount(missCount);
+			if (failNumber <= missCount)
 			{
 				Debug.Log("<color=red>ゲームオーバー！</color>");
 			}

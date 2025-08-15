@@ -7,16 +7,8 @@ public class MainGame : MonoBehaviour
 	/// </summary>
 	public static readonly int Cell_Number = 9;
 
-	/// <summary>
-	/// ボード
-	/// </summary>
-	[SerializeField] private Board board;
-
-	/// <summary>
-	/// ミスUI
-	/// </summary>
-	[SerializeField] private MissUI missUI;
-	public MissUI MissUI => missUI;
+	[SerializeField] private MainGameUI mainGameUI;
+	public MainGameUI MainGameUI => mainGameUI;
 
 	/// <summary>
 	/// メインゲームロジック
@@ -42,7 +34,7 @@ public class MainGame : MonoBehaviour
 		if (GameManager.SingletonInstance.GetSetting() is MainGameSetting mainGameSetting)
 		{
 			mainGameLogic = new MainGameLogic(this, mainGameSetting.Difficulty);
-			board.CreateCell(mainGameLogic);
+			mainGameUI.Board.CreateCell(mainGameLogic);
 
 			//missUI.SetMissNumber(mainGameLogic.Judge.MissNumber);
 		}

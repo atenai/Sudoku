@@ -1796,7 +1796,7 @@ GameObject:
   - component: {fileID: 869099645}
   - component: {fileID: 869099644}
   m_Layer: 5
-  m_Name: missNumber
+  m_Name: failNumber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2387,8 +2387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missCount: {fileID: 336718466}
-  missNumber: {fileID: 869099644}
-  mainGame: {fileID: 1275434859}
+  failNumber: {fileID: 869099644}
 --- !u!1 &1017346344
 GameObject:
   m_ObjectHideFlags: 0
@@ -2720,6 +2719,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1275434851}
   - component: {fileID: 1275434859}
+  - component: {fileID: 1275434860}
   m_Layer: 0
   m_Name: MainGame
   m_TagString: Untagged
@@ -2752,6 +2752,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f00fb85048fef0a408e8a85dca19a328, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainGameUI: {fileID: 1275434860}
+--- !u!114 &1275434860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1275434849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca9b17d83629e844da99d682739b545f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   board: {fileID: 1017346349}

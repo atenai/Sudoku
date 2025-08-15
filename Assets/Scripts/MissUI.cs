@@ -6,7 +6,7 @@ using TMPro;
 public class MissUI : MonoBehaviour
 {
 	[SerializeField] private TextMeshProUGUI missCount;
-	[SerializeField] private TextMeshProUGUI missNumber;
+	[SerializeField] private TextMeshProUGUI failNumber;
 
 	/// <summary>
 	/// ミスカウントをセットする
@@ -20,9 +20,9 @@ public class MissUI : MonoBehaviour
 	/// <summary>
 	/// ミスナンバーをセットする
 	/// </summary>
-	/// <param name="missNumber"></param>
-	public void SetMissNumber(int missNumber)
+	/// <param name="failNumber"></param>
+	public void SetFailNumber(int failNumber)
 	{
-		this.missNumber.text = missNumber.ToString();
+		this.failNumber.text = failNumber.ToString();
 	}
 }
