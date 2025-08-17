@@ -10,7 +10,7 @@ public class Judge
 	/// <summary>
 	/// 生成された全てのセルを管理
 	/// </summary>
-	private CellButton[,] allCells;
+	private ICellButton[,] allCells;
 
 	/// <summary>
 	/// ミス数
@@ -66,7 +66,7 @@ public class Judge
 	/// マスを登録
 	/// </summary>
 	/// <param name="cells">登録した全てのセル</param>
-	public void RegisterCells(CellButton[,] cells)
+	public void RegisterCells(ICellButton[,] cells)
 	{
 		allCells = cells;
 	}
@@ -117,7 +117,7 @@ public class Judge
 	{
 		foreach (var cell in allCells)
 		{
-			if (cell.GetComponent<UnityEngine.UI.Button>().interactable)
+			if (cell.IsInteractable)
 			{
 				return false;
 			}

@@ -7,7 +7,7 @@ public class MainGameInput
 	/// <summary>
 	/// 現在選択しているセル
 	/// </summary>
-	private CellButton selectedCurrentCell;
+	private ICellButton selectedCurrentCell;
 
 	MainGame mainGame;
 
@@ -24,7 +24,7 @@ public class MainGameInput
 	/// セルを選択
 	/// </summary>
 	/// <param name="cell"></param>
-	public void SelectCell(CellButton cell)
+	public void SelectCell(ICellButton cell)
 	{
 		// 以前のセルのハイライトを解除
 		if (selectedCurrentCell != null && selectedCurrentCell != cell)

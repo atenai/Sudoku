@@ -27,7 +27,7 @@ public class Board : MonoBehaviour
 	/// <param name="qGrid">問題グリッド</param>
 	public void CreateCell(IGridData gridData)
 	{
-		CellButton[,] cells = new CellButton[MainGame.Cell_Number, MainGame.Cell_Number];
+		ICellButton[,] cells = new ICellButton[MainGame.Cell_Number, MainGame.Cell_Number];
 
 		for (int r = 0; r < MainGame.Cell_Number; r++)
 		{

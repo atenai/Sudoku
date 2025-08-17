@@ -3,10 +3,11 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class CellButton : MonoBehaviour
+public class CellButton : MonoBehaviour, ICellButton
 {
 	[SerializeField] private Image image;
 	[SerializeField] private Button button;
+	public bool IsInteractable { get => button.interactable; }
 	[SerializeField] private TextMeshProUGUI numberText;
 	/// <summary>
 	/// 9個の小テキスト
@@ -21,8 +22,14 @@ public class CellButton : MonoBehaviour
 	public int Row { get => row; set => row = value; }
 	private int col;
 	public int Col { get => col; set => col = value; }
+	/// <summary>
+	/// 答えの数値
+	/// </summary>
 	private int answerNumber;
 	public int AnswerNumber { get => answerNumber; set => answerNumber = value; }
+	/// <summary>
+	/// 問題の数値
+	/// </summary>
 	private int questionNumber;
 	public int QuestionNumber { get => questionNumber; set => questionNumber = value; }
 
