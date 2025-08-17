@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MainGame : MonoBehaviour
+public class MainGame : MonoBehaviour, IMainGame
 {
 	/// <summary>
 	/// マス数
@@ -8,13 +8,19 @@ public class MainGame : MonoBehaviour
 	public static readonly int Cell_Number = 9;
 
 	[SerializeField] private MainGameUI mainGameUI;
-	public MainGameUI MainGameUI => mainGameUI;
+	public IMainGameUI IMainGameUI
+	{
+		get { return mainGameUI; }
+	}
 
 	/// <summary>
 	/// メインゲームロジック
 	/// </summary>
-	private MainGameLogic mainGameLogic;
-	public MainGameLogic MainGameLogic => mainGameLogic;
+	private IMainGameLogic mainGameLogic;
+	public IMainGameLogic IMainGameLogic
+	{
+		get { return mainGameLogic; }
+	}
 
 	/// <summary>
 	/// メモモード切替

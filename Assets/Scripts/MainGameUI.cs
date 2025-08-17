@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainGameUI : MonoBehaviour
+public class MainGameUI : MonoBehaviour, IMainGameUI
 {
 	/// <summary>
 	/// ボード

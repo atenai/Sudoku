@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// メインゲームロジッククラス
 /// </summary>
-public class MainGameLogic : IGridData
+public class MainGameLogic : IMainGameLogic
 {
 	/// <summary>
 	/// 答えグリッド
@@ -17,11 +17,17 @@ public class MainGameLogic : IGridData
 	/// </summary>
 	private int[,] questionGrid = new int[MainGame.Cell_Number, MainGame.Cell_Number];
 
-	private MainGameInput mainGameInput;
+	private IMainGameInput iMainGameInput;
 	private IJudge iJudge;
 
-	public MainGameInput MainGameInput => mainGameInput;
-	public IJudge IJudge => iJudge;
+	public IMainGameInput IMainGameInput
+	{
+		get { return iMainGameInput; }
+	}
+	public IJudge IJudge
+	{
+		get { return iJudge; }
+	}
 
 	/// <summary>
 	/// コンストラクタ
@@ -31,7 +37,7 @@ public class MainGameLogic : IGridData
 	public MainGameLogic(MainGame mainGame, MainGameSetting.DifficultyType difficultyType)
 	{
 		GenerateGrid generateGrid = new GenerateGrid(answerGrid, questionGrid, difficultyType);
-		mainGameInput = new MainGameInput(mainGame);
+		iMainGameInput = new MainGameInput(mainGame);
 		iJudge = new Judge(mainGame, difficultyType);
 	}
 

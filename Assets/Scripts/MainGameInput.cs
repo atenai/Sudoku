@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainGameInput
+public class MainGameInput : IMainGameInput
 {
 	/// <summary>
 	/// 現在選択しているセル
@@ -24,7 +24,7 @@ public class MainGameInput
 	/// セルを選択
 	/// </summary>
 	/// <param name="cell"></param>
-	public void SelectCell(ICellButton cell)
+	public void ISelectCell(ICellButton cell)
 	{
 		// 以前のセルのハイライトを解除
 		if (selectedCurrentCell != null && selectedCurrentCell != cell)
@@ -46,7 +46,7 @@ public class MainGameInput
 	/// 数値を入力
 	/// </summary>
 	/// <param name="number"></param>
-	public void InputNumber(int number)
+	public void IInputNumber(int number)
 	{
 		if (selectedCurrentCell != null)
 		{
@@ -73,7 +73,7 @@ public class MainGameInput
 	/// <summary>
 	/// メモモードの切り替え
 	/// </summary>
-	public void ToggleMemoMode()
+	public void IToggleMemoMode()
 	{
 		mainGame.MemoMode = !mainGame.MemoMode;
 		Debug.Log("メモモード: " + (mainGame.MemoMode ? "ON" : "OFF"));

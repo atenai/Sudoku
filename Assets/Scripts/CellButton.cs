@@ -69,7 +69,7 @@ public class CellButton : MonoBehaviour, ICellButton
 		Debug.Log($"答え番号: {answerNumber}");
 		Debug.Log($"問題番号: {questionNumber}");
 
-		mainGame.MainGameLogic.MainGameInput.SelectCell(this);
+		mainGame.IMainGameLogic.IMainGameInput.ISelectCell(this);
 	}
 
 	//5
@@ -87,7 +87,7 @@ public class CellButton : MonoBehaviour, ICellButton
 
 		//6
 		// 入力ごとに判定する
-		mainGame.MainGameLogic.IJudge.CheckAnswer(this, number);
+		mainGame.IMainGameLogic.IJudge.CheckAnswer(this, number);
 	}
 
 	/// <summary>

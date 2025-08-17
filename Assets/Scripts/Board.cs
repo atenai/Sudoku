@@ -42,6 +42,6 @@ public class Board : MonoBehaviour, IBoard
 		}
 
 		// 全てのマスを登録
-		mainGame.MainGameLogic.IJudge.RegisterCells(cells);
+		mainGame.IMainGameLogic.IJudge.RegisterCells(cells);
 	}
 }
