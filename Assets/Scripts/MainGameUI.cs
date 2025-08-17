@@ -14,7 +14,7 @@ public class MainGameUI : MonoBehaviour
 	/// </summary>
 	[SerializeField] private MissUI missUI;
 
-	public Board Board => board;
+	public IBoard IBoard => board;
 
 	public IMissUI IMissUI => missUI;
 }

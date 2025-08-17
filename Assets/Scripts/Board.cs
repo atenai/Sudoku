@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// ボードクラス
 /// </summary>
-public class Board : MonoBehaviour
+public class Board : MonoBehaviour, IBoard
 {
 	/// <summary>
 	/// ボードのトランスフォーム

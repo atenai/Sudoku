@@ -34,7 +34,7 @@ public class MainGame : MonoBehaviour
 		if (GameManager.SingletonInstance.GetSetting() is MainGameSetting mainGameSetting)
 		{
 			mainGameLogic = new MainGameLogic(this, mainGameSetting.Difficulty);
-			mainGameUI.Board.CreateCell(mainGameLogic);
+			mainGameUI.IBoard.CreateCell(mainGameLogic);
 
 			//missUI.SetMissNumber(mainGameLogic.Judge.MissNumber);
 		}
