@@ -87,7 +87,7 @@ public class CellButton : MonoBehaviour, ICellButton
 
 		//6
 		// 入力ごとに判定する
-		mainGame.MainGameLogic.Judge.CheckAnswer(this, number);
+		mainGame.MainGameLogic.IJudge.CheckAnswer(this, number);
 	}
 
 	/// <summary>

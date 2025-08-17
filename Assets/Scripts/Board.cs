@@ -42,6 +42,6 @@ public class Board : MonoBehaviour
 		}
 
 		// 全てのマスを登録
-		mainGame.MainGameLogic.Judge.RegisterCells(cells);
+		mainGame.MainGameLogic.IJudge.RegisterCells(cells);
 	}
 }

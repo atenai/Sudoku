@@ -18,10 +18,10 @@ public class MainGameLogic : IGridData
 	private int[,] questionGrid = new int[MainGame.Cell_Number, MainGame.Cell_Number];
 
 	private MainGameInput mainGameInput;
-	private Judge judge;
+	private IJudge iJudge;
 
 	public MainGameInput MainGameInput => mainGameInput;
-	public Judge Judge => judge;
+	public IJudge IJudge => iJudge;
 
 	/// <summary>
 	/// コンストラクタ
@@ -32,7 +32,7 @@ public class MainGameLogic : IGridData
 	{
 		GenerateGrid generateGrid = new GenerateGrid(answerGrid, questionGrid, difficultyType);
 		mainGameInput = new MainGameInput(mainGame);
-		judge = new Judge(mainGame, difficultyType);
+		iJudge = new Judge(mainGame, difficultyType);
 	}
 
 	/// <summary>

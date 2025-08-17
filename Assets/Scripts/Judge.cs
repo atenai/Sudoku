@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// 正誤判定クラス
 /// </summary>
-public class Judge
+public class Judge : IJudge
 {
 	/// <summary>
 	/// 生成された全てのセルを管理
@@ -77,7 +77,7 @@ public class Judge
 	/// </summary>
 	/// <param name="cell">選択したセル</param>
 	/// <param name="number">入力番号</param>
-	public void CheckAnswer(CellButton cell, int number)
+	public void CheckAnswer(ICellButton cell, int number)
 	{
 		if (mainGame.MemoMode) return; // メモ入力時は判定しない
 		if (number == 0) return; // 入力を消した場合は判定しない
