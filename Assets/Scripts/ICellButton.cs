@@ -4,15 +4,15 @@ using UnityEngine;
 
 public interface ICellButton
 {
-	int Row { get; }
-	int Col { get; }
-	int AnswerNumber { get; }
-	int QuestionNumber { get; }
-	bool IsInteractable { get; }
+	int IRow { get; }
+	int ICol { get; }
+	int IAnswerNumber { get; }
+	int IQuestionNumber { get; }
+	bool IIsInteractable { get; }
 
-	void SetNumber(int number);
-	void ToggleMemo(int number);
-	void Highlight(bool isSelected);
-	void SetColor(Color color);
-	void LockCell();
+	void ISetNumber(int number);
+	void IToggleMemo(int number);
+	void IHighlight(bool isSelected);
+	void ISetColor(Color color);
+	void ILockCell();
 }

@@ -66,7 +66,7 @@ public class Judge : IJudge
 	/// マスを登録
 	/// </summary>
 	/// <param name="cells">登録した全てのセル</param>
-	public void RegisterCells(ICellButton[,] cells)
+	public void IRegisterCells(ICellButton[,] cells)
 	{
 		allCells = cells;
 	}
@@ -77,17 +77,17 @@ public class Judge : IJudge
 	/// </summary>
 	/// <param name="cell">選択したセル</param>
 	/// <param name="number">入力番号</param>
-	public void CheckAnswer(ICellButton cell, int number)
+	public void ICheckAnswer(ICellButton cell, int number)
 	{
 		if (mainGame.IMainGameLogic.IMainGameInput.IMemoMode) return; // メモ入力時は判定しない
 		if (number == 0) return; // 入力を消した場合は判定しない
 
-		if (cell.AnswerNumber == number)
+		if (cell.IAnswerNumber == number)
 		{
 			//Debug.Log($"({cell.Row},{cell.Col}) 正解！");
 			Debug.Log("<color=green>正解！</color>");
-			cell.SetColor(Color.green);
-			cell.LockCell(); // 正解したらそのセルをロック
+			cell.ISetColor(Color.green);
+			cell.ILockCell(); // 正解したらそのセルをロック
 
 			// クリア判定
 			if (CheckAllCellLock() == true)
@@ -99,7 +99,7 @@ public class Judge : IJudge
 		{
 			//Debug.Log($"({cell.Row},{cell.Col}) 不正解！");
 			Debug.Log("<color=red>不正解！</color>");
-			cell.SetColor(Color.red);
+			cell.ISetColor(Color.red);
 			missCount++;
 			mainGame.IMainGameUI.IMissUI.ISetMissCount(missCount);
 			if (failNumber <= missCount)
@@ -117,7 +117,7 @@ public class Judge : IJudge
 	{
 		foreach (var cell in allCells)
 		{
-			if (cell.IsInteractable)
+			if (cell.IIsInteractable)
 			{
 				return false;
 			}

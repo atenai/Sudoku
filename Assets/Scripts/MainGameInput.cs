@@ -36,16 +36,15 @@ public class MainGameInput : IMainGameInput
 		// 以前のセルのハイライトを解除
 		if (selectedCurrentCell != null && selectedCurrentCell != cell)
 		{
-			selectedCurrentCell.Highlight(false);
+			selectedCurrentCell.IHighlight(false);
 		}
 
 		// 新しく選んだセルを選択状態に
 		selectedCurrentCell = cell;
-		//cell.SetColor(Color.blue);
-		selectedCurrentCell.Highlight(true); // ✅ 選択セルをハイライト
-		Debug.Log($"ボタン (縦:{selectedCurrentCell.Row}, 横:{selectedCurrentCell.Col}) がクリックされました!");
-		Debug.Log($"答え番号: {selectedCurrentCell.AnswerNumber}");
-		Debug.Log($"問題番号: {selectedCurrentCell.QuestionNumber}");
+		selectedCurrentCell.IHighlight(true); // 選択セルをハイライト
+		Debug.Log($"ボタン (縦:{selectedCurrentCell.IRow}, 横:{selectedCurrentCell.ICol}) がクリックされました!");
+		Debug.Log($"答え番号: {selectedCurrentCell.IAnswerNumber}");
+		Debug.Log($"問題番号: {selectedCurrentCell.IQuestionNumber}");
 	}
 
 	//3
@@ -60,17 +59,17 @@ public class MainGameInput : IMainGameInput
 			if (memoMode && number != 0)
 			{
 				//入力後ハイライト解除
-				selectedCurrentCell.Highlight(false);
+				selectedCurrentCell.IHighlight(false);
 				//メモを切り替え
-				selectedCurrentCell.ToggleMemo(number);
+				selectedCurrentCell.IToggleMemo(number);
 			}
 			else
 			{
 				//入力後ハイライト解除
-				selectedCurrentCell.Highlight(false);
+				selectedCurrentCell.IHighlight(false);
 				//4
 				//本数字入力
-				selectedCurrentCell.SetNumber(number);
+				selectedCurrentCell.ISetNumber(number);
 			}
 
 			selectedCurrentCell = null;

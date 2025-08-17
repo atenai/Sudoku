@@ -7,6 +7,6 @@ public interface IJudge
 	int FailNumber { get; }
 	int MissCount { get; }
 
-	void RegisterCells(ICellButton[,] cells);
-	void CheckAnswer(ICellButton cell, int number);
+	void IRegisterCells(ICellButton[,] cells);
+	void ICheckAnswer(ICellButton cell, int number);
 }

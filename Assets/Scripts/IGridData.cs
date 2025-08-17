@@ -11,7 +11,7 @@ public interface IGridData
 	/// <param name="row">横</param>
 	/// <param name="col">縦</param>
 	/// <returns>答えグリッドの数値</returns>
-	public int GetAnswerGridNumber(int row, int col);
+	public int IGetAnswerGridNumber(int row, int col);
 
 	/// <summary>
 	/// 問題グリッドの数値
@@ -19,5 +19,5 @@ public interface IGridData
 	/// <param name="row">横</param>
 	/// <param name="col">縦</param>
 	/// <returns>問題グリッドの数値</returns>
-	public int GetQuestionGridNumber(int row, int col);
+	public int IGetQuestionGridNumber(int row, int col);
 }

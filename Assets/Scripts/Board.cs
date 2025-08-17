@@ -25,7 +25,7 @@ public class Board : MonoBehaviour, IBoard
 	/// </summary>
 	/// <param name="aGrid">答えグリッド</param>
 	/// <param name="qGrid">問題グリッド</param>
-	public void CreateCell(IGridData gridData)
+	public void ICreateCell(IGridData gridData)
 	{
 		ICellButton[,] cells = new ICellButton[MainGame.Cell_Number, MainGame.Cell_Number];
 
@@ -36,12 +36,12 @@ public class Board : MonoBehaviour, IBoard
 				GameObject newButton = Instantiate(cellButtonPrefab);
 				newButton.transform.SetParent(BoardTransform, false);
 				CellButton cellButton = newButton.GetComponent<CellButton>();
-				cellButton.Initialize(r, c, gridData.GetAnswerGridNumber(r, c), gridData.GetQuestionGridNumber(r, c), mainGame);
+				cellButton.Initialize(r, c, gridData.IGetAnswerGridNumber(r, c), gridData.IGetQuestionGridNumber(r, c), mainGame);
 				cells[r, c] = cellButton;
 			}
 		}
 
 		// 全てのマスを登録
-		mainGame.IMainGameLogic.IJudge.RegisterCells(cells);
+		mainGame.IMainGameLogic.IJudge.IRegisterCells(cells);
 	}
 }

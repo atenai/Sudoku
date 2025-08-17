@@ -7,7 +7,7 @@ public class CellButton : MonoBehaviour, ICellButton
 {
 	[SerializeField] private Image image;
 	[SerializeField] private Button button;
-	public bool IsInteractable { get => button.interactable; }
+	public bool IIsInteractable { get => button.interactable; }
 	[SerializeField] private TextMeshProUGUI numberText;
 	/// <summary>
 	/// 9個の小テキスト
@@ -19,19 +19,19 @@ public class CellButton : MonoBehaviour, ICellButton
 	private bool[] memoActive = new bool[9];
 
 	private int row;
-	public int Row { get => row; set => row = value; }
+	public int IRow { get => row; set => row = value; }
 	private int col;
-	public int Col { get => col; set => col = value; }
+	public int ICol { get => col; set => col = value; }
 	/// <summary>
 	/// 答えの数値
 	/// </summary>
 	private int answerNumber;
-	public int AnswerNumber { get => answerNumber; set => answerNumber = value; }
+	public int IAnswerNumber { get => answerNumber; set => answerNumber = value; }
 	/// <summary>
 	/// 問題の数値
 	/// </summary>
 	private int questionNumber;
-	public int QuestionNumber { get => questionNumber; set => questionNumber = value; }
+	public int IQuestionNumber { get => questionNumber; set => questionNumber = value; }
 
 	private MainGame mainGame;
 
@@ -77,7 +77,7 @@ public class CellButton : MonoBehaviour, ICellButton
 	/// 入力番号
 	/// </summary>
 	/// <param name="number"></param>
-	public void SetNumber(int number)
+	public void ISetNumber(int number)
 	{
 		Debug.Log("<color=green>入力番号 : " + number + "</color>");
 		numberText.text = number == 0 ? "" : number.ToString();
@@ -87,14 +87,14 @@ public class CellButton : MonoBehaviour, ICellButton
 
 		//6
 		// 入力ごとに判定する
-		mainGame.IMainGameLogic.IJudge.CheckAnswer(this, number);
+		mainGame.IMainGameLogic.IJudge.ICheckAnswer(this, number);
 	}
 
 	/// <summary>
 	/// メモON/OFF切り替え
 	/// </summary>
 	/// <param name="number">入力番号</param>
-	public void ToggleMemo(int number)
+	public void IToggleMemo(int number)
 	{
 		//メモテキストは配列で0～8で指定している為-1している
 		int index = number - 1;
@@ -127,15 +127,15 @@ public class CellButton : MonoBehaviour, ICellButton
 	/// 選択したセルをハイライト
 	/// </summary>
 	/// <param name="isSelected">選択中か？</param>
-	public void Highlight(bool isSelected)
+	public void IHighlight(bool isSelected)
 	{
 		if (isSelected)
 		{
-			SetColor(Color.cyan); //選択中は水色で表示
+			ISetColor(Color.cyan); //選択中は水色で表示
 		}
 		else
 		{
-			SetColor(Color.white); //通常時は白
+			ISetColor(Color.white); //通常時は白
 		}
 	}
 
@@ -143,7 +143,7 @@ public class CellButton : MonoBehaviour, ICellButton
 	/// セルの背景色を変更する（正解・不正解・選択状態）
 	/// </summary>
 	/// <param name="color">セットする色</param>
-	public void SetColor(Color color)
+	public void ISetColor(Color color)
 	{
 		if (image != null)
 		{
@@ -154,7 +154,7 @@ public class CellButton : MonoBehaviour, ICellButton
 	/// <summary>
 	/// 正解時にセルを固定
 	/// </summary>
-	public void LockCell()
+	public void ILockCell()
 	{
 		button.interactable = false;
 		ClearMemos(); //正解時にメモも削除
