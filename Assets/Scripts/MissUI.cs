@@ -12,7 +12,7 @@ public class MissUI : MonoBehaviour, IMissUI
 	/// ミスカウントをセットする
 	/// </summary>
 	/// <param name="missCount"></param>
-	public void SetMissCount(int missCount)
+	public void ISetMissCount(int missCount)
 	{
 		this.missCount.text = missCount.ToString();
 	}
@@ -21,7 +21,7 @@ public class MissUI : MonoBehaviour, IMissUI
 	/// ミスナンバーをセットする
 	/// </summary>
 	/// <param name="failNumber"></param>
-	public void SetFailNumber(int failNumber)
+	public void ISetFailNumber(int failNumber)
 	{
 		this.failNumber.text = failNumber.ToString();
 	}

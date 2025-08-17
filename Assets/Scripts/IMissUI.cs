@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IMissUI
 {
-	void SetMissCount(int missCount);
-	void SetFailNumber(int failNumber);
+	void ISetMissCount(int missCount);
+	void ISetFailNumber(int failNumber);
 }

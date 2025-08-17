@@ -9,8 +9,6 @@ public class MainGameInput : IMainGameInput
 	/// </summary>
 	private ICellButton selectedCurrentCell;
 
-	MainGame mainGame;
-
 	/// <summary>
 	/// メモモード切替
 	/// </summary>
@@ -24,10 +22,9 @@ public class MainGameInput : IMainGameInput
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	/// <param name="mainGame"></param>
-	public MainGameInput(MainGame mainGame)
+	public MainGameInput()
 	{
-		this.mainGame = mainGame;
+
 	}
 
 	/// <summary>

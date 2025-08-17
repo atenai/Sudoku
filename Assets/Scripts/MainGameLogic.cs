@@ -37,7 +37,7 @@ public class MainGameLogic : IMainGameLogic
 	public MainGameLogic(MainGame mainGame, MainGameSetting.DifficultyType difficultyType)
 	{
 		GenerateGrid generateGrid = new GenerateGrid(answerGrid, questionGrid, difficultyType);
-		iMainGameInput = new MainGameInput(mainGame);
+		iMainGameInput = new MainGameInput();
 		iJudge = new Judge(mainGame, difficultyType);
 	}
 
