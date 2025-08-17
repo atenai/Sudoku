@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class MissUI : MonoBehaviour
+public class MissUI : MonoBehaviour, IMissUI
 {
 	[SerializeField] private TextMeshProUGUI missCount;
 	[SerializeField] private TextMeshProUGUI failNumber;

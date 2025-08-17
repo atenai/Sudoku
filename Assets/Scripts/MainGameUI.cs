@@ -16,5 +16,5 @@ public class MainGameUI : MonoBehaviour
 
 	public Board Board => board;
 
-	public MissUI MissUI => missUI;
+	public IMissUI IMissUI => missUI;
 }

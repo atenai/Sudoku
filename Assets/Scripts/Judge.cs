@@ -38,8 +38,8 @@ public class Judge
 		this.mainGame = mainGame;
 		SetMissNumber(difficultyType);
 
-		mainGame.MainGameUI.MissUI.SetMissCount(missCount);
-		mainGame.MainGameUI.MissUI.SetFailNumber(failNumber);
+		mainGame.MainGameUI.IMissUI.SetMissCount(missCount);
+		mainGame.MainGameUI.IMissUI.SetFailNumber(failNumber);
 	}
 
 	/// <summary>
@@ -101,7 +101,7 @@ public class Judge
 			Debug.Log("<color=red>不正解！</color>");
 			cell.SetColor(Color.red);
 			missCount++;
-			mainGame.MainGameUI.MissUI.SetMissCount(missCount);
+			mainGame.MainGameUI.IMissUI.SetMissCount(missCount);
 			if (failNumber <= missCount)
 			{
 				Debug.Log("<color=red>ゲームオーバー！</color>");
