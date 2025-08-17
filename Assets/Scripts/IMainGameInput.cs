@@ -4,6 +4,9 @@ using UnityEngine;
 
 public interface IMainGameInput
 {
+	/// メモモード（ON/OFF）
+	bool IMemoMode { get; set; }
+
 	/// <summary>
 	/// セルを選択したときの処理
 	/// </summary>

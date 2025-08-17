@@ -12,6 +12,16 @@ public class MainGameInput : IMainGameInput
 	MainGame mainGame;
 
 	/// <summary>
+	/// メモモード切替
+	/// </summary>
+	private bool memoMode = false;
+	public bool IMemoMode
+	{
+		get { return memoMode; }
+		set { memoMode = value; }
+	}
+
+	/// <summary>
 	/// コンストラクタ
 	/// </summary>
 	/// <param name="mainGame"></param>
@@ -50,7 +60,7 @@ public class MainGameInput : IMainGameInput
 	{
 		if (selectedCurrentCell != null)
 		{
-			if (mainGame.MemoMode && number != 0)
+			if (memoMode && number != 0)
 			{
 				//入力後ハイライト解除
 				selectedCurrentCell.Highlight(false);
@@ -75,7 +85,7 @@ public class MainGameInput : IMainGameInput
 	/// </summary>
 	public void IToggleMemoMode()
 	{
-		mainGame.MemoMode = !mainGame.MemoMode;
-		Debug.Log("メモモード: " + (mainGame.MemoMode ? "ON" : "OFF"));
+		memoMode = !memoMode;
+		Debug.Log("メモモード: " + (memoMode ? "ON" : "OFF"));
 	}
 }

@@ -23,16 +23,6 @@ public class MainGame : MonoBehaviour, IMainGame
 	}
 
 	/// <summary>
-	/// メモモード切替
-	/// </summary>
-	private bool memoMode = false;
-	public bool MemoMode
-	{
-		get { return memoMode; }
-		set { memoMode = value; }
-	}
-
-	/// <summary>
 	/// 初期化処理
 	/// </summary>
 	private void Start()

@@ -79,7 +79,7 @@ public class Judge : IJudge
 	/// <param name="number">入力番号</param>
 	public void CheckAnswer(ICellButton cell, int number)
 	{
-		if (mainGame.MemoMode) return; // メモ入力時は判定しない
+		if (mainGame.IMainGameLogic.IMainGameInput.IMemoMode) return; // メモ入力時は判定しない
 		if (number == 0) return; // 入力を消した場合は判定しない
 
 		if (cell.AnswerNumber == number)

@@ -30,7 +30,7 @@ public class MemoButton : MonoBehaviour
 	private void Start()
 	{
 		button.onClick.AddListener(OnClick);
-		UpdateVisual();//初期状態を反映
+		InitVisual();
 	}
 
 	/// <summary>
@@ -42,12 +42,29 @@ public class MemoButton : MonoBehaviour
 		UpdateVisual();
 	}
 
+	private void InitVisual()
+	{
+		// どれか未初期化ならデフォルト表示で早期return
+		if (mainGame == null || mainGame.IMainGameLogic == null)
+		{
+			if (text)
+			{
+				text.text = "Memo: OFF";
+			}
+			if (image)
+			{
+				image.color = Color.white;
+			}
+			return;
+		}
+	}
+
 	/// <summary>
 	/// メモボタンのビジュアルを更新
 	/// </summary>
 	private void UpdateVisual()
 	{
-		if (mainGame.MemoMode == true)
+		if (mainGame.IMainGameLogic.IMainGameInput.IMemoMode == true)
 		{
 			if (text != null)
 			{
