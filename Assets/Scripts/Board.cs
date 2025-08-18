@@ -10,11 +10,13 @@ public class Board : MonoBehaviour, IBoard
 	/// <summary>
 	/// ボードのトランスフォーム
 	/// </summary>
-	[SerializeField] private Transform BoardTransform;
+	[SerializeField] private Transform boardTransform;
+
 	/// <summary>
 	/// 各マスのプレハブ
 	/// </summary>
 	[SerializeField] private GameObject cellButtonPrefab;
+
 	/// <summary>
 	/// メインゲーム
 	/// </summary>
@@ -34,7 +36,7 @@ public class Board : MonoBehaviour, IBoard
 			for (int c = 0; c < MainGame.Cell_Number; c++)
 			{
 				GameObject newButton = Instantiate(cellButtonPrefab);
-				newButton.transform.SetParent(BoardTransform, false);
+				newButton.transform.SetParent(boardTransform, false);
 				CellButton cellButton = newButton.GetComponent<CellButton>();
 				cellButton.Initialize(r, c, gridData.IGetAnswerGridNumber(r, c), gridData.IGetQuestionGridNumber(r, c), mainGame);
 				cells[r, c] = cellButton;

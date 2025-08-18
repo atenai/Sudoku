@@ -7,7 +7,13 @@ public class MainGame : MonoBehaviour, IMainGame
 	/// </summary>
 	public static readonly int Cell_Number = 9;
 
+	/// <summary>
+	/// メインゲームUI
+	/// </summary>
 	[SerializeField] private MainGameUI mainGameUI;
+	/// <summary>
+	/// メインゲームUIのプロパティ
+	/// </summary>
 	public IMainGameUI IMainGameUI
 	{
 		get { return mainGameUI; }
@@ -17,6 +23,9 @@ public class MainGame : MonoBehaviour, IMainGame
 	/// メインゲームロジック
 	/// </summary>
 	private IMainGameLogic mainGameLogic;
+	/// <summary>
+	/// メインゲームロジックのプロパティ
+	/// </summary>
 	public IMainGameLogic IMainGameLogic
 	{
 		get { return mainGameLogic; }

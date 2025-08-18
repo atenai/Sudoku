@@ -2501,7 +2501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4786a1c113e4b940ac56c938bba2de9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BoardTransform: {fileID: 1017346345}
+  boardTransform: {fileID: 1017346345}
   cellButtonPrefab: {fileID: 1006129044220685062, guid: 8d05f4575a1e1b640a1d57fdbd7c7423, type: 3}
   mainGame: {fileID: 1275434859}
 --- !u!1 &1063595147

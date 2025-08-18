@@ -10,7 +10,7 @@ public class CellButton : MonoBehaviour, ICellButton
 	public bool IIsInteractable { get => button.interactable; }
 	[SerializeField] private TextMeshProUGUI numberText;
 	/// <summary>
-	/// 9個の小テキスト
+	/// 9個の小メモテキスト
 	/// </summary>
 	[SerializeField] private TextMeshProUGUI[] memoTexts;
 	/// <summary>
@@ -23,16 +23,25 @@ public class CellButton : MonoBehaviour, ICellButton
 	private int col;
 	public int ICol { get => col; set => col = value; }
 	/// <summary>
-	/// 答えの数値
+	/// 答え数値
 	/// </summary>
 	private int answerNumber;
+	/// <summary>
+	/// 答え数値のプロパティ
+	/// </summary>
 	public int IAnswerNumber { get => answerNumber; set => answerNumber = value; }
 	/// <summary>
-	/// 問題の数値
+	/// 問題数値
 	/// </summary>
 	private int questionNumber;
+	/// <summary>
+	/// 問題数値のプロパティ
+	/// </summary>
 	public int IQuestionNumber { get => questionNumber; set => questionNumber = value; }
 
+	/// <summary>
+	/// メインゲーム
+	/// </summary>
 	private MainGame mainGame;
 
 	/// <summary>
@@ -40,8 +49,9 @@ public class CellButton : MonoBehaviour, ICellButton
 	/// </summary>
 	/// <param name="row"></param>
 	/// <param name="col"></param>
-	/// <param name="answerNumber"></param>
-	/// <param name="questionNumber"></param>
+	/// <param name="answerNumber">答え数値</param>
+	/// <param name="questionNumber">問題数値</param>
+	/// /// <param name="mainGame">メインゲーム</param>
 	public void Initialize(int row, int col, int answerNumber, int questionNumber, MainGame mainGame)
 	{
 		this.row = row;

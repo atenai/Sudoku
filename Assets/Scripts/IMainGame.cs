@@ -4,9 +4,13 @@ using UnityEngine;
 
 public interface IMainGame
 {
-	/// UI への窓口
+	/// <summary>
+	/// メインゲームUI
+	/// </summary>
 	public IMainGameUI IMainGameUI { get; }
 
-	/// ロジックへの窓口
+	/// <summary>
+	/// メインゲームロジック
+	/// </summary>
 	public IMainGameLogic IMainGameLogic { get; }
 }
