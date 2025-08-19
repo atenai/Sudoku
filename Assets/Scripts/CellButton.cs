@@ -42,7 +42,7 @@ public class CellButton : MonoBehaviour, ICellButton
 	/// <summary>
 	/// メインゲーム
 	/// </summary>
-	private MainGame mainGame;
+	private IMainGame iMainGame;
 
 	/// <summary>
 	/// 初期化処理
@@ -52,13 +52,13 @@ public class CellButton : MonoBehaviour, ICellButton
 	/// <param name="answerNumber">答え数値</param>
 	/// <param name="questionNumber">問題数値</param>
 	/// /// <param name="mainGame">メインゲーム</param>
-	public void Initialize(int row, int col, int answerNumber, int questionNumber, MainGame mainGame)
+	public void Initialize(int row, int col, int answerNumber, int questionNumber, IMainGame iMainGame)
 	{
 		this.row = row;
 		this.col = col;
 		this.answerNumber = answerNumber;
 		this.questionNumber = questionNumber;
-		this.mainGame = mainGame;
+		this.iMainGame = iMainGame;
 
 		numberText.text = questionNumber == 0 ? "" : questionNumber.ToString();
 		button.onClick.AddListener(OnClick);
@@ -79,7 +79,7 @@ public class CellButton : MonoBehaviour, ICellButton
 		Debug.Log($"答え番号: {answerNumber}");
 		Debug.Log($"問題番号: {questionNumber}");
 
-		mainGame.IMainGameLogic.IMainGameInput.ISelectCell(this);
+		iMainGame.IMainGameLogic.IMainGameInput.ISelectCell(this);
 	}
 
 	//5
@@ -97,7 +97,7 @@ public class CellButton : MonoBehaviour, ICellButton
 
 		//6
 		// 入力ごとに判定する
-		mainGame.IMainGameLogic.IJudge.ICheckAnswer(this, number);
+		iMainGame.IMainGameLogic.IJudge.ICheckAnswer(this, number);
 	}
 
 	/// <summary>

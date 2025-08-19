@@ -34,11 +34,11 @@ public class MainGameLogic : IMainGameLogic
 	/// </summary>
 	/// <param name="mainGame"></param>
 	/// <param name="difficultyType">設定した難易度</param>
-	public MainGameLogic(MainGame mainGame, MainGameSetting.DifficultyType difficultyType)
+	public MainGameLogic(IMainGame iMainGame, MainGameSetting.DifficultyType difficultyType)
 	{
 		GenerateGrid generateGrid = new GenerateGrid(answerGrid, questionGrid, difficultyType);
 		iMainGameInput = new MainGameInput();
-		iJudge = new Judge(mainGame, difficultyType);
+		iJudge = new Judge(iMainGame, difficultyType);
 	}
 
 	/// <summary>

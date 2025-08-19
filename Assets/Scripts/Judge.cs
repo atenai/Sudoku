@@ -22,7 +22,7 @@ public class Judge : IJudge
 	/// </summary>
 	private int missCount = 0;
 
-	private MainGame mainGame;
+	private IMainGame iMainGame;
 
 	public int FailNumber => failNumber;
 	public int MissCount => missCount;
@@ -32,14 +32,14 @@ public class Judge : IJudge
 	/// </summary>
 	/// <param name="mainGame"></param>
 	/// <param name="difficultyType">設定した難易度</param>
-	public Judge(MainGame mainGame, MainGameSetting.DifficultyType difficultyType)
+	public Judge(IMainGame iMainGame, MainGameSetting.DifficultyType difficultyType)
 	{
 		//Debug.Log("<color=red>ジャッジクラス！</color>");
-		this.mainGame = mainGame;
+		this.iMainGame = iMainGame;
 		SetMissNumber(difficultyType);
 
-		mainGame.IMainGameUI.IMissUI.ISetMissCount(missCount);
-		mainGame.IMainGameUI.IMissUI.ISetFailNumber(failNumber);
+		iMainGame.IMainGameUI.IMissUI.ISetMissCount(missCount);
+		iMainGame.IMainGameUI.IMissUI.ISetFailNumber(failNumber);
 	}
 
 	/// <summary>
@@ -79,7 +79,7 @@ public class Judge : IJudge
 	/// <param name="number">入力番号</param>
 	public void ICheckAnswer(ICellButton cell, int number)
 	{
-		if (mainGame.IMainGameLogic.IMainGameInput.IMemoMode) return; // メモ入力時は判定しない
+		if (iMainGame.IMainGameLogic.IMainGameInput.IMemoMode) return; // メモ入力時は判定しない
 		if (number == 0) return; // 入力を消した場合は判定しない
 
 		if (cell.IAnswerNumber == number)
@@ -101,7 +101,7 @@ public class Judge : IJudge
 			Debug.Log("<color=red>不正解！</color>");
 			cell.ISetColor(Color.red);
 			missCount++;
-			mainGame.IMainGameUI.IMissUI.ISetMissCount(missCount);
+			iMainGame.IMainGameUI.IMissUI.ISetMissCount(missCount);
 			if (failNumber <= missCount)
 			{
 				Debug.Log("<color=red>ゲームオーバー！</color>");
