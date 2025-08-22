@@ -41,6 +41,13 @@ public class MainGame : MonoBehaviour, IMainGame
 			mainGameLogic = new MainGameLogic(this, mainGameSetting.Difficulty);
 			mainGameUI.IBoard.ICreateCell(mainGameLogic);
 
+			foreach (var inputNumberButton in mainGameUI.InputNumberButtons)
+			{
+				inputNumberButton.Initialize(mainGameLogic.IMainGameInput);
+			}
+
+			mainGameUI.ClearButton.Initialize(mainGameLogic.IMainGameInput);
+			mainGameUI.MemoButton.Initialize(mainGameLogic.IMainGameInput);
 			//missUI.SetMissNumber(mainGameLogic.Judge.MissNumber);
 		}
 		else

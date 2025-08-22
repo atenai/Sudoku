@@ -8,13 +8,18 @@ public class InputNumberButton : MonoBehaviour
 {
 	[SerializeField] private Button button;
 	[SerializeField] int number;
-	[SerializeField] MainGame mainGame;
+
+	/// <summary>
+	/// メインゲームインプット
+	/// </summary>
+	private IMainGameInput mainGameInput;
 
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	void Start()
+	public void Initialize(IMainGameInput mainGameInput)
 	{
+		this.mainGameInput = mainGameInput;
 		button.onClick.AddListener(OnClick);
 	}
 
@@ -25,6 +30,6 @@ public class InputNumberButton : MonoBehaviour
 	private void OnClick()
 	{
 		//2
-		mainGame.IMainGameLogic.IMainGameInput.IInputNumber(number);
+		mainGameInput.IInputNumber(number);
 	}
 }

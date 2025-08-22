@@ -12,15 +12,16 @@ public class ClearButton : MonoBehaviour
 	[SerializeField] private Button button;
 
 	/// <summary>
-	/// メインゲーム
+	/// メインゲームインプット
 	/// </summary>
-	[SerializeField] private MainGame mainGame;
+	private IMainGameInput mainGameInput;
 
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	private void Start()
+	public void Initialize(IMainGameInput mainGameInput)
 	{
+		this.mainGameInput = mainGameInput;
 		button.onClick.AddListener(OnClick);
 	}
 
@@ -30,6 +31,6 @@ public class ClearButton : MonoBehaviour
 	private void OnClick()
 	{
 		//number=0で選択セルをクリア
-		mainGame.IMainGameLogic.IMainGameInput.IInputNumber(0);
+		mainGameInput.IInputNumber(0);
 	}
 }

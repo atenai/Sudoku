@@ -23,14 +23,17 @@ public class MemoButton : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI text;
 
 	/// <summary>
-	/// メインゲーム
+	/// メインゲームインプット
 	/// </summary>
-	[SerializeField] private MainGame mainGame;
+	private IMainGameInput mainGameInput;
 
-	private void Start()
+	/// <summary>
+	/// 初期化処理
+	/// </summary>
+	public void Initialize(IMainGameInput mainGameInput)
 	{
+		this.mainGameInput = mainGameInput;
 		button.onClick.AddListener(OnClick);
-		InitVisual();
 	}
 
 	/// <summary>
@@ -38,25 +41,8 @@ public class MemoButton : MonoBehaviour
 	/// </summary>
 	private void OnClick()
 	{
-		mainGame.IMainGameLogic.IMainGameInput.IToggleMemoMode();
+		mainGameInput.IToggleMemoMode();
 		UpdateVisual();
-	}
-
-	private void InitVisual()
-	{
-		// どれか未初期化ならデフォルト表示で早期return
-		if (mainGame == null || mainGame.IMainGameLogic == null)
-		{
-			if (text)
-			{
-				text.text = "Memo: OFF";
-			}
-			if (image)
-			{
-				image.color = Color.white;
-			}
-			return;
-		}
 	}
 
 	/// <summary>
@@ -64,7 +50,7 @@ public class MemoButton : MonoBehaviour
 	/// </summary>
 	private void UpdateVisual()
 	{
-		if (mainGame.IMainGameLogic.IMainGameInput.IMemoMode == true)
+		if (mainGameInput.IMemoMode == true)
 		{
 			if (text != null)
 			{
