@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// ボードクラス
 /// </summary>
-public class Board : MonoBehaviour, IBoard
+public class Board : MonoBehaviour
 {
 	/// <summary>
 	/// ボードのトランスフォーム
@@ -18,9 +18,20 @@ public class Board : MonoBehaviour, IBoard
 	[SerializeField] private GameObject cellButtonPrefab;
 
 	/// <summary>
-	/// メインゲーム
+	/// メインゲームインプット
 	/// </summary>
-	[SerializeField] private MainGame mainGame;
+	private IMainGameInput mainGameInput;
+
+	private IJudge judge;
+
+	/// <summary>
+	/// 初期化処理
+	/// </summary>
+	public void Initialize(IMainGameInput mainGameInput, IJudge judge)
+	{
+		this.mainGameInput = mainGameInput;
+		this.judge = judge;
+	}
 
 	/// <summary>
 	/// マスを作成
@@ -38,12 +49,12 @@ public class Board : MonoBehaviour, IBoard
 				GameObject newButton = Instantiate(cellButtonPrefab);
 				newButton.transform.SetParent(boardTransform, false);
 				CellButton cellButton = newButton.GetComponent<CellButton>();
-				cellButton.Initialize(r, c, gridData.IGetAnswerGridNumber(r, c), gridData.IGetQuestionGridNumber(r, c), mainGame);
+				cellButton.Initialize(r, c, gridData.IGetAnswerGridNumber(r, c), gridData.IGetQuestionGridNumber(r, c), mainGameInput, judge);
 				cells[r, c] = cellButton;
 			}
 		}
 
 		// 全てのマスを登録
-		mainGame.IMainGameLogic.IJudge.IRegisterCells(cells);
+		judge.IRegisterCells(cells);
 	}
 }

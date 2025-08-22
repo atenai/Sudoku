@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainGameUI : MonoBehaviour, IMainGameUI
+public class MainGameUI : MonoBehaviour
 {
 	/// <summary>
 	/// ボード
@@ -20,9 +20,9 @@ public class MainGameUI : MonoBehaviour, IMainGameUI
 
 	[SerializeField] private MemoButton memoButton;
 
-	public IBoard IBoard => board;
+	public Board Board => board;
 
-	public IMissUI IMissUI => missUI;
+	public IMissUI MissUI => missUI;
 
 	public InputNumberButton[] InputNumberButtons => inputNumberButtons;
 

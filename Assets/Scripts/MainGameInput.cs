@@ -41,10 +41,7 @@ public class MainGameInput : IMainGameInput
 
 		// 新しく選んだセルを選択状態に
 		selectedCurrentCell = cell;
-		selectedCurrentCell.IHighlight(true); // 選択セルをハイライト
-		Debug.Log($"ボタン (縦:{selectedCurrentCell.IRow}, 横:{selectedCurrentCell.ICol}) がクリックされました!");
-		Debug.Log($"答え番号: {selectedCurrentCell.IAnswerNumber}");
-		Debug.Log($"問題番号: {selectedCurrentCell.IQuestionNumber}");
+		selectedCurrentCell.IHighlight(true);// 選択セルをハイライト
 	}
 
 	//3

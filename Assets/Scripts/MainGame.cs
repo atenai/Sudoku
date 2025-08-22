@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MainGame : MonoBehaviour, IMainGame
+public class MainGame : MonoBehaviour
 {
 	/// <summary>
 	/// マス数
@@ -11,13 +11,6 @@ public class MainGame : MonoBehaviour, IMainGame
 	/// メインゲームUI
 	/// </summary>
 	[SerializeField] private MainGameUI mainGameUI;
-	/// <summary>
-	/// メインゲームUIのプロパティ
-	/// </summary>
-	public IMainGameUI IMainGameUI
-	{
-		get { return mainGameUI; }
-	}
 
 	/// <summary>
 	/// メインゲームロジック
@@ -38,8 +31,9 @@ public class MainGame : MonoBehaviour, IMainGame
 	{
 		if (GameManager.SingletonInstance.GetSetting() is MainGameSetting mainGameSetting)
 		{
-			mainGameLogic = new MainGameLogic(this, mainGameSetting.Difficulty);
-			mainGameUI.IBoard.ICreateCell(mainGameLogic);
+			mainGameLogic = new MainGameLogic(mainGameUI.MissUI, mainGameSetting.Difficulty);
+			mainGameUI.Board.Initialize(mainGameLogic.IMainGameInput, mainGameLogic.IJudge);
+			mainGameUI.Board.ICreateCell(mainGameLogic);
 
 			foreach (var inputNumberButton in mainGameUI.InputNumberButtons)
 			{
@@ -48,16 +42,10 @@ public class MainGame : MonoBehaviour, IMainGame
 
 			mainGameUI.ClearButton.Initialize(mainGameLogic.IMainGameInput);
 			mainGameUI.MemoButton.Initialize(mainGameLogic.IMainGameInput);
-			//missUI.SetMissNumber(mainGameLogic.Judge.MissNumber);
 		}
 		else
 		{
 			Debug.LogError("メインゲームに必要な値を取得できませんでした。");
 		}
-	}
-
-	private void Update()
-	{
-
 	}
 }

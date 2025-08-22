@@ -306,7 +306,7 @@ public class 数独唯一解生成1 : MonoBehaviour
 				GameObject newButton = Instantiate(buttonPrefab);
 				newButton.transform.SetParent(parrentTransform, false);
 				CellButton cellButton = newButton.GetComponent<CellButton>();
-				cellButton.Initialize(r, c, answerGrid[r, c], questionGrid[r, c], mainGame);
+				cellButton.Initialize(r, c, answerGrid[r, c], questionGrid[r, c], mainGame.IMainGameLogic.IMainGameInput, mainGame.IMainGameLogic.IJudge);
 				cells[r, c] = cellButton;
 			}
 		}

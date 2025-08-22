@@ -19,9 +19,8 @@ public class CellButton : MonoBehaviour, ICellButton
 	private bool[] memoActive = new bool[9];
 
 	private int row;
-	public int IRow { get => row; set => row = value; }
 	private int col;
-	public int ICol { get => col; set => col = value; }
+
 	/// <summary>
 	/// 答え数値
 	/// </summary>
@@ -34,15 +33,16 @@ public class CellButton : MonoBehaviour, ICellButton
 	/// 問題数値
 	/// </summary>
 	private int questionNumber;
-	/// <summary>
-	/// 問題数値のプロパティ
-	/// </summary>
-	public int IQuestionNumber { get => questionNumber; set => questionNumber = value; }
 
 	/// <summary>
-	/// メインゲーム
+	/// メインゲームインプット
 	/// </summary>
-	private IMainGame iMainGame;
+	private IMainGameInput mainGameInput;
+
+	/// <summary>
+	/// ジャッジ
+	/// </summary>/
+	private IJudge judge;
 
 	/// <summary>
 	/// 初期化処理
@@ -52,13 +52,14 @@ public class CellButton : MonoBehaviour, ICellButton
 	/// <param name="answerNumber">答え数値</param>
 	/// <param name="questionNumber">問題数値</param>
 	/// /// <param name="mainGame">メインゲーム</param>
-	public void Initialize(int row, int col, int answerNumber, int questionNumber, IMainGame iMainGame)
+	public void Initialize(int row, int col, int answerNumber, int questionNumber, IMainGameInput mainGameInput, IJudge judge)
 	{
 		this.row = row;
 		this.col = col;
 		this.answerNumber = answerNumber;
 		this.questionNumber = questionNumber;
-		this.iMainGame = iMainGame;
+		this.mainGameInput = mainGameInput;
+		this.judge = judge;
 
 		numberText.text = questionNumber == 0 ? "" : questionNumber.ToString();
 		button.onClick.AddListener(OnClick);
@@ -79,7 +80,7 @@ public class CellButton : MonoBehaviour, ICellButton
 		Debug.Log($"答え番号: {answerNumber}");
 		Debug.Log($"問題番号: {questionNumber}");
 
-		iMainGame.IMainGameLogic.IMainGameInput.ISelectCell(this);
+		mainGameInput.ISelectCell(this);
 	}
 
 	//5
@@ -97,7 +98,7 @@ public class CellButton : MonoBehaviour, ICellButton
 
 		//6
 		// 入力ごとに判定する
-		iMainGame.IMainGameLogic.IJudge.ICheckAnswer(this, number);
+		judge.ICheckAnswer(this, number);
 	}
 
 	/// <summary>
