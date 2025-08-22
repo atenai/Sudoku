@@ -26,21 +26,18 @@ public class Judge : IJudge
 
 	private IMainGameInput mainGameInput;
 
-	public int FailNumber => failNumber;
-	public int MissCount => missCount;
-
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	/// <param name="mainGame"></param>
+	/// <param name="missUI">ミスUI</param>
+	/// <param name="mainGameInput">メインゲームインプット</param>
 	/// <param name="difficultyType">設定した難易度</param>
 	public Judge(IMissUI missUI, IMainGameInput mainGameInput, MainGameSetting.DifficultyType difficultyType)
 	{
-		//Debug.Log("<color=red>ジャッジクラス！</color>");
 		this.missUI = missUI;
 		this.mainGameInput = mainGameInput;
-		SetMissNumber(difficultyType);
 
+		SetMissNumber(difficultyType);
 		missUI.ISetMissCount(missCount);
 		missUI.ISetFailNumber(failNumber);
 	}

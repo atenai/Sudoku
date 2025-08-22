@@ -18,12 +18,12 @@ public class MainGameLogic : IMainGameLogic
 	private int[,] questionGrid = new int[MainGame.Cell_Number, MainGame.Cell_Number];
 
 	private IMainGameInput iMainGameInput;
-	private IJudge iJudge;
-
 	public IMainGameInput IMainGameInput
 	{
 		get { return iMainGameInput; }
 	}
+
+	private IJudge iJudge;
 	public IJudge IJudge
 	{
 		get { return iJudge; }
