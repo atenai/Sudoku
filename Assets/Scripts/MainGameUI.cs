@@ -20,7 +20,7 @@ public class MainGameUI : MonoBehaviour
 
 	[SerializeField] private MemoButton memoButton;
 
-	public IBoard Board => board;
+	public Board Board => board;
 
 	public IMissUI MissUI => missUI;
 
