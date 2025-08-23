@@ -74,7 +74,7 @@ public class CellButton : MonoBehaviour, ICellButton
 	/// <summary>
 	/// マス（セル）が押された行う処理
 	/// </summary>
-	public void OnClick()
+	private void OnClick()
 	{
 		Debug.Log($"ボタン (縦:{row}, 横:{col}) がクリックされました!");
 		Debug.Log($"答え番号: {answerNumber}");
