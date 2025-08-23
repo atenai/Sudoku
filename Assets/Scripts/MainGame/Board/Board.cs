@@ -18,27 +18,11 @@ public class Board : MonoBehaviour
 	[SerializeField] private GameObject cellButtonPrefab;
 
 	/// <summary>
-	/// メインゲームインプット
-	/// </summary>
-	private IMainGameInput mainGameInput;
-
-	private IJudge judge;
-
-	/// <summary>
-	/// 初期化処理
-	/// </summary>
-	public void Initialize(IMainGameInput mainGameInput, IJudge judge)
-	{
-		this.mainGameInput = mainGameInput;
-		this.judge = judge;
-	}
-
-	/// <summary>
 	/// マスを作成
 	/// </summary>
 	/// <param name="aGrid">答えグリッド</param>
 	/// <param name="qGrid">問題グリッド</param>
-	public void ICreateCell(IGridData gridData)
+	public void ICreateCell(IGridData gridData, IMainGameInput mainGameInput, IJudge judge)
 	{
 		ICellButton[,] cells = new ICellButton[MainGame.Cell_Number, MainGame.Cell_Number];
 
