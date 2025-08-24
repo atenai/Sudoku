@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IJudge
 {
-	void IRegisterCells(ICellButton[,] cells);
-	void ICheckAnswer(ICellButton cell, int number);
+	public void IRegisterCells(ICellButton[,] cells);
+	public void ICheckAnswer(ICellButton cell, int number);
 }
