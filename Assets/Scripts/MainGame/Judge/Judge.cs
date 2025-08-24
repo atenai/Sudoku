@@ -82,12 +82,12 @@ public class Judge : IJudge
 		if (mainGameInput.GetMemoMode()) { return; } // メモ入力時は判定しない
 		if (number == 0) { return; } // 入力を消した場合は判定しない
 
-		if (cell.GetAnswerNumber() == number)
+		if (cell.IGetAnswerNumber() == number)
 		{
 			//Debug.Log($"({cell.Row},{cell.Col}) 正解！");
 			Debug.Log("<color=green>正解！</color>");
 			cell.ISetColor(Color.green);
-			cell.ILockCell(); // 正解したらそのセルをロック
+			cell.ISetLockCell(); // 正解したらそのセルをロック
 
 			// クリア判定
 			if (CheckAllCellLock() == true)
@@ -117,7 +117,7 @@ public class Judge : IJudge
 	{
 		foreach (var cell in allCells)
 		{
-			if (cell.GetIsInteractable())
+			if (cell.IGetIsInteractable())
 			{
 				return false;
 			}

@@ -7,10 +7,6 @@ public class CellButton : MonoBehaviour, ICellButton
 {
 	[SerializeField] private Image image;
 	[SerializeField] private Button button;
-	public bool GetIsInteractable()
-	{
-		return button.interactable;
-	}
 	[SerializeField] private TextMeshProUGUI numberText;
 	/// <summary>
 	/// 9個の小メモテキスト
@@ -28,15 +24,6 @@ public class CellButton : MonoBehaviour, ICellButton
 	/// 答え数値
 	/// </summary>
 	private int answerNumber;
-
-	/// <summary>
-	/// 答え数値取得
-	/// </summary>
-	/// <returns>答え数値</returns>
-	public int GetAnswerNumber()
-	{
-		return answerNumber;
-	}
 
 	/// <summary>
 	/// 問題数値
@@ -89,35 +76,54 @@ public class CellButton : MonoBehaviour, ICellButton
 		Debug.Log($"答え番号: {answerNumber}");
 		//Debug.Log($"問題番号: {questionNumber}");
 
-		mainGameInput.ISelectCell(this);
+		mainGameInput.ISetSelectCell(this);
+	}
+
+
+	/// <summary>
+	/// ボタンが押せるかどうか
+	/// </summary>
+	/// <returns></returns>
+	public bool IGetIsInteractable()
+	{
+		return button.interactable;
+	}
+
+	/// <summary>
+	/// 答え数値取得
+	/// </summary>
+	/// <returns>答え数値</returns>
+	public int IGetAnswerNumber()
+	{
+		return answerNumber;
 	}
 
 	//5
 	/// <summary>
 	/// 入力番号
 	/// </summary>
-	/// <param name="number"></param>
-	public void ISetNumber(int number)
+	/// <param name="inputNumber"></param>
+	public void ISetNumber(int inputNumber)
 	{
-		Debug.Log("<color=green>入力番号 : " + number + "</color>");
-		numberText.text = number == 0 ? "" : number.ToString();
+		Debug.Log("<color=green>入力番号 : " + inputNumber + "</color>");
+		numberText.text = inputNumber == 0 ? "" : inputNumber.ToString();
 
 		// 数字を入れたらメモを全消去
 		ClearMemos();
 
 		//6
 		// 入力ごとに判定する
-		judge.ICheckAnswer(this, number);
+		judge.ICheckAnswer(this, inputNumber);
 	}
 
 	/// <summary>
-	/// メモON/OFF切り替え
+	/// メモ数字をセットする
 	/// </summary>
-	/// <param name="number">入力番号</param>
-	public void IToggleMemo(int number)
+	/// <param name="inputNumber">入力番号</param>
+	public void ISetMemoNumber(int inputNumber)
 	{
 		//メモテキストは配列で0～8で指定している為-1している
-		int index = number - 1;
+		int index = inputNumber - 1;
 		//indexが0以下　または　indexが9と同じかそれ以上　なら切り上げる（だって対応したメモテキストが無いから）
 		if (index < 0 || 9 <= index)
 		{
@@ -147,7 +153,7 @@ public class CellButton : MonoBehaviour, ICellButton
 	/// 選択したセルをハイライト
 	/// </summary>
 	/// <param name="isSelected">選択中か？</param>
-	public void IHighlight(bool isSelected)
+	public void ISetHighlight(bool isSelected)
 	{
 		if (isSelected)
 		{
@@ -174,7 +180,7 @@ public class CellButton : MonoBehaviour, ICellButton
 	/// <summary>
 	/// 正解時にセルを固定
 	/// </summary>
-	public void ILockCell()
+	public void ISetLockCell()
 	{
 		button.interactable = false;
 		ClearMemos(); //正解時にメモも削除

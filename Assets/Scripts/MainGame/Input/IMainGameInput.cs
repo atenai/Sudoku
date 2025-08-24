@@ -4,22 +4,24 @@ using UnityEngine;
 
 public interface IMainGameInput
 {
-	/// メモモード（ON/OFF）
-	//bool IMemoMode { get; set; }
+	/// <summary>
+	/// メモモードの状態を取得
+	/// </summary>
+	/// <returns>メモモードの状態</returns>
 	public bool GetMemoMode();
 
 	/// <summary>
 	/// セルを選択したときの処理
 	/// </summary>
-	void ISelectCell(ICellButton cellButton);
+	public void ISetSelectCell(ICellButton cellButton);
 
 	/// <summary>
 	/// 数字を入力したときの処理
 	/// </summary>
-	void IInputNumber(int number);
+	public void ISetInputNumber(int number);
 
 	/// <summary>
 	/// メモモード切り替え
 	/// </summary>
-	void IToggleMemoMode();
+	public void IToggleMemoMode();
 }

@@ -35,17 +35,17 @@ public class MainGameInput : IMainGameInput
 	/// セルを選択
 	/// </summary>
 	/// <param name="cell"></param>
-	public void ISelectCell(ICellButton cell)
+	public void ISetSelectCell(ICellButton cell)
 	{
 		// 以前のセルのハイライトを解除
 		if (selectedCurrentCell != null && selectedCurrentCell != cell)
 		{
-			selectedCurrentCell.IHighlight(false);
+			selectedCurrentCell.ISetHighlight(false);
 		}
 
 		// 新しく選んだセルを選択状態に
 		selectedCurrentCell = cell;
-		selectedCurrentCell.IHighlight(true);// 選択セルをハイライト
+		selectedCurrentCell.ISetHighlight(true);// 選択セルをハイライト
 	}
 
 	//3
@@ -53,23 +53,23 @@ public class MainGameInput : IMainGameInput
 	/// 数値を入力
 	/// </summary>
 	/// <param name="number"></param>
-	public void IInputNumber(int number)
+	public void ISetInputNumber(int number)
 	{
 		if (selectedCurrentCell != null)
 		{
 			if (memoMode && number != 0)
 			{
 				//入力後ハイライト解除
-				selectedCurrentCell.IHighlight(false);
-				//メモを切り替え
-				selectedCurrentCell.IToggleMemo(number);
+				selectedCurrentCell.ISetHighlight(false);
+				//メモへ数字を入力
+				selectedCurrentCell.ISetMemoNumber(number);
 			}
 			else
 			{
 				//入力後ハイライト解除
-				selectedCurrentCell.IHighlight(false);
+				selectedCurrentCell.ISetHighlight(false);
 				//4
-				//本数字入力
+				//本数字を入力
 				selectedCurrentCell.ISetNumber(number);
 			}
 

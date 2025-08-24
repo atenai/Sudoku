@@ -4,12 +4,20 @@ using UnityEngine;
 
 public interface ICellButton
 {
-	public int GetAnswerNumber();
-	public bool GetIsInteractable();
+	public int IGetAnswerNumber();
+	public bool IGetIsInteractable();
 
-	void ISetNumber(int number);
-	void IToggleMemo(int number);
-	void IHighlight(bool isSelected);
-	void ISetColor(Color color);
-	void ILockCell();
+	/// <summary>
+	/// 本数字をセットする
+	/// </summary>
+	/// <param name="number"></param>
+	public void ISetNumber(int number);
+	/// <summary>
+	/// メモ数字をセットする
+	/// </summary>
+	/// <param name="number"></param>
+	public void ISetMemoNumber(int number);
+	public void ISetHighlight(bool isSelected);
+	public void ISetColor(Color color);
+	public void ISetLockCell();
 }
