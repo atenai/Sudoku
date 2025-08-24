@@ -4,7 +4,8 @@ using UnityEngine;
 
 public interface ICellButton
 {
-	int IAnswerNumber { get; }
+	public int GetAnswerNumber();
+
 	bool IIsInteractable { get; }
 
 	void ISetNumber(int number);

@@ -82,7 +82,7 @@ public class Judge : IJudge
 		if (mainGameInput.IMemoMode) return; // メモ入力時は判定しない
 		if (number == 0) return; // 入力を消した場合は判定しない
 
-		if (cell.IAnswerNumber == number)
+		if (cell.GetAnswerNumber() == number)
 		{
 			//Debug.Log($"({cell.Row},{cell.Col}) 正解！");
 			Debug.Log("<color=green>正解！</color>");

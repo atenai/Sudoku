@@ -25,10 +25,16 @@ public class CellButton : MonoBehaviour, ICellButton
 	/// 答え数値
 	/// </summary>
 	private int answerNumber;
+
 	/// <summary>
-	/// 答え数値のプロパティ
+	/// 答え数値取得
 	/// </summary>
-	public int IAnswerNumber { get => answerNumber; set => answerNumber = value; }
+	/// <returns>答え数値</returns>
+	public int GetAnswerNumber()
+	{
+		return answerNumber;
+	}
+
 	/// <summary>
 	/// 問題数値
 	/// </summary>
