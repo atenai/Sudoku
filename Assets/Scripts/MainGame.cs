@@ -15,11 +15,11 @@ public class MainGame : MonoBehaviour
 	/// <summary>
 	/// メインゲームロジック
 	/// </summary>
-	private IMainGameLogic mainGameLogic;
+	private MainGameLogic mainGameLogic;
 	/// <summary>
 	/// メインゲームロジックのプロパティ
 	/// </summary>
-	public IMainGameLogic IMainGameLogic
+	public MainGameLogic IMainGameLogic
 	{
 		get { return mainGameLogic; }
 	}

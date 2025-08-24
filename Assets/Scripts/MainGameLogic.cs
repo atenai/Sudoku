@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// メインゲームロジッククラス
 /// </summary>
-public class MainGameLogic : IMainGameLogic
+public class MainGameLogic : IGridData
 {
 	/// <summary>
 	/// 答えグリッド
