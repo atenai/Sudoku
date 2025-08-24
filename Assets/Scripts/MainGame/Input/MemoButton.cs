@@ -50,7 +50,7 @@ public class MemoButton : MonoBehaviour
 	/// </summary>
 	private void UpdateVisual()
 	{
-		if (mainGameInput.IMemoMode == true)
+		if (mainGameInput.GetMemoMode() == true)
 		{
 			if (text != null)
 			{

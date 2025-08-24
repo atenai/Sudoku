@@ -13,10 +13,14 @@ public class MainGameInput : IMainGameInput
 	/// メモモード切替
 	/// </summary>
 	private bool memoMode = false;
-	public bool IMemoMode
+
+	/// <summary>
+	/// メモモードの取得
+	/// </summary>
+	/// <returns>メモモードの状態</returns>
+	public bool GetMemoMode()
 	{
-		get { return memoMode; }
-		set { memoMode = value; }
+		return memoMode;
 	}
 
 	/// <summary>

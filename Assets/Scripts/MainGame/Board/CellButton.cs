@@ -87,7 +87,7 @@ public class CellButton : MonoBehaviour, ICellButton
 	{
 		Debug.Log($"ボタン (縦:{row}, 横:{col}) がクリックされました!");
 		Debug.Log($"答え番号: {answerNumber}");
-		Debug.Log($"問題番号: {questionNumber}");
+		//Debug.Log($"問題番号: {questionNumber}");
 
 		mainGameInput.ISelectCell(this);
 	}

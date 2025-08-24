@@ -79,8 +79,8 @@ public class Judge : IJudge
 	/// <param name="number">入力番号</param>
 	public void ICheckAnswer(ICellButton cell, int number)
 	{
-		if (mainGameInput.IMemoMode) return; // メモ入力時は判定しない
-		if (number == 0) return; // 入力を消した場合は判定しない
+		if (mainGameInput.GetMemoMode()) { return; } // メモ入力時は判定しない
+		if (number == 0) { return; } // 入力を消した場合は判定しない
 
 		if (cell.GetAnswerNumber() == number)
 		{
