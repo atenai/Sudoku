@@ -7,7 +7,10 @@ public class CellButton : MonoBehaviour, ICellButton
 {
 	[SerializeField] private Image image;
 	[SerializeField] private Button button;
-	public bool IIsInteractable { get => button.interactable; }
+	public bool GetIsInteractable()
+	{
+		return button.interactable;
+	}
 	[SerializeField] private TextMeshProUGUI numberText;
 	/// <summary>
 	/// 9個の小メモテキスト

@@ -5,8 +5,7 @@ using UnityEngine;
 public interface ICellButton
 {
 	public int GetAnswerNumber();
-
-	bool IIsInteractable { get; }
+	public bool GetIsInteractable();
 
 	void ISetNumber(int number);
 	void IToggleMemo(int number);

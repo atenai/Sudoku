@@ -117,7 +117,7 @@ public class Judge : IJudge
 	{
 		foreach (var cell in allCells)
 		{
-			if (cell.IIsInteractable)
+			if (cell.GetIsInteractable())
 			{
 				return false;
 			}
