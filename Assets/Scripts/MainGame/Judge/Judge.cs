@@ -65,7 +65,7 @@ public class Judge : IJudge, IRegister
 		switch (difficultyType)
 		{
 			case MainGameSetting.DifficultyType.Easy:
-				failNumber = 10;
+				failNumber = 5;
 				break;
 			case MainGameSetting.DifficultyType.Normal:
 				failNumber = 10;

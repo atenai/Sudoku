@@ -22,7 +22,6 @@ public class MainGameLogic : IGridData
 	{
 		get { return mainGameInput; }
 	}
-
 	public IMemo IMemo
 	{
 		get { return mainGameInput; }
@@ -33,7 +32,6 @@ public class MainGameLogic : IGridData
 	{
 		get { return judge; }
 	}
-
 	public IRegister IRegister
 	{
 		get { return judge; }
