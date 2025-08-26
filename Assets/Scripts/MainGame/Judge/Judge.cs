@@ -98,28 +98,45 @@ public class Judge : IJudge, IRegister
 
 		if (cell.IGetAnswerNumber() == number)
 		{
-			//Debug.Log($"({cell.Row},{cell.Col}) 正解！");
-			Debug.Log("<color=green>正解！</color>");
-			cell.ISetColor(Color.green);
-			cell.ISetLockCell(); // 正解したらそのセルをロック
-
-			// クリア判定
-			if (CheckAllCellLock() == true)
-			{
-				Debug.Log("<color=yellow>ゲームクリア！</color>");
-			}
+			//正解
+			Correct(cell);
 		}
 		else
 		{
-			//Debug.Log($"({cell.Row},{cell.Col}) 不正解！");
-			Debug.Log("<color=red>不正解！</color>");
-			cell.ISetColor(Color.red);
-			missCount++;
-			missUI.ISetMissCount(missCount);
-			if (failNumber <= missCount)
-			{
-				Debug.Log("<color=red>ゲームオーバー！</color>");
-			}
+			//不正解
+			InCorrect(cell);
+		}
+	}
+
+	/// <summary>
+	/// 正解処理
+	/// </summary>
+	/// <param name="cell"></param>
+	public void Correct(ICellNumber cell)
+	{
+		Debug.Log("<color=green>正解！</color>");
+		cell.ISetColor(Color.green);
+		// 正解したらそのセルをロック
+		cell.ISetLockCell();
+		if (CheckAllCellLock() == true)
+		{
+			Debug.Log("<color=yellow>ゲームクリア！</color>");
+		}
+	}
+
+	/// <summary>
+	/// 不正解処理
+	/// </summary>
+	/// <param name="cell"></param>
+	public void InCorrect(ICellNumber cell)
+	{
+		Debug.Log("<color=red>不正解！</color>");
+		cell.ISetColor(Color.red);
+		missCount++;
+		missUI.ISetMissCount(missCount);
+		if (failNumber <= missCount)
+		{
+			Debug.Log("<color=red>ゲームオーバー！</color>");
 		}
 	}
 
