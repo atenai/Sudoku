@@ -5,18 +5,22 @@ using UnityEngine;
 public interface IButtonStatus
 {
 	/// <summary>
-	/// 本数字をセットする
-	/// </summary>
-	/// <param name="number"></param>
-	public void ISetNumber(int number);
-	/// <summary>
-	/// メモ数字をセットする
-	/// </summary>
-	/// <param name="number"></param>
-	public void ISetMemoNumber(int number);
-	/// <summary>
-	/// 答えの数字を取得する
+	/// ボタンの状態を取得する
 	/// </summary>
 	/// <returns></returns>
-	public int IGetAnswerNumber();
+	public bool IGetIsInteractable();
+	/// <summary>
+	/// ハイライト状態を設定する
+	/// </summary>
+	/// <param name="isSelected"></param>
+	public void ISetHighlight(bool isSelected);
+	/// <summary>
+	/// 色を設定する
+	/// </summary>
+	/// <param name="color"></param>
+	public void ISetColor(Color color);
+	/// <summary>
+	/// セルをロックする
+	/// </summary>
+	public void ISetLockCell();
 }
