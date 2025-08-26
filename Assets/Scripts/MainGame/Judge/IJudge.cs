@@ -12,7 +12,7 @@ public interface IJudge
 	public void ICheckAnswer(ICellNumber cell, int number);
 
 	/// <summary>
-	/// ミス数
+	/// 失敗数
 	/// </summary>
 	public int GetFailNumber();
 
