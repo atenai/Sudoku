@@ -4,6 +4,11 @@ using UnityEngine;
 
 public interface IJudge
 {
+	/// <summary>
+	/// 答えをチェックする
+	/// </summary>
+	/// <param name="cell"></param>
+	/// <param name="number"></param>
 	public void ICheckAnswer(ICellNumber cell, int number);
 
 	/// <summary>

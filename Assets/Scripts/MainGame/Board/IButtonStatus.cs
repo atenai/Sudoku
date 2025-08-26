@@ -14,5 +14,9 @@ public interface IButtonStatus
 	/// </summary>
 	/// <param name="number"></param>
 	public void ISetMemoNumber(int number);
+	/// <summary>
+	/// 答えの数字を取得する
+	/// </summary>
+	/// <returns></returns>
 	public int IGetAnswerNumber();
 }
