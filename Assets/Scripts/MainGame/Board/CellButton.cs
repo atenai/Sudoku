@@ -33,7 +33,7 @@ public class CellButton : MonoBehaviour, ICellNumber
 	/// <summary>
 	/// メインゲームインプット
 	/// </summary>
-	private ISelectInput selectInput;
+	private ISelectCell selectCell;
 
 	/// <summary>
 	/// ジャッジ
@@ -48,13 +48,13 @@ public class CellButton : MonoBehaviour, ICellNumber
 	/// <param name="answerNumber">答え数値</param>
 	/// <param name="questionNumber">問題数値</param>
 	/// /// <param name="mainGame">メインゲーム</param>
-	public void Initialize(int row, int col, int answerNumber, int questionNumber, ISelectInput selectInput, IJudge judge)
+	public void Initialize(int row, int col, int answerNumber, int questionNumber, ISelectCell selectCell, IJudge judge)
 	{
 		this.row = row;
 		this.col = col;
 		this.answerNumber = answerNumber;
 		this.questionNumber = questionNumber;
-		this.selectInput = selectInput;
+		this.selectCell = selectCell;
 		this.judge = judge;
 
 		numberText.text = questionNumber == 0 ? "" : questionNumber.ToString();
@@ -76,7 +76,7 @@ public class CellButton : MonoBehaviour, ICellNumber
 		Debug.Log($"答え番号: {answerNumber}");
 		//Debug.Log($"問題番号: {questionNumber}");
 
-		selectInput.ISetSelectCell(this);
+		selectCell.ISetSelectCell(this);
 	}
 
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainGameInput : ISelectInput, IMemo
+public class MainGameInput : IInputNumber, ISelectCell, IMemo
 {
 	/// <summary>
 	/// 現在選択しているセル

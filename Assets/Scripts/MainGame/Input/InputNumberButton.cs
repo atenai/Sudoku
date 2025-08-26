@@ -12,14 +12,14 @@ public class InputNumberButton : MonoBehaviour
 	/// <summary>
 	/// メインゲームインプット
 	/// </summary>
-	private ISelectInput selectInput;
+	private IInputNumber inputNumber;
 
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	public void Initialize(ISelectInput selectInput)
+	public void Initialize(IInputNumber inputNumber)
 	{
-		this.selectInput = selectInput;
+		this.inputNumber = inputNumber;
 		button.onClick.AddListener(OnClick);
 	}
 
@@ -30,6 +30,6 @@ public class InputNumberButton : MonoBehaviour
 	private void OnClick()
 	{
 		//2
-		selectInput.ISetInputNumber(number);
+		inputNumber.ISetInputNumber(number);
 	}
 }

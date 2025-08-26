@@ -18,7 +18,11 @@ public class MainGameLogic : IGridData
 	private int[,] questionGrid = new int[MainGame.Cell_Number, MainGame.Cell_Number];
 
 	private MainGameInput mainGameInput;
-	public ISelectInput ISelectInput
+	public IInputNumber IInputNumber
+	{
+		get { return mainGameInput; }
+	}
+	public ISelectCell ISelectCell
 	{
 		get { return mainGameInput; }
 	}

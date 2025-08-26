@@ -22,7 +22,7 @@ public class Board : MonoBehaviour
 	/// </summary>
 	/// <param name="aGrid">答えグリッド</param>
 	/// <param name="qGrid">問題グリッド</param>
-	public void ICreateCell(IGridData gridData, ISelectInput selectInput, IJudge judge, IRegister register)
+	public void ICreateCell(IGridData gridData, ISelectCell selectCell, IJudge judge, IRegister register)
 	{
 		ICellNumber[,] cells = new ICellNumber[MainGame.Cell_Number, MainGame.Cell_Number];
 
@@ -33,7 +33,7 @@ public class Board : MonoBehaviour
 				GameObject newButton = Instantiate(cellButtonPrefab);
 				newButton.transform.SetParent(boardTransform, false);
 				CellButton cellButton = newButton.GetComponent<CellButton>();
-				cellButton.Initialize(r, c, gridData.IGetAnswerGridNumber(r, c), gridData.IGetQuestionGridNumber(r, c), selectInput, judge);
+				cellButton.Initialize(r, c, gridData.IGetAnswerGridNumber(r, c), gridData.IGetQuestionGridNumber(r, c), selectCell, judge);
 				cells[r, c] = cellButton;
 			}
 		}
