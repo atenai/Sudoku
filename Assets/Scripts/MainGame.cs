@@ -32,14 +32,14 @@ public class MainGame : MonoBehaviour
 		if (GameManager.SingletonInstance.GetSetting() is MainGameSetting mainGameSetting)
 		{
 			mainGameLogic = new MainGameLogic(mainGameUI.MissUI, mainGameSetting.Difficulty);
-			mainGameUI.Board.ICreateCell(mainGameLogic, mainGameLogic.IMainGameInput, mainGameLogic.IJudge);
+			mainGameUI.Board.ICreateCell(mainGameLogic, mainGameLogic.ISelectInput, mainGameLogic.IJudge, mainGameLogic.IRegister);
 
 			foreach (var inputNumberButton in mainGameUI.InputNumberButtons)
 			{
-				inputNumberButton.Initialize(mainGameLogic.IMainGameInput);
+				inputNumberButton.Initialize(mainGameLogic.ISelectInput);
 			}
-			mainGameUI.ClearButton.Initialize(mainGameLogic.IMainGameInput);
-			mainGameUI.MemoButton.Initialize(mainGameLogic.IMainGameInput);
+			mainGameUI.ClearButton.Initialize(mainGameLogic.ISelectInput);
+			mainGameUI.MemoButton.Initialize(mainGameLogic.IMemo);
 		}
 		else
 		{

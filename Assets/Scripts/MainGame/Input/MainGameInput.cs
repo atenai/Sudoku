@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainGameInput : IMainGameInput
+public class MainGameInput : ISelectInput, IMemo
 {
 	/// <summary>
 	/// 現在選択しているセル
 	/// </summary>
-	private ICellButton selectedCurrentCell;
+	private ICellNumber selectedCurrentCell;
 
 	/// <summary>
 	/// メモモード切替
@@ -35,7 +35,7 @@ public class MainGameInput : IMainGameInput
 	/// セルを選択
 	/// </summary>
 	/// <param name="cell"></param>
-	public void ISetSelectCell(ICellButton cell)
+	public void ISetSelectCell(ICellNumber cell)
 	{
 		// 以前のセルのハイライトを解除
 		if (selectedCurrentCell != null && selectedCurrentCell != cell)

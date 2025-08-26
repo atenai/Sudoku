@@ -5,12 +5,12 @@ using UnityEngine;
 /// <summary>
 /// 正誤判定クラス
 /// </summary>
-public class Judge : IJudge
+public class Judge : IJudge, IRegister
 {
 	/// <summary>
 	/// 生成された全てのセルを管理
 	/// </summary>
-	private ICellButton[,] allCells;
+	private ICellNumber[,] allCells;
 
 	/// <summary>
 	/// ミス数
@@ -24,7 +24,7 @@ public class Judge : IJudge
 
 	private IMissUI missUI;
 
-	private IMainGameInput mainGameInput;
+	private IMemo memo;
 
 	/// <summary>
 	/// コンストラクタ
@@ -32,10 +32,10 @@ public class Judge : IJudge
 	/// <param name="missUI">ミスUI</param>
 	/// <param name="mainGameInput">メインゲームインプット</param>
 	/// <param name="difficultyType">設定した難易度</param>
-	public Judge(IMissUI missUI, IMainGameInput mainGameInput, MainGameSetting.DifficultyType difficultyType)
+	public Judge(IMissUI missUI, IMemo memo, MainGameSetting.DifficultyType difficultyType)
 	{
 		this.missUI = missUI;
-		this.mainGameInput = mainGameInput;
+		this.memo = memo;
 
 		SetMissNumber(difficultyType);
 		missUI.ISetMissCount(missCount);
@@ -66,7 +66,7 @@ public class Judge : IJudge
 	/// マスを登録
 	/// </summary>
 	/// <param name="cells">登録した全てのセル</param>
-	public void IRegisterCells(ICellButton[,] cells)
+	public void IRegisterCells(ICellNumber[,] cells)
 	{
 		allCells = cells;
 	}
@@ -77,9 +77,9 @@ public class Judge : IJudge
 	/// </summary>
 	/// <param name="cell">選択したセル</param>
 	/// <param name="number">入力番号</param>
-	public void ICheckAnswer(ICellButton cell, int number)
+	public void ICheckAnswer(ICellNumber cell, int number)
 	{
-		if (mainGameInput.GetMemoMode()) { return; } // メモ入力時は判定しない
+		if (memo.GetMemoMode()) { return; } // メモ入力時は判定しない
 		if (number == 0) { return; } // 入力を消した場合は判定しない
 
 		if (cell.IGetAnswerNumber() == number)

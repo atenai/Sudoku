@@ -3,7 +3,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class CellButton : MonoBehaviour, ICellButton
+public class CellButton : MonoBehaviour, ICellNumber
 {
 	[SerializeField] private Image image;
 	[SerializeField] private Button button;
@@ -33,7 +33,7 @@ public class CellButton : MonoBehaviour, ICellButton
 	/// <summary>
 	/// メインゲームインプット
 	/// </summary>
-	private IMainGameInput mainGameInput;
+	private ISelectInput selectInput;
 
 	/// <summary>
 	/// ジャッジ
@@ -48,13 +48,13 @@ public class CellButton : MonoBehaviour, ICellButton
 	/// <param name="answerNumber">答え数値</param>
 	/// <param name="questionNumber">問題数値</param>
 	/// /// <param name="mainGame">メインゲーム</param>
-	public void Initialize(int row, int col, int answerNumber, int questionNumber, IMainGameInput mainGameInput, IJudge judge)
+	public void Initialize(int row, int col, int answerNumber, int questionNumber, ISelectInput selectInput, IJudge judge)
 	{
 		this.row = row;
 		this.col = col;
 		this.answerNumber = answerNumber;
 		this.questionNumber = questionNumber;
-		this.mainGameInput = mainGameInput;
+		this.selectInput = selectInput;
 		this.judge = judge;
 
 		numberText.text = questionNumber == 0 ? "" : questionNumber.ToString();
@@ -76,7 +76,7 @@ public class CellButton : MonoBehaviour, ICellButton
 		Debug.Log($"答え番号: {answerNumber}");
 		//Debug.Log($"問題番号: {questionNumber}");
 
-		mainGameInput.ISetSelectCell(this);
+		selectInput.ISetSelectCell(this);
 	}
 
 

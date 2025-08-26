@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IJudge
+public interface IRegister
 {
-	public void ICheckAnswer(ICellNumber cell, int number);
+	public void IRegisterCells(ICellNumber[,] cells);
 }

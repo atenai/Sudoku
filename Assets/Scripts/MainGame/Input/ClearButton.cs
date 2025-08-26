@@ -14,14 +14,14 @@ public class ClearButton : MonoBehaviour
 	/// <summary>
 	/// メインゲームインプット
 	/// </summary>
-	private IMainGameInput mainGameInput;
+	private ISelectInput selectInput;
 
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	public void Initialize(IMainGameInput mainGameInput)
+	public void Initialize(ISelectInput selectInput)
 	{
-		this.mainGameInput = mainGameInput;
+		this.selectInput = selectInput;
 		button.onClick.AddListener(OnClick);
 	}
 
@@ -31,6 +31,6 @@ public class ClearButton : MonoBehaviour
 	private void OnClick()
 	{
 		//number=0で選択セルをクリア
-		mainGameInput.ISetInputNumber(0);
+		selectInput.ISetInputNumber(0);
 	}
 }

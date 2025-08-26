@@ -17,16 +17,26 @@ public class MainGameLogic : IGridData
 	/// </summary>
 	private int[,] questionGrid = new int[MainGame.Cell_Number, MainGame.Cell_Number];
 
-	private IMainGameInput iMainGameInput;
-	public IMainGameInput IMainGameInput
+	private MainGameInput mainGameInput;
+	public ISelectInput ISelectInput
 	{
-		get { return iMainGameInput; }
+		get { return mainGameInput; }
 	}
 
-	private IJudge iJudge;
+	public IMemo IMemo
+	{
+		get { return mainGameInput; }
+	}
+
+	private Judge judge;
 	public IJudge IJudge
 	{
-		get { return iJudge; }
+		get { return judge; }
+	}
+
+	public IRegister IRegister
+	{
+		get { return judge; }
 	}
 
 	/// <summary>
@@ -37,8 +47,8 @@ public class MainGameLogic : IGridData
 	public MainGameLogic(IMissUI missUI, MainGameSetting.DifficultyType difficultyType)
 	{
 		GenerateGrid generateGrid = new GenerateGrid(answerGrid, questionGrid, difficultyType);
-		iMainGameInput = new MainGameInput();
-		iJudge = new Judge(missUI, iMainGameInput, difficultyType);
+		mainGameInput = new MainGameInput();
+		judge = new Judge(missUI, mainGameInput, difficultyType);
 	}
 
 	/// <summary>

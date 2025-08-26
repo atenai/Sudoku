@@ -25,14 +25,14 @@ public class MemoButton : MonoBehaviour
 	/// <summary>
 	/// メインゲームインプット
 	/// </summary>
-	private IMainGameInput mainGameInput;
+	private IMemo memo;
 
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	public void Initialize(IMainGameInput mainGameInput)
+	public void Initialize(IMemo memo)
 	{
-		this.mainGameInput = mainGameInput;
+		this.memo = memo;
 		button.onClick.AddListener(OnClick);
 	}
 
@@ -41,7 +41,7 @@ public class MemoButton : MonoBehaviour
 	/// </summary>
 	private void OnClick()
 	{
-		mainGameInput.IToggleMemoMode();
+		memo.IToggleMemoMode();
 		UpdateVisual();
 	}
 
@@ -50,7 +50,7 @@ public class MemoButton : MonoBehaviour
 	/// </summary>
 	private void UpdateVisual()
 	{
-		if (mainGameInput.GetMemoMode() == true)
+		if (memo.GetMemoMode() == true)
 		{
 			if (text != null)
 			{

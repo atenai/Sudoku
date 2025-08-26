@@ -22,9 +22,9 @@ public class Board : MonoBehaviour
 	/// </summary>
 	/// <param name="aGrid">答えグリッド</param>
 	/// <param name="qGrid">問題グリッド</param>
-	public void ICreateCell(IGridData gridData, IMainGameInput mainGameInput, IJudge judge)
+	public void ICreateCell(IGridData gridData, ISelectInput selectInput, IJudge judge, IRegister register)
 	{
-		ICellButton[,] cells = new ICellButton[MainGame.Cell_Number, MainGame.Cell_Number];
+		ICellNumber[,] cells = new ICellNumber[MainGame.Cell_Number, MainGame.Cell_Number];
 
 		for (int r = 0; r < MainGame.Cell_Number; r++)
 		{
@@ -33,12 +33,12 @@ public class Board : MonoBehaviour
 				GameObject newButton = Instantiate(cellButtonPrefab);
 				newButton.transform.SetParent(boardTransform, false);
 				CellButton cellButton = newButton.GetComponent<CellButton>();
-				cellButton.Initialize(r, c, gridData.IGetAnswerGridNumber(r, c), gridData.IGetQuestionGridNumber(r, c), mainGameInput, judge);
+				cellButton.Initialize(r, c, gridData.IGetAnswerGridNumber(r, c), gridData.IGetQuestionGridNumber(r, c), selectInput, judge);
 				cells[r, c] = cellButton;
 			}
 		}
 
 		// 全てのマスを登録
-		judge.IRegisterCells(cells);
+		register.IRegisterCells(cells);
 	}
 }
