@@ -22,6 +22,22 @@ public class Judge : IJudge, IRegister
 	/// </summary>
 	private int missCount = 0;
 
+	/// <summary>
+	/// ミス数
+	/// </summary>
+	public int GetFailNumber()
+	{
+		return failNumber;
+	}
+
+	/// <summary>
+	/// ミスカウント
+	/// </summary>
+	public int GetMissCount()
+	{
+		return missCount;
+	}
+
 	private IMissUI missUI;
 
 	private IMemo memo;
@@ -38,8 +54,6 @@ public class Judge : IJudge, IRegister
 		this.memo = memo;
 
 		SetMissNumber(difficultyType);
-		missUI.ISetMissCount(missCount);
-		missUI.ISetFailNumber(failNumber);
 	}
 
 	/// <summary>

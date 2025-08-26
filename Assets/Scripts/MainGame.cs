@@ -40,6 +40,9 @@ public class MainGame : MonoBehaviour
 			}
 			mainGameUI.ClearButton.Initialize(mainGameLogic.ISelectInput);
 			mainGameUI.MemoButton.Initialize(mainGameLogic.IMemo);
+
+			mainGameUI.MissUI.ISetMissCount(mainGameLogic.IJudge.GetMissCount());
+			mainGameUI.MissUI.ISetFailNumber(mainGameLogic.IJudge.GetFailNumber());
 		}
 		else
 		{
