@@ -6,8 +6,19 @@ using UnityEngine.Events;
 
 public class CellButton : MonoBehaviour
 {
+	/// <summary>
+	/// セルの背景画像
+	/// </summary>
 	[SerializeField] private Image image;
+
+	/// <summary>
+	/// セルのボタン
+	/// </summary>
 	[SerializeField] private Button button;
+
+	/// <summary>
+	/// セルの数字テキスト
+	/// </summary>
 	[SerializeField] private TextMeshProUGUI numberText;
 
 	/// <summary>
@@ -20,9 +31,6 @@ public class CellButton : MonoBehaviour
 	/// </summary>
 	private bool[] memoActive = new bool[9];
 
-	private int row;
-	private int col;
-
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
@@ -30,12 +38,9 @@ public class CellButton : MonoBehaviour
 	/// <param name="col"></param>
 	/// <param name="answerNumber">答え数値</param>
 	/// <param name="questionNumber">問題数値</param>
-	/// /// <param name="mainGame">メインゲーム</param>
+	/// <param name="unityAction">ボタンがクリックされたときの処理</param>
 	public void Initialize(int row, int col, int answerNumber, int questionNumber, UnityAction<int, int> unityAction)
 	{
-		this.row = row;
-		this.col = col;
-
 		numberText.text = questionNumber == 0 ? "" : questionNumber.ToString();
 		button.onClick.AddListener(() =>
 		{
@@ -54,7 +59,7 @@ public class CellButton : MonoBehaviour
 	/// <summary>
 	/// 入力番号
 	/// </summary>
-	/// <param name="inputNumber"></param>
+	/// <param name="inputNumber">入力番号</param>
 	public void SetNumber(int inputNumber)
 	{
 		Debug.Log("<color=green>入力番号 : " + inputNumber + "</color>");
@@ -83,18 +88,6 @@ public class CellButton : MonoBehaviour
 		memoTexts[index].gameObject.SetActive(memoActive[index]);
 		//メモを入力したらメインの数字はOFFにする
 		numberText.text = "";
-	}
-
-	/// <summary>
-	/// 全メモをクリア
-	/// </summary>
-	private void ClearMemos()
-	{
-		for (int i = 0; i < memoTexts.Length; i++)
-		{
-			memoTexts[i].gameObject.SetActive(false);
-			memoActive[i] = false;
-		}
 	}
 
 	/// <summary>
@@ -132,5 +125,17 @@ public class CellButton : MonoBehaviour
 	{
 		button.interactable = false;
 		ClearMemos(); //正解時にメモも削除
+	}
+
+	/// <summary>
+	/// 全メモをクリア
+	/// </summary>
+	private void ClearMemos()
+	{
+		for (int i = 0; i < memoTexts.Length; i++)
+		{
+			memoTexts[i].gameObject.SetActive(false);
+			memoActive[i] = false;
+		}
 	}
 }

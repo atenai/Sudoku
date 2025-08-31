@@ -18,6 +18,9 @@ public class MainGame : MonoBehaviour
 	/// </summary>
 	private int[,] questionGrid = new int[Cell_Number, Cell_Number];
 
+	// プレイヤーの現在入力状態
+	private int[,] currentGrid = new int[Cell_Number, Cell_Number];
+
 	/// <summary>
 	/// ミスカウント
 	/// </summary>
@@ -64,6 +67,9 @@ public class MainGame : MonoBehaviour
 			MainGameLogicFacade.CreateQuestionGrid(questionGrid, emptyCells);
 			Debug.Log("<color=blue>問題を生成しました！</color>");
 			MainGameLogicFacade.DebugGrid(questionGrid);
+
+			// 4. 現在のマスの状態を初期化
+			Array.Copy(questionGrid, currentGrid, questionGrid.Length);
 
 			//マスUIを生成
 			mainGameUI.Board.CreateCell(answerGrid, questionGrid, (row, col) => OnCellSelected(row, col));
@@ -137,7 +143,9 @@ public class MainGame : MonoBehaviour
 		bool isCorrect = MainGameLogicFacade.CheckAnswer(answerGrid[selectedRow, selectedCol], inputNumber);
 		if (isCorrect == true)
 		{
-			MainGameLogicFacade.Correct();
+			// まず現在状態を更新
+			currentGrid[selectedRow, selectedCol] = inputNumber;
+			MainGameLogicFacade.Correct(IsAllCorrect());
 		}
 		else
 		{
@@ -146,5 +154,20 @@ public class MainGame : MonoBehaviour
 		}
 
 		mainGameUI.Board.ShowNumber(selectedRow, selectedCol, inputNumber, isCorrect);
+	}
+
+	private bool IsAllCorrect()
+	{
+		for (int r = 0; r < Cell_Number; r++)
+		{
+			for (int c = 0; c < Cell_Number; c++)
+			{
+				if (currentGrid[r, c] != answerGrid[r, c])
+				{
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 }

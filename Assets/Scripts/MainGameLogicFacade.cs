@@ -41,9 +41,9 @@ public static class MainGameLogicFacade
 		return new Result().FailNumber(difficultyType);
 	}
 
-	public static void Correct()
+	public static void Correct(bool isAllCorrect)
 	{
-		new Result().Correct();
+		new Result().Correct(isAllCorrect);
 	}
 
 	public static void InCorrect(ref int missCount, int failNumber)

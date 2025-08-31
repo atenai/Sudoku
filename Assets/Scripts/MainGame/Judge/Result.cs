@@ -30,9 +30,13 @@ public class Result
 	/// <summary>
 	/// 正解処理
 	/// </summary>
-	public void Correct()
+	public void Correct(bool isAllCorrect)
 	{
 		Debug.Log("<color=green>正解！</color>");
+		if (isAllCorrect)
+		{
+			Debug.Log("<color=green>ゲームクリアー！</color>");
+		}
 	}
 
 	/// <summary>

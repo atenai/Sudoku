@@ -22,6 +22,7 @@ public class Board : MonoBehaviour
 	/// セルボタンの配列
 	/// </summary>
 	private CellButton[,] cells = new CellButton[MainGame.Cell_Number, MainGame.Cell_Number];
+
 	private int selectedRow = -1;
 	private int selectedCol = -1;
 
@@ -54,7 +55,7 @@ public class Board : MonoBehaviour
 	/// </summary>
 	/// <param name="row"></param>
 	/// <param name="col"></param>
-	/// <param name="value"></param>
+	/// <param name="inputNumber">入力番号</param>
 	/// <param name="isCorrect"></param>
 	public void ShowNumber(int row, int col, int inputNumber, bool isCorrect)
 	{
@@ -97,7 +98,7 @@ public class Board : MonoBehaviour
 	}
 
 	/// <summary>
-	/// 追加：全セルの選択を解除
+	/// 全セルの選択を解除
 	/// </summary>
 	public void ClearSelected()
 	{
@@ -116,7 +117,7 @@ public class Board : MonoBehaviour
 	}
 
 	/// <summary>
-	/// 追加：指定セルをハイライト（前回は解除）
+	/// 指定セルをハイライト（前回は解除）
 	/// </summary>
 	public void SetSelected(int row, int col)
 	{
