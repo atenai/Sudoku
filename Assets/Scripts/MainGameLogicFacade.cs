@@ -52,6 +52,11 @@ public static class MainGameLogicFacade
 		new Result().InCorrect(ref missCount, failNumber);
 	}
 
+	public static bool IsAllCorrect(int[,] cGrid, int[,] aGrid)
+	{
+		return new Result().IsAllCorrect(cGrid, aGrid);
+	}
+
 	public static void ToggleMemoMode(ref bool memoMode)
 	{
 		new MainGameInput().ToggleMemoMode(ref memoMode);

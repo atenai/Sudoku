@@ -162,7 +162,7 @@ public class MainGame : MonoBehaviour
 		{
 			// まず現在状態を更新
 			currentGrid[selectedRow, selectedCol] = inputNumber;
-			MainGameLogicFacade.Correct(IsAllCorrect());
+			MainGameLogicFacade.Correct(MainGameLogicFacade.IsAllCorrect(currentGrid, answerGrid));
 		}
 		else
 		{
@@ -171,24 +171,5 @@ public class MainGame : MonoBehaviour
 		}
 
 		mainGameUI.Board.ShowNumber(selectedRow, selectedCol, inputNumber, isCorrect);
-	}
-
-	/// <summary>
-	/// 全てのマスが正解かどうか？
-	/// </summary>
-	/// <returns>全てのマスが正解しているならtrue 一つでも不正解または空ならfalse</returns>
-	private bool IsAllCorrect()
-	{
-		for (int r = 0; r < Cell_Number; r++)
-		{
-			for (int c = 0; c < Cell_Number; c++)
-			{
-				if (currentGrid[r, c] != answerGrid[r, c])
-				{
-					return false;
-				}
-			}
-		}
-		return true;
 	}
 }
