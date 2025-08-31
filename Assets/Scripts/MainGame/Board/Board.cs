@@ -19,6 +19,11 @@ public class Board : MonoBehaviour
 	[SerializeField] private GameObject cellButtonPrefab;
 
 	/// <summary>
+	/// セルボタンの配列
+	/// </summary>
+	private CellButton[,] cells = new CellButton[MainGame.Cell_Number, MainGame.Cell_Number];
+
+	/// <summary>
 	/// マスを作成
 	/// </summary>
 	/// <param name="aGrid">答えグリッド</param>
@@ -33,7 +38,35 @@ public class Board : MonoBehaviour
 				newButton.transform.SetParent(boardTransform, false);
 				CellButton cellButton = newButton.GetComponent<CellButton>();
 				cellButton.Initialize(r, c, aGrid[r, c], qGrid[r, c], unityAction);
+				cells[r, c] = cellButton;
 			}
+		}
+	}
+
+	/// <summary>
+	/// セルに数字を表示する
+	/// </summary>
+	/// <param name="row"></param>
+	/// <param name="col"></param>
+	/// <param name="value"></param>
+	/// <param name="isCorrect"></param>
+	public void ShowNumber(int row, int col, int value, bool isCorrect)
+	{
+		if (cells == null) { return; }
+		CellButton cellButton = cells[row, col];
+		if (cellButton == null) { return; }
+
+		cellButton.SetNumber(value);
+		if (isCorrect)
+		{
+			//正解時の表示処理
+			cellButton.SetLockCell();
+			cellButton.SetColor(Color.green);
+		}
+		else
+		{
+			//不正解時の表示処理
+			cellButton.SetColor(Color.red);
 		}
 	}
 }

@@ -33,7 +33,7 @@ public class MainGame : MonoBehaviour
 	/// </summary>
 	private bool memoMode = false;
 
-	// ★ ここを座標で保持
+	//ここで座標を保持
 	private int selectedRow = -1;
 	private int selectedCol = -1;
 
@@ -96,32 +96,38 @@ public class MainGame : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// メモモードの取得
+	/// </summary>
+	/// <returns></returns>
 	public bool GetMemoMode()
 	{
 		return memoMode;
 	}
 
-	// ★ セル選択
+	/// <summary>
+	/// セルが選択されたときの処理
+	/// </summary>
+	/// <param name="row"></param>
+	/// <param name="col"></param>
 	private void OnCellSelected(int row, int col)
 	{
 		selectedRow = row;
 		selectedCol = col;
 	}
 
-	// ★ 数字入力
+	/// <summary>
+	/// 数字が入力されたときの処理
+	/// </summary>
+	/// <param name="inputNumber"></param>
 	private void OnNumberInput(int inputNumber)
 	{
-		if (selectedRow < 0 || selectedCol < 0) return;
+		if (selectedRow < 0 || selectedCol < 0) { return; }
+		if (questionGrid[selectedRow, selectedCol] != 0) { return; }// 固定マスは無視
+		if (memoMode) { return; }
 
-		// 固定マスは無視
-		if (questionGrid[selectedRow, selectedCol] != 0) return;
-
-		if (memoMode)
-		{
-			return;
-		}
-
-		if (MainGameLogicFacade.CheckAnswer(answerGrid[selectedRow, selectedCol], inputNumber))
+		bool isCorrect = MainGameLogicFacade.CheckAnswer(answerGrid[selectedRow, selectedCol], inputNumber);
+		if (isCorrect == true)
 		{
 			MainGameLogicFacade.Correct();
 		}
@@ -130,5 +136,7 @@ public class MainGame : MonoBehaviour
 			MainGameLogicFacade.InCorrect(ref missCount, failNumber);
 			mainGameUI.MissUI.SetMissCount(missCount);
 		}
+
+		mainGameUI.Board.ShowNumber(selectedRow, selectedCol, inputNumber, isCorrect);
 	}
 }

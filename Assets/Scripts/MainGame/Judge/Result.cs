@@ -33,7 +33,6 @@ public class Result
 	/// <summary>
 	/// 正解処理
 	/// </summary>
-	/// <param name="cell"></param>
 	public void Correct()
 	{
 		Debug.Log("<color=green>正解！</color>");
@@ -42,7 +41,8 @@ public class Result
 	/// <summary>
 	/// 不正解処理
 	/// </summary>
-	/// <param name="cell"></param>
+	/// <param name="missCount"></param>
+	/// <param name="failNumber"></param>
 	public void InCorrect(ref int missCount, int failNumber)
 	{
 		Debug.Log("<color=red>不正解！</color>");

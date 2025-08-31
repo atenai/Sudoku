@@ -15,6 +15,7 @@ public class MainGameInput
 	/// <summary>
 	/// メモモードの切り替え
 	/// </summary>
+	/// <param name="memoMode">メモモード</param>
 	public void ToggleMemoMode(ref bool memoMode)
 	{
 		memoMode = !memoMode;
