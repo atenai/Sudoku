@@ -9,17 +9,10 @@ public class GenerateGrid
 	/// </summary>
 	private const int Separator_Block = 3;
 
-
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	/// <param name="aGrid"></param>
-	/// <param name="qGrid"></param>
-	/// <param name="difficultyType"></param>
-	public GenerateGrid()
-	{
-
-	}
+	public GenerateGrid() { }
 
 	/// <summary>
 	/// 空白数を設定

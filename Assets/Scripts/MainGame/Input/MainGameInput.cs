@@ -7,10 +7,7 @@ public class MainGameInput
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	public MainGameInput()
-	{
-
-	}
+	public MainGameInput() { }
 
 	/// <summary>
 	/// メモモードの切り替え

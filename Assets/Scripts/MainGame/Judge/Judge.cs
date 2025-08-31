@@ -10,10 +10,7 @@ public class Judge
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	public Judge()
-	{
-
-	}
+	public Judge() { }
 
 	/// <summary>
 	/// 正誤判定処理

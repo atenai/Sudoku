@@ -146,7 +146,7 @@ public class MainGame : MonoBehaviour
 	/// <summary>
 	/// 数字が入力されたときの処理
 	/// </summary>
-	/// <param name="inputNumber"></param>
+	/// <param name="inputNumber">入力数値</param>
 	private void OnNumberInput(int inputNumber)
 	{
 		if (selectedRow < 0 || selectedCol < 0) { return; }
@@ -173,6 +173,10 @@ public class MainGame : MonoBehaviour
 		mainGameUI.Board.ShowNumber(selectedRow, selectedCol, inputNumber, isCorrect);
 	}
 
+	/// <summary>
+	/// 全てのマスが正解かどうか？
+	/// </summary>
+	/// <returns>全てのマスが正解しているならtrue 一つでも不正解または空ならfalse</returns>
 	private bool IsAllCorrect()
 	{
 		for (int r = 0; r < Cell_Number; r++)
