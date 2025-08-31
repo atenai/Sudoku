@@ -7,10 +7,7 @@ public class Result
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	public Result()
-	{
-
-	}
+	public Result() { }
 
 	/// <summary>
 	/// ミス数をセットする

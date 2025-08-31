@@ -24,16 +24,6 @@ public class CellButton : MonoBehaviour
 	private int col;
 
 	/// <summary>
-	/// 答え数値
-	/// </summary>
-	private int answerNumber;
-
-	public int GetAnswerNumber()
-	{
-		return answerNumber;
-	}
-
-	/// <summary>
 	/// 初期化処理
 	/// </summary>
 	/// <param name="row"></param>
@@ -45,7 +35,6 @@ public class CellButton : MonoBehaviour
 	{
 		this.row = row;
 		this.col = col;
-		this.answerNumber = answerNumber;
 
 		numberText.text = questionNumber == 0 ? "" : questionNumber.ToString();
 		button.onClick.AddListener(() =>

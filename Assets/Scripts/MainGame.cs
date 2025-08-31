@@ -65,14 +65,10 @@ public class MainGame : MonoBehaviour
 			Debug.Log("<color=blue>問題を生成しました！</color>");
 			MainGameLogicFacade.DebugGrid(questionGrid);
 
-			mainGameUI.Board.CreateCell
-			(
-				answerGrid,
-				questionGrid,
-				(row, col) => OnCellSelected(row, col)
-			);
+			//マスUIを生成
+			mainGameUI.Board.CreateCell(answerGrid, questionGrid, (row, col) => OnCellSelected(row, col));
 
-			//ミスカウントをセット
+			//ミスUIをセット
 			missCount = 0;
 			mainGameUI.MissUI.SetMissCount(missCount);
 			failNumber = MainGameLogicFacade.FailNumber(mainGameSetting.Difficulty);
