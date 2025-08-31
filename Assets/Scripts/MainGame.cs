@@ -1,6 +1,12 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// メインゲームクラス
+/// </summary>
+/// <remarks>
+/// 数独のシステム全体を管理
+/// </remarks>
 public class MainGame : MonoBehaviour
 {
 	/// <summary>

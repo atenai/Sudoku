@@ -8,6 +8,7 @@ using UnityEngine;
 /// <remarks>
 /// ファサードパターンを使用したクラス
 /// 各サブクラスをここにまとめて、リストとして外部に公開する
+/// 数独のルール機能を管理
 /// </remarks>
 public static class MainGameLogicFacade
 {
