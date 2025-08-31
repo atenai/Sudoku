@@ -96,7 +96,10 @@ public class MainGame : MonoBehaviour
 				mainGameUI.Board.ClearNumber(selectedRow, selectedCol);
 			});
 
-			mainGameUI.MemoButton.Initialize(GetMemoMode, () => MainGameLogicFacade.ToggleMemoMode(ref memoMode));
+			mainGameUI.MemoButton.Initialize(GetMemoMode, () =>
+			{
+				MainGameLogicFacade.ToggleMemoMode(ref memoMode);
+			});
 		}
 		else
 		{
@@ -137,6 +140,12 @@ public class MainGame : MonoBehaviour
 		if (memoMode)
 		{
 			mainGameUI.Board.ToggleMemo(selectedRow, selectedCol, inputNumber);
+
+			// 選択解除（どのマスもハイライトしない状態へ）
+			mainGameUI.Board.ClearSelected();
+			selectedRow = -1;
+			selectedCol = -1;
+
 			return;
 		}
 
@@ -154,6 +163,11 @@ public class MainGame : MonoBehaviour
 		}
 
 		mainGameUI.Board.ShowNumber(selectedRow, selectedCol, inputNumber, isCorrect);
+
+		// 選択解除（どのマスもハイライトしない状態へ）
+		mainGameUI.Board.ClearSelected();
+		selectedRow = -1;
+		selectedCol = -1;
 	}
 
 	private bool IsAllCorrect()

@@ -102,16 +102,6 @@ public class Board : MonoBehaviour
 	/// </summary>
 	public void ClearSelected()
 	{
-		if (cells == null) { return; }
-
-		for (int r = 0; r < MainGame.Cell_Number; r++)
-		{
-			for (int c = 0; c < MainGame.Cell_Number; c++)
-			{
-				cells[r, c]?.SetHighlight(false);
-			}
-		}
-
 		selectedRow = -1;
 		selectedCol = -1;
 	}
