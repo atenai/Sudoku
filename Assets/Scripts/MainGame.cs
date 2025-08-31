@@ -83,7 +83,13 @@ public class MainGame : MonoBehaviour
 					OnNumberInput(number);
 				});
 			}
-			mainGameUI.ClearButton.Initialize(() => Debug.Log("クリアボタンがクリックされました"));
+
+			mainGameUI.ClearButton.Initialize(() =>
+			{
+				Debug.Log("クリアボタンがクリックされました");
+				mainGameUI.Board.ClearNumber(selectedRow, selectedCol);
+			});
+
 			mainGameUI.MemoButton.Initialize(GetMemoMode, () => MainGameLogicFacade.ToggleMemoMode(ref memoMode));
 		}
 		else
@@ -110,6 +116,8 @@ public class MainGame : MonoBehaviour
 	{
 		selectedRow = row;
 		selectedCol = col;
+
+		mainGameUI.Board.SetSelected(row, col);
 	}
 
 	/// <summary>
@@ -120,7 +128,11 @@ public class MainGame : MonoBehaviour
 	{
 		if (selectedRow < 0 || selectedCol < 0) { return; }
 		if (questionGrid[selectedRow, selectedCol] != 0) { return; }// 固定マスは無視
-		if (memoMode) { return; }
+		if (memoMode)
+		{
+			mainGameUI.Board.ToggleMemo(selectedRow, selectedCol, inputNumber);
+			return;
+		}
 
 		bool isCorrect = MainGameLogicFacade.CheckAnswer(answerGrid[selectedRow, selectedCol], inputNumber);
 		if (isCorrect == true)
