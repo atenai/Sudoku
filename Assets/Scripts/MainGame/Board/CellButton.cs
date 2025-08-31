@@ -2,16 +2,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
-public class CellButton : MonoBehaviour, ICellNumber
+public class CellButton : MonoBehaviour
 {
 	[SerializeField] private Image image;
 	[SerializeField] private Button button;
 	[SerializeField] private TextMeshProUGUI numberText;
+
 	/// <summary>
 	/// 9個の小メモテキスト
 	/// </summary>
 	[SerializeField] private TextMeshProUGUI[] memoTexts;
+
 	/// <summary>
 	/// メモON/OFF管理
 	/// </summary>
@@ -25,20 +28,10 @@ public class CellButton : MonoBehaviour, ICellNumber
 	/// </summary>
 	private int answerNumber;
 
-	/// <summary>
-	/// 問題数値
-	/// </summary>
-	private int questionNumber;
-
-	/// <summary>
-	/// メインゲームインプット
-	/// </summary>
-	private ISelectCell selectCell;
-
-	/// <summary>
-	/// ジャッジ
-	/// </summary>/
-	private IJudge judge;
+	public int GetAnswerNumber()
+	{
+		return answerNumber;
+	}
 
 	/// <summary>
 	/// 初期化処理
@@ -48,17 +41,19 @@ public class CellButton : MonoBehaviour, ICellNumber
 	/// <param name="answerNumber">答え数値</param>
 	/// <param name="questionNumber">問題数値</param>
 	/// /// <param name="mainGame">メインゲーム</param>
-	public void Initialize(int row, int col, int answerNumber, int questionNumber, ISelectCell selectCell, IJudge judge)
+	public void Initialize(int row, int col, int answerNumber, int questionNumber, UnityAction<int, int> unityAction)
 	{
 		this.row = row;
 		this.col = col;
 		this.answerNumber = answerNumber;
-		this.questionNumber = questionNumber;
-		this.selectCell = selectCell;
-		this.judge = judge;
 
 		numberText.text = questionNumber == 0 ? "" : questionNumber.ToString();
-		button.onClick.AddListener(OnClick);
+		button.onClick.AddListener(() =>
+		{
+			Debug.Log($"ボタン (縦:{row}, 横:{col}) がクリックされました!");
+			Debug.Log($"答え番号: {answerNumber}");
+			unityAction.Invoke(row, col);
+		});
 
 		// 問題に数字があるセルは入力不可にする
 		button.interactable = questionNumber == 0;
@@ -68,59 +63,23 @@ public class CellButton : MonoBehaviour, ICellNumber
 	}
 
 	/// <summary>
-	/// マス（セル）が押された行う処理
-	/// </summary>
-	private void OnClick()
-	{
-		Debug.Log($"ボタン (縦:{row}, 横:{col}) がクリックされました!");
-		Debug.Log($"答え番号: {answerNumber}");
-		//Debug.Log($"問題番号: {questionNumber}");
-
-		selectCell.ISetSelectCell(this);
-	}
-
-
-	/// <summary>
-	/// ボタンが押せるかどうか
-	/// </summary>
-	/// <returns></returns>
-	public bool IGetIsInteractable()
-	{
-		return button.interactable;
-	}
-
-	/// <summary>
-	/// 答え数値取得
-	/// </summary>
-	/// <returns>答え数値</returns>
-	public int IGetAnswerNumber()
-	{
-		return answerNumber;
-	}
-
-	//5
-	/// <summary>
 	/// 入力番号
 	/// </summary>
 	/// <param name="inputNumber"></param>
-	public void ISetNumber(int inputNumber)
+	public void SetNumber(int inputNumber)
 	{
 		Debug.Log("<color=green>入力番号 : " + inputNumber + "</color>");
 		numberText.text = inputNumber == 0 ? "" : inputNumber.ToString();
 
 		// 数字を入れたらメモを全消去
 		ClearMemos();
-
-		//6
-		// 入力ごとに判定する
-		judge.ICheckAnswer(this, inputNumber);
 	}
 
 	/// <summary>
 	/// メモ数字をセットする
 	/// </summary>
 	/// <param name="inputNumber">入力番号</param>
-	public void ISetMemoNumber(int inputNumber)
+	public void SetMemoNumber(int inputNumber)
 	{
 		//メモテキストは配列で0～8で指定している為-1している
 		int index = inputNumber - 1;
@@ -153,15 +112,15 @@ public class CellButton : MonoBehaviour, ICellNumber
 	/// 選択したセルをハイライト
 	/// </summary>
 	/// <param name="isSelected">選択中か？</param>
-	public void ISetHighlight(bool isSelected)
+	public void SetHighlight(bool isSelected)
 	{
 		if (isSelected)
 		{
-			ISetColor(Color.cyan); //選択中は水色で表示
+			SetColor(Color.cyan); //選択中は水色で表示
 		}
 		else
 		{
-			ISetColor(Color.white); //通常時は白
+			SetColor(Color.white); //通常時は白
 		}
 	}
 
@@ -169,7 +128,7 @@ public class CellButton : MonoBehaviour, ICellNumber
 	/// セルの背景色を変更する（正解・不正解・選択状態）
 	/// </summary>
 	/// <param name="color">セットする色</param>
-	public void ISetColor(Color color)
+	public void SetColor(Color color)
 	{
 		if (image != null)
 		{
@@ -180,7 +139,7 @@ public class CellButton : MonoBehaviour, ICellNumber
 	/// <summary>
 	/// 正解時にセルを固定
 	/// </summary>
-	public void ISetLockCell()
+	public void SetLockCell()
 	{
 		button.interactable = false;
 		ClearMemos(); //正解時にメモも削除

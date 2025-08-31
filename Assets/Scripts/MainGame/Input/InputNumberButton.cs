@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 /// <summary>
 /// 答え入力ボタンクラス
@@ -10,26 +11,10 @@ public class InputNumberButton : MonoBehaviour
 	[SerializeField] int number;
 
 	/// <summary>
-	/// メインゲームインプット
-	/// </summary>
-	private IInputNumber inputNumber;
-
-	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	public void Initialize(IInputNumber inputNumber)
+	public void Initialize(UnityAction<int> unityAction)
 	{
-		this.inputNumber = inputNumber;
-		button.onClick.AddListener(OnClick);
-	}
-
-	//1
-	/// <summary>
-	/// 答え入力ボタンを押した際の処理
-	/// </summary>
-	private void OnClick()
-	{
-		//2
-		inputNumber.ISetInputNumber(number);
+		button.onClick.AddListener(() => unityAction(number));
 	}
 }

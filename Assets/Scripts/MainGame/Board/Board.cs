@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// ボードクラス
@@ -22,10 +23,8 @@ public class Board : MonoBehaviour
 	/// </summary>
 	/// <param name="aGrid">答えグリッド</param>
 	/// <param name="qGrid">問題グリッド</param>
-	public void ICreateCell(IGridData gridData, ISelectCell selectCell, IJudge judge, IRegister register)
+	public void CreateCell(int[,] aGrid, int[,] qGrid, UnityAction<int, int> unityAction)
 	{
-		ICellNumber[,] cells = new ICellNumber[MainGame.Cell_Number, MainGame.Cell_Number];
-
 		for (int r = 0; r < MainGame.Cell_Number; r++)
 		{
 			for (int c = 0; c < MainGame.Cell_Number; c++)
@@ -33,12 +32,8 @@ public class Board : MonoBehaviour
 				GameObject newButton = Instantiate(cellButtonPrefab);
 				newButton.transform.SetParent(boardTransform, false);
 				CellButton cellButton = newButton.GetComponent<CellButton>();
-				cellButton.Initialize(r, c, gridData.IGetAnswerGridNumber(r, c), gridData.IGetQuestionGridNumber(r, c), selectCell, judge);
-				cells[r, c] = cellButton;
+				cellButton.Initialize(r, c, aGrid[r, c], qGrid[r, c], unityAction);
 			}
 		}
-
-		// 全てのマスを登録
-		register.IRegisterCells(cells);
 	}
 }

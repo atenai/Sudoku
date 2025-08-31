@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
+using UnityEngine.Events;
 
 /// <summary>
 /// メモボタンクラス
@@ -22,27 +24,19 @@ public class MemoButton : MonoBehaviour
 	/// </summary>
 	[SerializeField] private TextMeshProUGUI text;
 
-	/// <summary>
-	/// メインゲームインプット
-	/// </summary>
-	private IMemo memo;
+	Func<bool> memoMode;
 
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	public void Initialize(IMemo memo)
+	public void Initialize(Func<bool> memoMode, UnityAction unityAction)
 	{
-		this.memo = memo;
-		button.onClick.AddListener(OnClick);
-	}
-
-	/// <summary>
-	/// メモボタンを押した際の処理
-	/// </summary>
-	private void OnClick()
-	{
-		memo.IToggleMemoMode();
-		UpdateVisual();
+		this.memoMode = memoMode;
+		button.onClick.AddListener(() =>
+		{
+			unityAction.Invoke();
+			UpdateVisual();
+		});
 	}
 
 	/// <summary>
@@ -50,7 +44,7 @@ public class MemoButton : MonoBehaviour
 	/// </summary>
 	private void UpdateVisual()
 	{
-		if (memo.GetMemoMode() == true)
+		if (memoMode.Invoke() == true)
 		{
 			if (text != null)
 			{

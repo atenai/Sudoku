@@ -9,10 +9,6 @@ public class GenerateGrid
 	/// </summary>
 	private const int Separator_Block = 3;
 
-	/// <summary>
-	/// 難易度に応じた空白数
-	/// </summary>
-	private int emptyCell = 55;
 
 	/// <summary>
 	/// コンストラクタ
@@ -20,43 +16,28 @@ public class GenerateGrid
 	/// <param name="aGrid"></param>
 	/// <param name="qGrid"></param>
 	/// <param name="difficultyType"></param>
-	public GenerateGrid(int[,] aGrid, int[,] qGrid, MainGameSetting.DifficultyType difficultyType)
+	public GenerateGrid()
 	{
-		// 0. 難易度設定
-		SetEmptyCell(difficultyType);
 
-		// 1. 完全な数独を生成
-		CreateAnswerGrid(0, 0, aGrid);
-		Debug.Log("<color=red>答えを生成しました！</color>");
-		DebugGrid(aGrid);
-
-		// 2. 完全解をコピーして問題用にする
-		System.Array.Copy(aGrid, qGrid, aGrid.Length);
-
-		// 3. マスを1つずつ消して唯一解を保つ
-		CreateQuestionGrid(qGrid);
-		Debug.Log("<color=blue>問題を生成しました！</color>");
-		DebugGrid(qGrid);
 	}
 
 	/// <summary>
 	/// 空白数を設定
 	/// </summary>
 	/// <param name="difficultyType"></param>
-	private void SetEmptyCell(MainGameSetting.DifficultyType difficultyType)
+	public int EmptyCell(MainGameSetting.DifficultyType difficultyType)
 	{
 		switch (difficultyType)
 		{
 			case MainGameSetting.DifficultyType.Easy:
-				emptyCell = 5;
-				break;
+				return 5;
 			case MainGameSetting.DifficultyType.Normal:
-				emptyCell = 20;
-				break;
+				return 20;
 			case MainGameSetting.DifficultyType.Hard:
-				emptyCell = 55;
-				break;
+				return 55;
 		}
+
+		return 0;
 	}
 
 	/// <summary>
@@ -73,7 +54,7 @@ public class GenerateGrid
 	/// <param name="col"></param>
 	/// <param name="aGrid"></param>
 	/// <returns></returns>
-	private bool CreateAnswerGrid(int row, int col, int[,] aGrid)
+	public bool CreateAnswerGrid(int row, int col, int[,] aGrid)
 	{
 		if (row == MainGame.Cell_Number)
 		{
@@ -181,7 +162,7 @@ public class GenerateGrid
 	///6.空白数が目標に達したら終了
 	///removed が emptyCell に達したら処理を終了します。
 	/// </summary>
-	private void CreateQuestionGrid(int[,] qGrid)
+	public void CreateQuestionGrid(int[,] qGrid, int emptyCell)
 	{
 		List<Vector2Int> cells = new List<Vector2Int>();
 		for (int r = 0; r < MainGame.Cell_Number; r++)
@@ -328,7 +309,7 @@ public class GenerateGrid
 	/// デバッグ用：グリッドの内容をコンソールに出力します。
 	/// </summary>
 	/// <param name="grid">デバッグログに表示したいグリッド</param>
-	private void DebugGrid(int[,] grid)
+	public void DebugGrid(int[,] grid)
 	{
 		string s = "";
 		for (int r = 0; r < MainGame.Cell_Number; r++)

@@ -22,7 +22,7 @@ public class MainGameUI : MonoBehaviour
 
 	public Board Board => board;
 
-	public IMissUI MissUI => missUI;
+	public MissUI MissUI => missUI;
 
 	public InputNumberButton[] InputNumberButtons => inputNumberButtons;
 

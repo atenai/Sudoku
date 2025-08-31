@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 /// <summary>
 /// クリアーボタン（消しゴム）クラス
@@ -12,25 +13,10 @@ public class ClearButton : MonoBehaviour
 	[SerializeField] private Button button;
 
 	/// <summary>
-	/// メインゲームインプット
-	/// </summary>
-	private IInputNumber inputNumber;
-
-	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	public void Initialize(IInputNumber inputNumber)
+	public void Initialize(UnityAction unityAction)
 	{
-		this.inputNumber = inputNumber;
-		button.onClick.AddListener(OnClick);
-	}
-
-	/// <summary>
-	/// クリアーボタン（消しゴム）を押した際の処理
-	/// </summary>
-	private void OnClick()
-	{
-		//number=0で選択セルをクリア
-		inputNumber.ISetInputNumber(0);
+		button.onClick.AddListener(unityAction);
 	}
 }
