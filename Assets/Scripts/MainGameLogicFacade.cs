@@ -10,55 +10,100 @@ using UnityEngine;
 /// 各サブクラスをここにまとめて、リストとして外部に公開する
 /// 数独のルール機能を管理
 /// </remarks>
-public static class MainGameLogicFacade
+public class MainGameLogicFacade
 {
-	public static int EmptyCell(MainGameSetting.DifficultyType difficultyType)
+	GenerateGrid generateGrid;
+	Judge judge;
+	Result result;
+	MainGameInput mainGameInput;
+
+	public int EmptyCell(MainGameSetting.DifficultyType difficultyType)
 	{
-		return new GenerateGrid().EmptyCell(difficultyType);
+		if (generateGrid == null)
+		{
+			generateGrid = new GenerateGrid();
+		}
+		return generateGrid.EmptyCell(difficultyType);
 	}
 
-	public static void CreateAnswerGrid(int row, int col, int[,] aGrid)
+	public void CreateAnswerGrid(int row, int col, int[,] aGrid)
 	{
-		new GenerateGrid().CreateAnswerGrid(row, col, aGrid);
+		if (generateGrid == null)
+		{
+			generateGrid = new GenerateGrid();
+		}
+		generateGrid.CreateAnswerGrid(row, col, aGrid);
 	}
 
-	public static void CreateQuestionGrid(int[,] qGrid, int emptyCell)
+	public void CreateQuestionGrid(int[,] qGrid, int emptyCell)
 	{
-		new GenerateGrid().CreateQuestionGrid(qGrid, emptyCell);
+		if (generateGrid == null)
+		{
+			generateGrid = new GenerateGrid();
+		}
+		generateGrid.CreateQuestionGrid(qGrid, emptyCell);
 	}
 
-	public static void DebugGrid(int[,] grid)
+	public void DebugGrid(int[,] grid)
 	{
-		new GenerateGrid().DebugGrid(grid);
+		if (generateGrid == null)
+		{
+			generateGrid = new GenerateGrid();
+		}
+		generateGrid.DebugGrid(grid);
 	}
 
-	public static bool CheckAnswer(int answerNumber, int inputNumber)
+	public bool CheckAnswer(int answerNumber, int inputNumber)
 	{
-		return new Judge().CheckAnswer(answerNumber, inputNumber);
+		if (judge == null)
+		{
+			judge = new Judge();
+		}
+		return judge.CheckAnswer(answerNumber, inputNumber);
 	}
 
-	public static int FailNumber(MainGameSetting.DifficultyType difficultyType)
+	public int FailNumber(MainGameSetting.DifficultyType difficultyType)
 	{
-		return new Result().FailNumber(difficultyType);
+		if (result == null)
+		{
+			result = new Result();
+		}
+		return result.FailNumber(difficultyType);
 	}
 
-	public static void Correct(bool isAllCorrect)
+	public void Correct(bool isAllCorrect)
 	{
-		new Result().Correct(isAllCorrect);
+		if (result == null)
+		{
+			result = new Result();
+		}
+		result.Correct(isAllCorrect);
 	}
 
-	public static void InCorrect(ref int missCount, int failNumber)
+	public void InCorrect(ref int missCount, int failNumber)
 	{
-		new Result().InCorrect(ref missCount, failNumber);
+		if (result == null)
+		{
+			result = new Result();
+		}
+		result.InCorrect(ref missCount, failNumber);
 	}
 
-	public static bool IsAllCorrect(int[,] cGrid, int[,] aGrid)
+	public bool IsAllCorrect(int[,] cGrid, int[,] aGrid)
 	{
-		return new Result().IsAllCorrect(cGrid, aGrid);
+		if (result == null)
+		{
+			result = new Result();
+		}
+		return result.IsAllCorrect(cGrid, aGrid);
 	}
 
-	public static void ToggleMemoMode(ref bool memoMode)
+	public void ToggleMemoMode(ref bool memoMode)
 	{
-		new MainGameInput().ToggleMemoMode(ref memoMode);
+		if (mainGameInput == null)
+		{
+			mainGameInput = new MainGameInput();
+		}
+		mainGameInput.ToggleMemoMode(ref memoMode);
 	}
 }

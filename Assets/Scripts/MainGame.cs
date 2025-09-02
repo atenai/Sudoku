@@ -24,9 +24,6 @@ public class MainGame : MonoBehaviour
 	/// </summary>
 	private int[,] questionGrid = new int[Cell_Number, Cell_Number];
 
-	// プレイヤーの現在入力状態
-	private int[,] currentGrid = new int[Cell_Number, Cell_Number];
-
 	/// <summary>
 	/// ミスカウント
 	/// </summary>
@@ -43,13 +40,19 @@ public class MainGame : MonoBehaviour
 	private bool memoMode = false;
 
 	//ここで座標を保持
-	private int selectedRow = -1;
-	private int selectedCol = -1;
+	private int currentRow = -1;
+	private int currentCol = -1;
+
+
+	private int oldRow = -1;
+	private int oldCol = -1;
 
 	/// <summary>
 	/// メインゲームUI
 	/// </summary>
 	[SerializeField] private MainGameUI mainGameUI;
+
+	MainGameLogicFacade mainGameLogicFacade = new MainGameLogicFacade();
 
 	/// <summary>
 	/// 初期化処理
@@ -61,29 +64,27 @@ public class MainGame : MonoBehaviour
 			//問題生成
 
 			// 1. 完全な数独を生成
-			MainGameLogicFacade.CreateAnswerGrid(0, 0, answerGrid);
+			mainGameLogicFacade.CreateAnswerGrid(0, 0, answerGrid);
 			Debug.Log("<color=red>答えを生成しました！</color>");
-			MainGameLogicFacade.DebugGrid(answerGrid);
+			mainGameLogicFacade.DebugGrid(answerGrid);
 
 			// 2. 完全解をコピーして問題用にする
 			System.Array.Copy(answerGrid, questionGrid, answerGrid.Length);
 
 			// 3. マスを1つずつ消して唯一解を保つ
-			int emptyCells = MainGameLogicFacade.EmptyCell(mainGameSetting.Difficulty);
-			MainGameLogicFacade.CreateQuestionGrid(questionGrid, emptyCells);
+			int emptyCells = mainGameLogicFacade.EmptyCell(mainGameSetting.Difficulty);
+			mainGameLogicFacade.CreateQuestionGrid(questionGrid, emptyCells);
 			Debug.Log("<color=blue>問題を生成しました！</color>");
-			MainGameLogicFacade.DebugGrid(questionGrid);
-
-			// 4. 現在のマスの状態を初期化
-			Array.Copy(questionGrid, currentGrid, questionGrid.Length);
+			mainGameLogicFacade.DebugGrid(questionGrid);
 
 			//マスUIを生成
 			mainGameUI.Board.CreateCell(answerGrid, questionGrid, (row, col) => OnCellSelected(row, col));
+			ClearCellSelected();
 
 			//ミスUIをセット
 			missCount = 0;
 			mainGameUI.MissUI.SetMissCount(missCount);
-			failNumber = MainGameLogicFacade.FailNumber(mainGameSetting.Difficulty);
+			failNumber = mainGameLogicFacade.FailNumber(mainGameSetting.Difficulty);
 			mainGameUI.MissUI.SetFailNumber(failNumber);
 
 			//ボタンにイベントを登録
@@ -93,26 +94,20 @@ public class MainGame : MonoBehaviour
 				{
 					Debug.Log($"入力ボタンがクリックされました: {number}");
 					OnNumberInput(number);
-					// 選択解除（どのマスもハイライトしない状態へ）
-					mainGameUI.Board.ClearSelected();
-					selectedRow = -1;
-					selectedCol = -1;
+					ClearCellSelected();
 				});
 			}
 
 			mainGameUI.ClearButton.Initialize(() =>
 			{
 				Debug.Log("クリアボタンがクリックされました");
-				mainGameUI.Board.ClearNumber(selectedRow, selectedCol);
-				// 選択解除（どのマスもハイライトしない状態へ）
-				mainGameUI.Board.ClearSelected();
-				selectedRow = -1;
-				selectedCol = -1;
+				mainGameUI.Board.ClearNumber(currentRow, currentCol);
+				ClearCellSelected();
 			});
 
 			mainGameUI.MemoButton.Initialize(GetMemoMode, () =>
 			{
-				MainGameLogicFacade.ToggleMemoMode(ref memoMode);
+				mainGameLogicFacade.ToggleMemoMode(ref memoMode);
 			});
 		}
 		else
@@ -135,12 +130,26 @@ public class MainGame : MonoBehaviour
 	/// </summary>
 	/// <param name="row"></param>
 	/// <param name="col"></param>
-	private void OnCellSelected(int row, int col)
+	private void OnCellSelected(int newRow, int newCol)
 	{
-		selectedRow = row;
-		selectedCol = col;
+		currentRow = newRow;
+		currentCol = newCol;
 
-		mainGameUI.Board.SetSelected(row, col);
+		mainGameUI.Board.SetSelectedHighlight(currentRow, currentCol, oldRow, oldCol);
+
+		oldRow = currentRow;
+		oldCol = currentCol;
+	}
+
+	/// <summary>
+	/// セルの選択を解除
+	/// </summary>
+	private void ClearCellSelected()
+	{
+		oldRow = -1;
+		oldCol = -1;
+		currentRow = -1;
+		currentCol = -1;
 	}
 
 	/// <summary>
@@ -149,27 +158,27 @@ public class MainGame : MonoBehaviour
 	/// <param name="inputNumber">入力数値</param>
 	private void OnNumberInput(int inputNumber)
 	{
-		if (selectedRow < 0 || selectedCol < 0) { return; }
-		if (questionGrid[selectedRow, selectedCol] != 0) { return; }// 固定マスは無視
+		if (currentRow < 0 || currentCol < 0) { return; }
+		if (questionGrid[currentRow, currentCol] != 0) { return; }// 固定マスは無視
 		if (memoMode)
 		{
-			mainGameUI.Board.ToggleMemo(selectedRow, selectedCol, inputNumber);
+			mainGameUI.Board.ToggleMemo(currentRow, currentCol, inputNumber);
 			return;
 		}
 
-		bool isCorrect = MainGameLogicFacade.CheckAnswer(answerGrid[selectedRow, selectedCol], inputNumber);
+		bool isCorrect = mainGameLogicFacade.CheckAnswer(answerGrid[currentRow, currentCol], inputNumber);
 		if (isCorrect == true)
 		{
 			// まず現在状態を更新
-			currentGrid[selectedRow, selectedCol] = inputNumber;
-			MainGameLogicFacade.Correct(MainGameLogicFacade.IsAllCorrect(currentGrid, answerGrid));
+			questionGrid[currentRow, currentCol] = inputNumber;
+			mainGameLogicFacade.Correct(mainGameLogicFacade.IsAllCorrect(questionGrid, answerGrid));
 		}
 		else
 		{
-			MainGameLogicFacade.InCorrect(ref missCount, failNumber);
+			mainGameLogicFacade.InCorrect(ref missCount, failNumber);
 			mainGameUI.MissUI.SetMissCount(missCount);
 		}
 
-		mainGameUI.Board.ShowNumber(selectedRow, selectedCol, inputNumber, isCorrect);
+		mainGameUI.Board.ShowNumber(currentRow, currentCol, inputNumber, isCorrect);
 	}
 }

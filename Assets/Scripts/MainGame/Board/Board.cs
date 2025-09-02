@@ -23,9 +23,6 @@ public class Board : MonoBehaviour
 	/// </summary>
 	private CellButton[,] cells = new CellButton[MainGame.Cell_Number, MainGame.Cell_Number];
 
-	private int selectedRow = -1;
-	private int selectedCol = -1;
-
 	/// <summary>
 	/// マスを作成
 	/// </summary>
@@ -44,10 +41,6 @@ public class Board : MonoBehaviour
 				cells[r, c] = cellButton;
 			}
 		}
-
-		// 初期は未選択
-		selectedRow = -1;
-		selectedCol = -1;
 	}
 
 	/// <summary>
@@ -98,32 +91,19 @@ public class Board : MonoBehaviour
 	}
 
 	/// <summary>
-	/// 全セルの選択を解除
-	/// </summary>
-	public void ClearSelected()
-	{
-		selectedRow = -1;
-		selectedCol = -1;
-	}
-
-	/// <summary>
 	/// 指定セルをハイライト（前回は解除）
 	/// </summary>
-	public void SetSelected(int row, int col)
+	public void SetSelectedHighlight(int currentRow, int currentCol, int oldRow, int oldCol)
 	{
 		if (cells == null) { return; }
 
 		//前回の選択を解除
-		if (0 <= selectedRow && 0 <= selectedCol)
+		if (0 <= oldRow && 0 <= oldCol)
 		{
-			cells[selectedRow, selectedCol]?.SetHighlight(false);
+			cells[oldRow, oldCol]?.SetHighlight(false);
 		}
 
 		//今回の選択をハイライト
-		cells[row, col]?.SetHighlight(true);
-
-		//記録
-		selectedRow = row;
-		selectedCol = col;
+		cells[currentRow, currentCol]?.SetHighlight(true);
 	}
 }
