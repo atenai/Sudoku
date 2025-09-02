@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
@@ -6,62 +5,54 @@ using UnityEngine.Events;
 
 public class CellButton : MonoBehaviour
 {
-	/// <summary>
-	/// セルの背景画像
-	/// </summary>
 	[SerializeField] private Image image;
-
-	/// <summary>
-	/// セルのボタン
-	/// </summary>
 	[SerializeField] private Button button;
-
-	/// <summary>
-	/// セルの数字テキスト
-	/// </summary>
 	[SerializeField] private TextMeshProUGUI numberText;
-
-	/// <summary>
-	/// 9個の小メモテキスト
-	/// </summary>
 	[SerializeField] private TextMeshProUGUI[] memoTexts;
 
-	/// <summary>
-	/// メモON/OFF管理
-	/// </summary>
 	private bool[] memoActive = new bool[9];
 
-	/// <summary>
-	/// 初期化処理
-	/// </summary>
-	/// <param name="row"></param>
-	/// <param name="col"></param>
-	/// <param name="answerNumber">答え数値</param>
-	/// <param name="questionNumber">問題数値</param>
-	/// <param name="unityAction">ボタンがクリックされたときの処理</param>
+	// ★ 追加：固定セル判定
+	public bool IsLocked { get; private set; } = false;
+
 	public void Initialize(int row, int col, int answerNumber, int questionNumber, UnityAction<int, int> unityAction)
 	{
+		if (button == null || numberText == null || image == null || memoTexts == null || memoTexts.Length < 9)
+		{
+			Debug.LogError($"[CellButton] 参照未設定あり: button={button != null}, numberText={numberText != null}, image={image != null}, memoTextsLen={(memoTexts == null ? 0 : memoTexts.Length)} ({name})");
+			return;
+		}
+
+		// 表示
 		numberText.text = questionNumber == 0 ? "" : questionNumber.ToString();
+
+		// ★ 固定セルかどうかを決めて interactable を反転
+		IsLocked = questionNumber != 0;
+		button.interactable = !IsLocked;
+
+		// クリック -> 選択通知
+		button.onClick.RemoveAllListeners();
 		button.onClick.AddListener(() =>
 		{
 			Debug.Log($"ボタン (縦:{row}, 横:{col}) がクリックされました!");
 			Debug.Log($"答え番号: {answerNumber}");
-			unityAction.Invoke(row, col);
+			if (unityAction != null)
+			{
+				unityAction.Invoke(row, col);
+			}
 		});
-
-		// 問題に数字があるセルは入力不可にする
-		button.interactable = questionNumber == 0;
 
 		// メモ初期化
 		ClearMemos();
 	}
 
-	/// <summary>
-	/// 入力番号
-	/// </summary>
-	/// <param name="inputNumber">入力番号</param>
 	public void SetNumber(int inputNumber)
 	{
+		if (numberText == null)
+		{
+			return;
+		}
+
 		Debug.Log("<color=green>入力番号 : " + inputNumber + "</color>");
 		numberText.text = inputNumber == 0 ? "" : inputNumber.ToString();
 
@@ -69,47 +60,47 @@ public class CellButton : MonoBehaviour
 		ClearMemos();
 	}
 
-	/// <summary>
-	/// メモ数字をセットする
-	/// </summary>
-	/// <param name="inputNumber">入力番号</param>
 	public void SetMemoNumber(int inputNumber)
 	{
-		//メモテキストは配列で0～8で指定している為-1している
+		// 以前: if (button.interactable) { return; } ←逆でした
+		if (IsLocked)
+		{
+			return;
+		}
+
+		if (memoTexts == null || memoTexts.Length < 9)
+		{
+			Debug.LogError($"[CellButton] memoTexts 未設定または数不足 ({name})");
+			return;
+		}
+
 		int index = inputNumber - 1;
-		//indexが0以下　または　indexが9と同じかそれ以上　なら切り上げる（だって対応したメモテキストが無いから）
-		if (index < 0 || 9 <= index)
+		if (index < 0 || index >= 9)
 		{
 			return;
 		}
 
 		memoActive[index] = !memoActive[index];
-
 		memoTexts[index].gameObject.SetActive(memoActive[index]);
-		//メモを入力したらメインの数字はOFFにする
-		numberText.text = "";
+
+		if (numberText != null)
+		{
+			numberText.text = "";
+		}
 	}
 
-	/// <summary>
-	/// 選択したセルをハイライト
-	/// </summary>
-	/// <param name="isSelected">選択中か？</param>
 	public void SetHighlight(bool isSelected)
 	{
 		if (isSelected)
 		{
-			SetColor(Color.cyan); //選択中は水色で表示
+			SetColor(Color.cyan);
 		}
 		else
 		{
-			SetColor(Color.white); //通常時は白
+			SetColor(Color.white);
 		}
 	}
 
-	/// <summary>
-	/// セルの背景色を変更する（正解・不正解・選択状態）
-	/// </summary>
-	/// <param name="color">セットする色</param>
 	public void SetColor(Color color)
 	{
 		if (image != null)
@@ -118,23 +109,29 @@ public class CellButton : MonoBehaviour
 		}
 	}
 
-	/// <summary>
-	/// 正解時にセルを固定
-	/// </summary>
 	public void SetLockCell()
 	{
-		button.interactable = false;
-		ClearMemos(); //正解時にメモも削除
+		IsLocked = true;
+		if (button != null)
+		{
+			button.interactable = false;
+		}
+		ClearMemos();
 	}
 
-	/// <summary>
-	/// 全メモをクリア
-	/// </summary>
 	private void ClearMemos()
 	{
+		if (memoTexts == null)
+		{
+			return;
+		}
+
 		for (int i = 0; i < memoTexts.Length; i++)
 		{
-			memoTexts[i].gameObject.SetActive(false);
+			if (memoTexts[i] != null)
+			{
+				memoTexts[i].gameObject.SetActive(false);
+			}
 			memoActive[i] = false;
 		}
 	}

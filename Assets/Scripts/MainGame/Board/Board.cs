@@ -82,12 +82,28 @@ public class Board : MonoBehaviour
 
 	public void ToggleMemo(int row, int col, int number)
 	{
-		if (cells == null) { return; }
-		CellButton cellButton = cells[row, col];
-		if (cellButton == null) { return; }
+		if (cells == null)
+		{
+			return;
+		}
+		if (row < 0 || col < 0 || row >= cells.GetLength(0) || col >= cells.GetLength(1))
+		{
+			Debug.LogWarning($"[Board] ToggleMemo 範囲外 row={row} col={col}");
+			return;
+		}
 
-		cellButton.SetMemoNumber(number);
-		cellButton.SetColor(Color.white);
+		CellButton cell = cells[row, col];
+		if (cell == null)
+		{
+			return;
+		}
+		if (cell.IsLocked)
+		{
+			return;
+		}
+
+		cell.SetMemoNumber(number);
+		cell.SetColor(Color.white);
 	}
 
 	/// <summary>
