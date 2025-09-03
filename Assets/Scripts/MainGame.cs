@@ -52,7 +52,7 @@ public class MainGame : MonoBehaviour
 	/// </summary>
 	[SerializeField] private MainGameUIFacade mainGameUIFacade;
 
-	MainGameLogicFacade mainGameLogicFacade = new MainGameLogicFacade();
+	private MainGameLogicFacade mainGameLogicFacade = new MainGameLogicFacade();
 
 	/// <summary>
 	/// 初期化処理
@@ -120,7 +120,7 @@ public class MainGame : MonoBehaviour
 	/// メモモードの取得
 	/// </summary>
 	/// <returns></returns>
-	public bool GetMemoMode()
+	private bool GetMemoMode()
 	{
 		return memoMode;
 	}
