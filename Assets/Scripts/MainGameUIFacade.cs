@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using System;
 
-public class MainGameUI : MonoBehaviour
+public class MainGameUIFacade : MonoBehaviour
 {
 	/// <summary>
 	/// ボード

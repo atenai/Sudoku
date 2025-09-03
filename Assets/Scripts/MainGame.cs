@@ -50,7 +50,7 @@ public class MainGame : MonoBehaviour
 	/// <summary>
 	/// メインゲームUI
 	/// </summary>
-	[SerializeField] private MainGameUI mainGameUI;
+	[SerializeField] private MainGameUIFacade mainGameUIFacade;
 
 	MainGameLogicFacade mainGameLogicFacade = new MainGameLogicFacade();
 
@@ -78,19 +78,19 @@ public class MainGame : MonoBehaviour
 			mainGameLogicFacade.DebugGrid(questionGrid);
 
 			//マスUIを生成
-			mainGameUI.CreateCell(answerGrid, questionGrid, (row, col) => OnCellSelected(row, col));
+			mainGameUIFacade.CreateCell(answerGrid, questionGrid, (row, col) => OnCellSelected(row, col));
 			ClearCellSelected();
 
 			//ミスUIをセット
 			missCount = 0;
-			mainGameUI.SetMissCount(missCount);
+			mainGameUIFacade.SetMissCount(missCount);
 			failNumber = mainGameLogicFacade.FailNumber(mainGameSetting.Difficulty);
-			mainGameUI.SetFailNumber(failNumber);
+			mainGameUIFacade.SetFailNumber(failNumber);
 
 			//ボタンにイベントを登録
-			for (int i = 0; i < mainGameUI.GetInputNumberButtonsLength(); i++)
+			for (int i = 0; i < mainGameUIFacade.GetInputNumberButtonsLength(); i++)
 			{
-				mainGameUI.InputNumberButtonInitialize(i, (int number) =>
+				mainGameUIFacade.InputNumberButtonInitialize(i, (int number) =>
 				{
 					Debug.Log($"入力ボタンがクリックされました: {number}");
 					OnNumberInput(number);
@@ -98,14 +98,14 @@ public class MainGame : MonoBehaviour
 				});
 			}
 
-			mainGameUI.ClearButtonInitialize(() =>
+			mainGameUIFacade.ClearButtonInitialize(() =>
 			{
 				Debug.Log("クリアボタンがクリックされました");
-				mainGameUI.ClearNumber(currentRow, currentCol);
+				mainGameUIFacade.ClearNumber(currentRow, currentCol);
 				ClearCellSelected();
 			});
 
-			mainGameUI.MemoButtonInitialize(GetMemoMode, () =>
+			mainGameUIFacade.MemoButtonInitialize(GetMemoMode, () =>
 			{
 				mainGameLogicFacade.ToggleMemoMode(ref memoMode);
 			});
@@ -135,7 +135,7 @@ public class MainGame : MonoBehaviour
 		currentRow = newRow;
 		currentCol = newCol;
 
-		mainGameUI.SetSelectedHighlight(currentRow, currentCol, oldRow, oldCol);
+		mainGameUIFacade.SetSelectedHighlight(currentRow, currentCol, oldRow, oldCol);
 
 		oldRow = currentRow;
 		oldCol = currentCol;
@@ -162,7 +162,7 @@ public class MainGame : MonoBehaviour
 		if (questionGrid[currentRow, currentCol] != 0) { return; }// 固定マスは無視
 		if (memoMode)
 		{
-			mainGameUI.ToggleMemo(currentRow, currentCol, inputNumber);
+			mainGameUIFacade.ToggleMemo(currentRow, currentCol, inputNumber);
 			return;
 		}
 
@@ -176,9 +176,9 @@ public class MainGame : MonoBehaviour
 		else
 		{
 			mainGameLogicFacade.InCorrect(ref missCount, failNumber);
-			mainGameUI.SetMissCount(missCount);
+			mainGameUIFacade.SetMissCount(missCount);
 		}
 
-		mainGameUI.ShowNumber(currentRow, currentCol, inputNumber, isCorrect);
+		mainGameUIFacade.ShowNumber(currentRow, currentCol, inputNumber, isCorrect);
 	}
 }

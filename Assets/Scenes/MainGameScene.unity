@@ -2496,7 +2496,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boardTransform: {fileID: 1017346345}
   cellButtonPrefab: {fileID: 1006129044220685062, guid: 8d05f4575a1e1b640a1d57fdbd7c7423, type: 3}
-  mainGame: {fileID: 1275434859}
 --- !u!1 &1063595147
 GameObject:
   m_ObjectHideFlags: 0
@@ -2746,7 +2745,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f00fb85048fef0a408e8a85dca19a328, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainGameUI: {fileID: 1275434860}
+  mainGameUIFacade: {fileID: 1275434860}
 --- !u!114 &1275434860
 MonoBehaviour:
   m_ObjectHideFlags: 0
