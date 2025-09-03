@@ -67,17 +67,4 @@ public class MemoButton : MonoBehaviour
 			}
 		}
 	}
-
-	public void SetVisual(bool isOn)
-	{
-		// Initialize で渡された getMemoMode と無関係に、外部命令で見た目を更新したいとき用
-		if (text != null)
-		{
-			text.text = isOn ? "Memo: ON" : "Memo: OFF";
-		}
-		if (image != null)
-		{
-			image.color = isOn ? Color.green : Color.white;
-		}
-	}
 }

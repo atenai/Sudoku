@@ -54,9 +54,6 @@ public class MainGame : MonoBehaviour
 
 	MainGameLogicFacade mainGameLogicFacade = new MainGameLogicFacade();
 
-	// ★ 追加：UIイベントハブ
-	private GameEventHub uiEvents = new GameEventHub();
-
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
@@ -80,57 +77,38 @@ public class MainGame : MonoBehaviour
 			Debug.Log("<color=blue>問題を生成しました！</color>");
 			mainGameLogicFacade.DebugGrid(questionGrid);
 
+			//マスUIを生成
+			mainGameUI.Board.CreateCell(answerGrid, questionGrid, (row, col) => OnCellSelected(row, col));
+			ClearCellSelected();
 
-			//============================================================//
-			// Start() 抜粋（この順で）
-			mainGameUI.Bind(uiEvents); // ① Bind
-
-			uiEvents.OnCellSelectedFromUI += (newRow, newCol) =>
-			{
-				currentRow = newRow;
-				currentCol = newCol;
-				uiEvents.RaiseSelectionChanged(currentRow, currentCol, oldRow, oldCol);
-				oldRow = currentRow;
-				oldCol = currentCol;
-			};
-
-			uiEvents.RaiseBoardInitialized(answerGrid, questionGrid); // ② Raise（空振り防止）
+			//ミスUIをセット
 			missCount = 0;
+			mainGameUI.MissUI.SetMissCount(missCount);
 			failNumber = mainGameLogicFacade.FailNumber(mainGameSetting.Difficulty);
-			uiEvents.RaiseMissCountChanged(missCount, failNumber);
+			mainGameUI.MissUI.SetFailNumber(failNumber);
 
-			// ↓ ここで再度 Bind を呼ばないように（あなたのコードだと2回呼んでます）
-			mainGameUI.Initialize(
-				onNumberClick: number =>
+			//ボタンにイベントを登録
+			foreach (var InputNumberButton in mainGameUI.InputNumberButtons)
+			{
+				InputNumberButton.Initialize((int number) =>
 				{
+					Debug.Log($"入力ボタンがクリックされました: {number}");
 					OnNumberInput(number);
-					if (!memoMode)
-					{
-						ClearCellSelected();
-					}
-				},
-				onClearClick: () =>
-				{
-					if (currentRow < 0 || currentCol < 0)
-					{
-						return;
-					}
-					if (questionGrid[currentRow, currentCol] != 0)
-					{
-						return;
-					}
-					uiEvents.RaiseCellCleared(currentRow, currentCol);
-					questionGrid[currentRow, currentCol] = 0;
 					ClearCellSelected();
-				},
-				getMemoMode: GetMemoMode,
-				onToggleMemo: () =>
-				{
-					mainGameLogicFacade.ToggleMemoMode(ref memoMode);
-					uiEvents.RaiseMemoModeChanged(memoMode);
-				}
-			);
-			//============================================================//
+				});
+			}
+
+			mainGameUI.ClearButton.Initialize(() =>
+			{
+				Debug.Log("クリアボタンがクリックされました");
+				mainGameUI.Board.ClearNumber(currentRow, currentCol);
+				ClearCellSelected();
+			});
+
+			mainGameUI.MemoButton.Initialize(GetMemoMode, () =>
+			{
+				mainGameLogicFacade.ToggleMemoMode(ref memoMode);
+			});
 		}
 		else
 		{
@@ -174,37 +152,33 @@ public class MainGame : MonoBehaviour
 		currentCol = -1;
 	}
 
-	// MainGame.cs の OnNumberInput（メモ分岐を修正）
+	/// <summary>
+	/// 数字が入力されたときの処理
+	/// </summary>
+	/// <param name="inputNumber">入力数値</param>
 	private void OnNumberInput(int inputNumber)
 	{
-		if (currentRow < 0 || currentCol < 0)
-		{
-			return;
-		}
-		if (questionGrid[currentRow, currentCol] != 0)
-		{
-			return;
-		}
-
+		if (currentRow < 0 || currentCol < 0) { return; }
+		if (questionGrid[currentRow, currentCol] != 0) { return; }// 固定マスは無視
 		if (memoMode)
 		{
-			// ★ ここは通常入力イベントではなく、メモ専用イベント
-			uiEvents.RaiseMemoToggledAtCell(currentRow, currentCol, inputNumber);
+			mainGameUI.Board.ToggleMemo(currentRow, currentCol, inputNumber);
 			return;
 		}
 
 		bool isCorrect = mainGameLogicFacade.CheckAnswer(answerGrid[currentRow, currentCol], inputNumber);
 		if (isCorrect == true)
 		{
+			// まず現在状態を更新
 			questionGrid[currentRow, currentCol] = inputNumber;
 			mainGameLogicFacade.Correct(mainGameLogicFacade.IsAllCorrect(questionGrid, answerGrid));
 		}
 		else
 		{
 			mainGameLogicFacade.InCorrect(ref missCount, failNumber);
-			uiEvents.RaiseMissCountChanged(missCount, failNumber);
+			mainGameUI.MissUI.SetMissCount(missCount);
 		}
 
-		uiEvents.RaiseCellInputResult(currentRow, currentCol, inputNumber, isCorrect);
+		mainGameUI.Board.ShowNumber(currentRow, currentCol, inputNumber, isCorrect);
 	}
 }
