@@ -70,6 +70,11 @@ public class Board : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// セルの数字をクリア
+	/// </summary>
+	/// <param name="row"></param>
+	/// <param name="col"></param>
 	public void ClearNumber(int row, int col)
 	{
 		if (cells == null) { return; }
@@ -80,6 +85,12 @@ public class Board : MonoBehaviour
 		cellButton.SetColor(Color.white);
 	}
 
+	/// <summary>
+	/// メモをトグル
+	/// </summary>
+	/// <param name="row"></param>
+	/// <param name="col"></param>
+	/// <param name="number"></param>
 	public void ToggleMemo(int row, int col, int number)
 	{
 		if (cells == null) { return; }

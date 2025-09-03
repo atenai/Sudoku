@@ -78,19 +78,19 @@ public class MainGame : MonoBehaviour
 			mainGameLogicFacade.DebugGrid(questionGrid);
 
 			//マスUIを生成
-			mainGameUI.Board.CreateCell(answerGrid, questionGrid, (row, col) => OnCellSelected(row, col));
+			mainGameUI.CreateCell(answerGrid, questionGrid, (row, col) => OnCellSelected(row, col));
 			ClearCellSelected();
 
 			//ミスUIをセット
 			missCount = 0;
-			mainGameUI.MissUI.SetMissCount(missCount);
+			mainGameUI.SetMissCount(missCount);
 			failNumber = mainGameLogicFacade.FailNumber(mainGameSetting.Difficulty);
-			mainGameUI.MissUI.SetFailNumber(failNumber);
+			mainGameUI.SetFailNumber(failNumber);
 
 			//ボタンにイベントを登録
-			foreach (var InputNumberButton in mainGameUI.InputNumberButtons)
+			for (int i = 0; i < mainGameUI.GetInputNumberButtonsLength(); i++)
 			{
-				InputNumberButton.Initialize((int number) =>
+				mainGameUI.InputNumberButtonInitialize(i, (int number) =>
 				{
 					Debug.Log($"入力ボタンがクリックされました: {number}");
 					OnNumberInput(number);
@@ -98,14 +98,14 @@ public class MainGame : MonoBehaviour
 				});
 			}
 
-			mainGameUI.ClearButton.Initialize(() =>
+			mainGameUI.ClearButtonInitialize(() =>
 			{
 				Debug.Log("クリアボタンがクリックされました");
-				mainGameUI.Board.ClearNumber(currentRow, currentCol);
+				mainGameUI.ClearNumber(currentRow, currentCol);
 				ClearCellSelected();
 			});
 
-			mainGameUI.MemoButton.Initialize(GetMemoMode, () =>
+			mainGameUI.MemoButtonInitialize(GetMemoMode, () =>
 			{
 				mainGameLogicFacade.ToggleMemoMode(ref memoMode);
 			});
@@ -135,7 +135,7 @@ public class MainGame : MonoBehaviour
 		currentRow = newRow;
 		currentCol = newCol;
 
-		mainGameUI.Board.SetSelectedHighlight(currentRow, currentCol, oldRow, oldCol);
+		mainGameUI.SetSelectedHighlight(currentRow, currentCol, oldRow, oldCol);
 
 		oldRow = currentRow;
 		oldCol = currentCol;
@@ -162,7 +162,7 @@ public class MainGame : MonoBehaviour
 		if (questionGrid[currentRow, currentCol] != 0) { return; }// 固定マスは無視
 		if (memoMode)
 		{
-			mainGameUI.Board.ToggleMemo(currentRow, currentCol, inputNumber);
+			mainGameUI.ToggleMemo(currentRow, currentCol, inputNumber);
 			return;
 		}
 
@@ -176,9 +176,9 @@ public class MainGame : MonoBehaviour
 		else
 		{
 			mainGameLogicFacade.InCorrect(ref missCount, failNumber);
-			mainGameUI.MissUI.SetMissCount(missCount);
+			mainGameUI.SetMissCount(missCount);
 		}
 
-		mainGameUI.Board.ShowNumber(currentRow, currentCol, inputNumber, isCorrect);
+		mainGameUI.ShowNumber(currentRow, currentCol, inputNumber, isCorrect);
 	}
 }

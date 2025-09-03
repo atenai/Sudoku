@@ -24,6 +24,9 @@ public class MemoButton : MonoBehaviour
 	/// </summary>
 	[SerializeField] private TextMeshProUGUI text;
 
+	/// <summary>
+	/// メモモードの取得
+	/// </summary>
 	Func<bool> memoMode;
 
 	/// <summary>
