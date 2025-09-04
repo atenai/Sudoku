@@ -12,10 +12,10 @@ using UnityEngine;
 /// </remarks>
 public class MainGameLogicFacade
 {
-	GenerateGrid generateGrid;
-	Judge judge;
-	Result result;
-	MainGameInput mainGameInput;
+	private GenerateGrid generateGrid;
+	private Judge judge;
+	private Result result;
+	private MainGameInput mainGameInput;
 
 	public int EmptyCell(MainGameSetting.DifficultyType difficultyType)
 	{
