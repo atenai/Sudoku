@@ -27,7 +27,7 @@ public class MemoButton : MonoBehaviour
 	/// <summary>
 	/// メモモードの取得
 	/// </summary>
-	Func<bool> memoMode;
+	private Func<bool> memoMode;
 
 	/// <summary>
 	/// 初期化処理

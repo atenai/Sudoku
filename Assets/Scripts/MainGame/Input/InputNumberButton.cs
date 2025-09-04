@@ -8,7 +8,7 @@ using UnityEngine.Events;
 public class InputNumberButton : MonoBehaviour
 {
 	[SerializeField] private Button button;
-	[SerializeField] int number;
+	[SerializeField] private int number;
 
 	/// <summary>
 	/// 初期化処理

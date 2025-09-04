@@ -58,16 +58,16 @@ public class Result
 	/// <summary>
 	/// 全てのマスが正解かどうか？
 	/// </summary>
-	/// <param name="cGrid">現在のグリッド</param>
+	/// <param name="qGrid">問題グリッド</param>
 	/// <param name="aGrid">答えグリッド</param>
 	/// <returns>全てのマスが正解しているならtrue 一つでも不正解または空ならfalse</returns>
-	public bool IsAllCorrect(int[,] cGrid, int[,] aGrid)
+	public bool IsAllCorrect(int[,] qGrid, int[,] aGrid)
 	{
 		for (int r = 0; r < MainGame.Cell_Number; r++)
 		{
 			for (int c = 0; c < MainGame.Cell_Number; c++)
 			{
-				if (cGrid[r, c] != aGrid[r, c])
+				if (qGrid[r, c] != aGrid[r, c])
 				{
 					return false;
 				}
