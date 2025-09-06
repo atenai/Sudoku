@@ -81,12 +81,16 @@ public class Board : MonoBehaviour
 		{
 			//正解時の表示処理
 			cellButton.SetLockCell();
-			cellButton.SetColor(Color.green);
+			cellButton.SetCurrentColorType(CellButton.ColorType.Correct);
+			cellButton.SetOldColorType(CellButton.ColorType.Correct);
+			cellButton.ViewCurrentColor();
 		}
 		else
 		{
 			//不正解時の表示処理
-			cellButton.SetColor(Color.red);
+			cellButton.SetCurrentColorType(CellButton.ColorType.Incorrect);
+			cellButton.SetOldColorType(CellButton.ColorType.Incorrect);
+			cellButton.ViewCurrentColor();
 		}
 	}
 
@@ -102,7 +106,9 @@ public class Board : MonoBehaviour
 		if (cellButton == null) { return; }
 
 		cellButton.SetNumber(0);
-		cellButton.SetColor(Color.white);
+		cellButton.SetCurrentColorType(CellButton.ColorType.Normal);
+		cellButton.SetOldColorType(CellButton.ColorType.Normal);
+		cellButton.ViewCurrentColor();
 	}
 
 	/// <summary>
@@ -118,7 +124,9 @@ public class Board : MonoBehaviour
 		if (cellButton == null) { return; }
 
 		cellButton.SetMemoNumber(number);
-		cellButton.SetColor(Color.white);
+		cellButton.SetCurrentColorType(CellButton.ColorType.Normal);
+		cellButton.SetOldColorType(CellButton.ColorType.Normal);
+		cellButton.ViewCurrentColor();
 	}
 
 	/// <summary>

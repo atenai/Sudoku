@@ -6,6 +6,17 @@ using UnityEngine.Events;
 
 public class CellButton : MonoBehaviour
 {
+	public enum ColorType
+	{
+		Normal,
+		Select,
+		Correct,
+		Incorrect
+	}
+
+	public ColorType currentColorType = ColorType.Normal;
+	public ColorType oldColorType = ColorType.Normal;
+
 	/// <summary>
 	/// セルの背景画像
 	/// </summary>
@@ -98,23 +109,53 @@ public class CellButton : MonoBehaviour
 	{
 		if (isSelected)
 		{
-			SetColor(Color.cyan); //選択中は水色で表示
+			SetCurrentColorType(ColorType.Select);
 		}
 		else
 		{
-			SetColor(Color.white); //通常時は白
+			SetCurrentColorType(oldColorType);
 		}
+		ViewCurrentColor();
+	}
+
+	public void SetCurrentColorType(ColorType colorType)
+	{
+		currentColorType = colorType;
+	}
+
+	public void SetOldColorType(ColorType colorType)
+	{
+		oldColorType = colorType;
+	}
+
+	public void ViewCurrentColor()
+	{
+		SetColor(currentColorType);
 	}
 
 	/// <summary>
 	/// セルの背景色を変更する（正解・不正解・選択状態）
 	/// </summary>
 	/// <param name="color">セットする色</param>
-	public void SetColor(Color color)
+	private void SetColor(ColorType colorType)
 	{
-		if (image != null)
+		switch (colorType)
 		{
-			image.color = color;
+			case ColorType.Normal:
+				image.color = Color.white;
+				break;
+			case ColorType.Select:
+				image.color = Color.cyan;
+				break;
+			case ColorType.Correct:
+				image.color = Color.green;
+				break;
+			case ColorType.Incorrect:
+				image.color = Color.red;
+				break;
+			default:
+				image.color = Color.white;
+				break;
 		}
 	}
 
