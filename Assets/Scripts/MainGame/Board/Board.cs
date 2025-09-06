@@ -23,6 +23,10 @@ public class Board : MonoBehaviour
 	/// </summary>
 	private CellButton[,] cells = new CellButton[MainGame.Cell_Number, MainGame.Cell_Number];
 
+	private Transform[,] blocks = new Transform[MainGame.Separator_Block, MainGame.Separator_Block];
+
+	[SerializeField] private Transform[] block;
+
 	/// <summary>
 	/// マスを作成
 	/// </summary>
@@ -30,12 +34,28 @@ public class Board : MonoBehaviour
 	/// <param name="qGrid">問題グリッド</param>
 	public void CreateCell(int[,] aGrid, int[,] qGrid, UnityAction<int, int> unityAction)
 	{
+		blocks[0, 0] = block[0];
+		blocks[0, 1] = block[1];
+		blocks[0, 2] = block[2];
+		blocks[1, 0] = block[3];
+		blocks[1, 1] = block[4];
+		blocks[1, 2] = block[5];
+		blocks[2, 0] = block[6];
+		blocks[2, 1] = block[7];
+		blocks[2, 2] = block[8];
+
 		for (int r = 0; r < MainGame.Cell_Number; r++)
 		{
 			for (int c = 0; c < MainGame.Cell_Number; c++)
 			{
+				//どの親ブロックに所属するか
+				int blockRow = r / MainGame.Separator_Block;
+				int blockCol = c / MainGame.Separator_Block;
+				Transform parentBlock = blocks[blockRow, blockCol];
+
+				//マスを生成
 				GameObject newButton = Instantiate(cellButtonPrefab);
-				newButton.transform.SetParent(boardTransform, false);
+				newButton.transform.SetParent(parentBlock, false);
 				CellButton cellButton = newButton.GetComponent<CellButton>();
 				cellButton.Initialize(r, c, aGrid[r, c], qGrid[r, c], unityAction);
 				cells[r, c] = cellButton;

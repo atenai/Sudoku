@@ -5,11 +5,6 @@ using UnityEngine;
 public class GenerateGrid
 {
 	/// <summary>
-	/// 区切りブロック
-	/// </summary>
-	private const int Separator_Block = 3;
-
-	/// <summary>
 	/// コンストラクタ
 	/// </summary>
 	public GenerateGrid() { }
@@ -96,11 +91,11 @@ public class GenerateGrid
 			if (grid[i, col] == num) { return false; }// 列に同じ数字があるか
 		}
 
-		int startRow = row / Separator_Block * Separator_Block;
-		int startCol = col / Separator_Block * Separator_Block;
-		for (int r = 0; r < Separator_Block; r++)
+		int startRow = row / MainGame.Separator_Block * MainGame.Separator_Block;
+		int startCol = col / MainGame.Separator_Block * MainGame.Separator_Block;
+		for (int r = 0; r < MainGame.Separator_Block; r++)
 		{
-			for (int c = 0; c < Separator_Block; c++)
+			for (int c = 0; c < MainGame.Separator_Block; c++)
 			{
 				if (grid[startRow + r, startCol + c] == num) { return false; }// 3×3ブロックに同じ数字があるか
 			}

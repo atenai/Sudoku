@@ -15,6 +15,11 @@ public class MainGame : MonoBehaviour
 	public static readonly int Cell_Number = 9;
 
 	/// <summary>
+	/// 区切りブロック
+	/// </summary>
+	public static readonly int Separator_Block = 3;
+
+	/// <summary>
 	/// 答えグリッド
 	/// </summary>
 	private int[,] answerGrid = new int[Cell_Number, Cell_Number];
