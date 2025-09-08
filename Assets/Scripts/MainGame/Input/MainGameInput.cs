@@ -18,4 +18,22 @@ public class MainGameInput
 		memoMode = !memoMode;
 		Debug.Log("メモモード: " + (memoMode ? "ON" : "OFF"));
 	}
+
+	/// <summary>
+	/// ヒント数をセットする
+	/// </summary>
+	/// <param name="difficultyType">設定した難易度</param>
+	public int HintCount(MainGameSetting.DifficultyType difficultyType)
+	{
+		switch (difficultyType)
+		{
+			case MainGameSetting.DifficultyType.Easy:
+				return 5;
+			case MainGameSetting.DifficultyType.Normal:
+				return 10;
+			case MainGameSetting.DifficultyType.Hard:
+				return 20;
+		}
+		return 0;
+	}
 }

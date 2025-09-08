@@ -106,4 +106,13 @@ public class MainGameLogicFacade
 		}
 		mainGameInput.ToggleMemoMode(ref memoMode);
 	}
+
+	public int HintCount(MainGameSetting.DifficultyType difficultyType)
+	{
+		if (mainGameInput == null)
+		{
+			mainGameInput = new MainGameInput();
+		}
+		return mainGameInput.HintCount(difficultyType);
+	}
 }

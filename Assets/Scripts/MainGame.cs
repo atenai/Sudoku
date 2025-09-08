@@ -44,13 +44,19 @@ public class MainGame : MonoBehaviour
 	/// </summary>
 	private bool memoMode = false;
 
-	//ここで座標を保持
+	/// <summary>
+	/// 現在のセル
+	/// </summary>
 	private int currentRow = -1;
 	private int currentCol = -1;
 
-
+	/// <summary>
+	/// 以前のセル
+	/// </summary>
 	private int oldRow = -1;
 	private int oldCol = -1;
+
+	private int hintCount = 5;
 
 	/// <summary>
 	/// メインゲームUI
@@ -91,6 +97,10 @@ public class MainGame : MonoBehaviour
 			mainGameUIFacade.SetMissCount(missCount);
 			failNumber = mainGameLogicFacade.FailNumber(mainGameSetting.Difficulty);
 			mainGameUIFacade.SetFailNumber(failNumber);
+
+			//ヒントUIをセット
+			hintCount = mainGameLogicFacade.HintCount(mainGameSetting.Difficulty);
+			mainGameUIFacade.SetHintCount(hintCount);
 
 			//ボタンにイベントを登録
 			for (int i = 0; i < mainGameUIFacade.GetInputNumberButtonsLength(); i++)
@@ -171,8 +181,8 @@ public class MainGame : MonoBehaviour
 	/// <param name="inputNumber">入力数値</param>
 	private void OnNumberInput(int inputNumber)
 	{
-		if (currentRow < 0 || currentCol < 0) { return; }
-		if (questionGrid[currentRow, currentCol] != 0) { return; }// 固定マスは無視
+		if (currentRow < 0 || currentCol < 0) { return; }//マスが選択されていない状態なら切り上げ
+		if (questionGrid[currentRow, currentCol] != 0) { return; }//既にマスが正解およびロック状態しているなら切り上げ
 		if (memoMode)
 		{
 			mainGameUIFacade.ToggleMemo(currentRow, currentCol, inputNumber);
@@ -197,13 +207,16 @@ public class MainGame : MonoBehaviour
 
 	private void UseSelectHint()
 	{
-		if (currentRow < 0 || currentCol < 0) { return; }
-		if (questionGrid[currentRow, currentCol] != 0) { return; }
+		if (currentRow < 0 || currentCol < 0) { return; }//マスが選択されていない状態なら切り上げ
+		if (questionGrid[currentRow, currentCol] != 0) { return; }//既にマスが正解およびロック状態しているなら切り上げ
+		if (hintCount <= 0) { return; }
 
 		int correctNumber = answerGrid[currentRow, currentCol];
 		questionGrid[currentRow, currentCol] = correctNumber;
 		mainGameLogicFacade.Correct(mainGameLogicFacade.IsAllCorrect(questionGrid, answerGrid));
 		mainGameUIFacade.ShowNumber(currentRow, currentCol, correctNumber, true);
 
+		hintCount--;
+		mainGameUIFacade.SetHintCount(hintCount);
 	}
 }

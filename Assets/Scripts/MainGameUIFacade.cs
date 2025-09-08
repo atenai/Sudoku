@@ -17,6 +17,11 @@ public class MainGameUIFacade : MonoBehaviour
 	[SerializeField] private MissUI missUI;
 
 	/// <summary>
+	/// ヒントUI
+	/// </summary>
+	[SerializeField] private HintUI hintUI;
+
+	/// <summary>
 	/// 数字入力ボタン
 	/// </summary>
 	[SerializeField] private InputNumberButton[] inputNumberButtons;
@@ -104,5 +109,10 @@ public class MainGameUIFacade : MonoBehaviour
 	public void HintButtonInitialize(UnityAction unityAction)
 	{
 		hintButton.Initialize(unityAction);
+	}
+
+	public void SetHintCount(int hintCount)
+	{
+		hintUI.SetHintCount(hintCount);
 	}
 }
