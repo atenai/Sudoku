@@ -23,12 +23,16 @@ public class TitleUI : MonoBehaviour
 	public Button NormalButton => normalButton;
 	public Button HardButton => hardButton;
 
+	private Vector3 defaultScale;
+
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
 	private void Start()
 	{
 		difficultyImage.gameObject.SetActive(false);
+
+		playButton.transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0), 0.5f, 10, 1).SetLoops(-1, LoopType.Restart).SetEase(Ease.Linear);
 		playButton.onClick.AddListener(OnClickPlay);
 
 		titleText.DOText("NumberPlace(Sudoku)", 1, scrambleMode: ScrambleMode.All).SetEase(Ease.Linear);
@@ -42,6 +46,9 @@ public class TitleUI : MonoBehaviour
 	{
 		playButton.gameObject.SetActive(false);
 		difficultyImage.gameObject.SetActive(true);
+		easyButton.transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0), 0.5f, 10, 1).SetLoops(-1, LoopType.Restart).SetEase(Ease.Linear);
+		normalButton.transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0), 0.5f, 10, 1).SetLoops(-1, LoopType.Restart).SetEase(Ease.Linear);
+		hardButton.transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0), 0.5f, 10, 1).SetLoops(-1, LoopType.Restart).SetEase(Ease.Linear);
 		easyButtonText.DOText("Easy", 1, scrambleMode: ScrambleMode.All).SetEase(Ease.Linear);
 		normalButtonText.DOText("Normal", 1, scrambleMode: ScrambleMode.All).SetEase(Ease.Linear);
 		hardButtonText.DOText("Hard", 1, scrambleMode: ScrambleMode.All).SetEase(Ease.Linear);
