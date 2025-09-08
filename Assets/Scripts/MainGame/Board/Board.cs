@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using DG.Tweening;
 
 /// <summary>
 /// ボードクラス
@@ -167,11 +168,14 @@ public class Board : MonoBehaviour
 				{
 					cells[r, c]?.SetRelatedHighlight(true);
 					cells[r, c]?.ViewCurrentColor();
+					cells[r, c]?.transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0), 0.5f, 10, 1).SetLoops(-1, LoopType.Restart).SetEase(Ease.Linear);
 				}
 				else
 				{
 					cells[r, c]?.SetRelatedHighlight(false);
 					cells[r, c]?.ViewCurrentColor();
+					cells[r, c]?.transform.DOKill();
+					cells[r, c]?.transform.localScale.Set(1, 1, 1);
 				}
 			}
 		}
