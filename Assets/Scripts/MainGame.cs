@@ -114,6 +114,12 @@ public class MainGame : MonoBehaviour
 			{
 				mainGameLogicFacade.ToggleMemoMode(ref memoMode);
 			});
+
+			mainGameUIFacade.HintButtonInitialize(() =>
+			{
+				Debug.Log("ヒントボタンがクリックされました");
+				UseSelectHint();
+			});
 		}
 		else
 		{
@@ -187,5 +193,17 @@ public class MainGame : MonoBehaviour
 		}
 
 		mainGameUIFacade.ShowNumber(currentRow, currentCol, inputNumber, isCorrect);
+	}
+
+	private void UseSelectHint()
+	{
+		if (currentRow < 0 || currentCol < 0) { return; }
+		if (questionGrid[currentRow, currentCol] != 0) { return; }
+
+		int correctNumber = answerGrid[currentRow, currentCol];
+		questionGrid[currentRow, currentCol] = correctNumber;
+		mainGameLogicFacade.Correct(mainGameLogicFacade.IsAllCorrect(questionGrid, answerGrid));
+		mainGameUIFacade.ShowNumber(currentRow, currentCol, correctNumber, true);
+
 	}
 }

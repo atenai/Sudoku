@@ -27,6 +27,11 @@ public class MainGameUIFacade : MonoBehaviour
 	[SerializeField] private ClearButton clearButton;
 
 	/// <summary>
+	/// ヒントボタン
+	/// </summary>
+	[SerializeField] private HintButton hintButton;
+
+	/// <summary>
 	/// メモボタン
 	/// </summary>
 	[SerializeField] private MemoButton memoButton;
@@ -94,5 +99,10 @@ public class MainGameUIFacade : MonoBehaviour
 	public void MemoButtonInitialize(Func<bool> memoMode, UnityAction unityAction)
 	{
 		memoButton.Initialize(memoMode, unityAction);
+	}
+
+	public void HintButtonInitialize(UnityAction unityAction)
+	{
+		hintButton.Initialize(unityAction);
 	}
 }
