@@ -41,9 +41,19 @@ public class MainGameUIFacade : MonoBehaviour
 		board.ClearNumber(row, col);
 	}
 
-	public void SetSelectedHighlight(int currentRow, int currentCol, int oldRow, int oldCol)
+	public void OldSelectHighlight(int oldRow, int oldCol)
 	{
-		board.SetSelectedHighlight(currentRow, currentCol, oldRow, oldCol);
+		board.OldSelectHighlight(oldRow, oldCol);
+	}
+
+	public void SetSelectedHighlight(int currentRow, int currentCol)
+	{
+		board.SetSelectedHighlight(currentRow, currentCol);
+	}
+
+	public void HighlightRelatedCells(int currentRow, int currentCol)
+	{
+		board.HighlightRelatedCells(currentRow, currentCol);
 	}
 
 	public void ToggleMemo(int row, int col, int number)

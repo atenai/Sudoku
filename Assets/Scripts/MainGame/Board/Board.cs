@@ -129,10 +129,7 @@ public class Board : MonoBehaviour
 		cellButton.ViewCurrentColor();
 	}
 
-	/// <summary>
-	/// 指定セルをハイライト（前回は解除）
-	/// </summary>
-	public void SetSelectedHighlight(int currentRow, int currentCol, int oldRow, int oldCol)
+	public void OldSelectHighlight(int oldRow, int oldCol)
 	{
 		if (cells == null) { return; }
 
@@ -141,8 +138,42 @@ public class Board : MonoBehaviour
 		{
 			cells[oldRow, oldCol]?.SetHighlight(false);
 		}
+	}
+
+	/// <summary>
+	/// 指定セルをハイライト（前回は解除）
+	/// </summary>
+	public void SetSelectedHighlight(int currentRow, int currentCol)
+	{
+		if (cells == null) { return; }
 
 		//今回の選択をハイライト
 		cells[currentRow, currentCol]?.SetHighlight(true);
+	}
+
+	public void HighlightRelatedCells(int currentRow, int currentCol)
+	{
+		if (cells == null) { return; }
+
+		for (var r = 0; r < MainGame.Cell_Number; r++)
+		{
+			for (var c = 0; c < MainGame.Cell_Number; c++)
+			{
+				var isSameRow = r == currentRow;
+				var isSameCol = c == currentCol;
+				var isSameBlock = (r / MainGame.Separator_Block == currentRow / MainGame.Separator_Block) && (c / MainGame.Separator_Block == currentCol / MainGame.Separator_Block);
+
+				if (isSameRow || isSameCol || isSameBlock)
+				{
+					cells[r, c]?.SetRelatedHighlight(true);
+					cells[r, c]?.ViewCurrentColor();
+				}
+				else
+				{
+					cells[r, c]?.SetRelatedHighlight(false);
+					cells[r, c]?.ViewCurrentColor();
+				}
+			}
+		}
 	}
 }

@@ -140,7 +140,9 @@ public class MainGame : MonoBehaviour
 		currentRow = newRow;
 		currentCol = newCol;
 
-		mainGameUIFacade.SetSelectedHighlight(currentRow, currentCol, oldRow, oldCol);
+		mainGameUIFacade.OldSelectHighlight(oldRow, oldCol);
+		mainGameUIFacade.HighlightRelatedCells(currentRow, currentCol);
+		mainGameUIFacade.SetSelectedHighlight(currentRow, currentCol);
 
 		oldRow = currentRow;
 		oldCol = currentCol;

@@ -11,7 +11,8 @@ public class CellButton : MonoBehaviour
 		Normal,
 		Select,
 		Correct,
-		Incorrect
+		Incorrect,
+		RelatedHighlight,
 	}
 
 	public ColorType currentColorType = ColorType.Normal;
@@ -118,6 +119,19 @@ public class CellButton : MonoBehaviour
 		ViewCurrentColor();
 	}
 
+	public void SetRelatedHighlight(bool isRelated)
+	{
+		if (isRelated)
+		{
+			SetCurrentColorType(ColorType.RelatedHighlight);
+		}
+		else
+		{
+			SetCurrentColorType(oldColorType);
+		}
+		ViewCurrentColor();
+	}
+
 	public void SetCurrentColorType(ColorType colorType)
 	{
 		currentColorType = colorType;
@@ -152,6 +166,9 @@ public class CellButton : MonoBehaviour
 				break;
 			case ColorType.Incorrect:
 				image.color = Color.red;
+				break;
+			case ColorType.RelatedHighlight:
+				image.color = Color.yellow;
 				break;
 			default:
 				image.color = Color.white;
