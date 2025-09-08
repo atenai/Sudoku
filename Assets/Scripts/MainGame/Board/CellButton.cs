@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using DG.Tweening;
 
 public class CellButton : MonoBehaviour
 {
@@ -53,7 +54,7 @@ public class CellButton : MonoBehaviour
 	/// <param name="unityAction">ボタンがクリックされたときの処理</param>
 	public void Initialize(int row, int col, int answerNumber, int questionNumber, UnityAction<int, int> unityAction)
 	{
-		numberText.text = questionNumber == 0 ? "" : questionNumber.ToString();
+		numberText.DOText(questionNumber == 0 ? "" : questionNumber.ToString(), 1, scrambleMode: ScrambleMode.All).SetEase(Ease.Linear);
 		button.onClick.AddListener(() =>
 		{
 			Debug.Log($"ボタン (縦:{row}, 横:{col}) がクリックされました!");
