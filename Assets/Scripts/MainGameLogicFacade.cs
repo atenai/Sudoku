@@ -33,11 +33,6 @@ public class MainGameLogicFacade
 		return result.FailNumber(difficultyType);
 	}
 
-	public void Correct(bool isAllCorrect)
-	{
-		result.Correct(isAllCorrect);
-	}
-
 	public bool InCorrect(ref int missCount, int failNumber)
 	{
 		return result.InCorrect(ref missCount, failNumber);

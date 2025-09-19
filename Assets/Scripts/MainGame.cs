@@ -133,8 +133,8 @@ public class MainGame : MonoBehaviour
 		}
 		else
 		{
+			mainGameUIFacade.SetTimerText(0, 0f);
 			Debug.Log("<color=red>ゲームオーバー！</color>");
-			//ゲームオーバー処理
 		}
 	}
 
@@ -193,13 +193,19 @@ public class MainGame : MonoBehaviour
 		bool isCorrect = mainGameLogicFacade.CheckAnswer(answerGrid[currentRow, currentCol], inputNumber);
 		if (isCorrect == true)
 		{
-			// まず現在状態を更新
+			// まず現在の問題グリッドの状態を更新
 			questionGrid[currentRow, currentCol] = inputNumber;
-			mainGameLogicFacade.Correct(mainGameLogicFacade.IsAllCorrect(questionGrid, answerGrid));
+			if (mainGameLogicFacade.IsAllCorrect(questionGrid, answerGrid))
+			{
+				Debug.Log("<color=green>ゲームクリアー！</color>");
+			}
 		}
 		else
 		{
-			mainGameLogicFacade.InCorrect(ref missCount, failNumber);
+			if (mainGameLogicFacade.InCorrect(ref missCount, failNumber))
+			{
+				Debug.Log("<color=red>ゲームオーバー！</color>");
+			}
 			mainGameUIFacade.SetMissCount(missCount);
 		}
 
@@ -214,7 +220,10 @@ public class MainGame : MonoBehaviour
 
 		int correctNumber = answerGrid[currentRow, currentCol];
 		questionGrid[currentRow, currentCol] = correctNumber;
-		mainGameLogicFacade.Correct(mainGameLogicFacade.IsAllCorrect(questionGrid, answerGrid));
+		if (mainGameLogicFacade.IsAllCorrect(questionGrid, answerGrid))
+		{
+			Debug.Log("<color=green>ゲームクリアー！</color>");
+		}
 		mainGameUIFacade.ShowNumber(currentRow, currentCol, correctNumber, true);
 
 		hintCount--;

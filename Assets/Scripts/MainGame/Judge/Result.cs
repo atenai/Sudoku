@@ -28,30 +28,15 @@ public class Result
 	}
 
 	/// <summary>
-	/// 正解処理
-	/// </summary>
-	/// <param name="isAllCorrect">全てのマスが正解かどうか？</param>
-	public void Correct(bool isAllCorrect)
-	{
-		Debug.Log("<color=green>正解！</color>");
-		if (isAllCorrect)
-		{
-			Debug.Log("<color=green>ゲームクリアー！</color>");
-		}
-	}
-
-	/// <summary>
 	/// 不正解処理
 	/// </summary>
 	/// <param name="missCount">ミスカウント</param>
 	/// <param name="failNumber">失敗できる数</param>
 	public bool InCorrect(ref int missCount, int failNumber)
 	{
-		Debug.Log("<color=red>不正解！</color>");
 		missCount++;
 		if (failNumber <= missCount)
 		{
-			Debug.Log("<color=red>ゲームオーバー！</color>");
 			return true;
 		}
 		return false;
