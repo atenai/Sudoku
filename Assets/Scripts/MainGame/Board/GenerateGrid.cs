@@ -10,10 +10,33 @@ public class GenerateGrid
 	public GenerateGrid() { }
 
 	/// <summary>
+	/// 答えと問題のグリッドを生成します。
+	/// </summary>
+	/// <param name="answerGrid">答えグリッド</param>
+	/// <param name="questionGrid">問題グリッド</param>
+	/// <param name="mainGameSetting">ゲーム設定</param>
+	public void CreateGrid(int[,] answerGrid, int[,] questionGrid, MainGameSetting mainGameSetting)
+	{
+		// 1. 完全な数独を生成
+		CreateAnswerGrid(0, 0, answerGrid);
+		Debug.Log("<color=red>答えを生成しました！</color>");
+		DebugGrid(answerGrid);
+
+		// 2. 完全解をコピーして問題用にする
+		System.Array.Copy(answerGrid, questionGrid, answerGrid.Length);
+
+		// 3. マスを1つずつ消して唯一解を保つ
+		int emptyCells = EmptyCell(mainGameSetting.Difficulty);
+		CreateQuestionGrid(questionGrid, emptyCells);
+		Debug.Log("<color=blue>問題を生成しました！</color>");
+		DebugGrid(questionGrid);
+	}
+
+	/// <summary>
 	/// 空白数を設定
 	/// </summary>
 	/// <param name="difficultyType"></param>
-	public int EmptyCell(MainGameSetting.DifficultyType difficultyType)
+	private int EmptyCell(MainGameSetting.DifficultyType difficultyType)
 	{
 		switch (difficultyType)
 		{
@@ -42,7 +65,7 @@ public class GenerateGrid
 	/// <param name="col"></param>
 	/// <param name="aGrid"></param>
 	/// <returns></returns>
-	public bool CreateAnswerGrid(int row, int col, int[,] aGrid)
+	private bool CreateAnswerGrid(int row, int col, int[,] aGrid)
 	{
 		if (row == MainGame.Cell_Number)
 		{
@@ -150,7 +173,7 @@ public class GenerateGrid
 	///6.空白数が目標に達したら終了
 	///removed が emptyCell に達したら処理を終了します。
 	/// </summary>
-	public void CreateQuestionGrid(int[,] qGrid, int emptyCell)
+	private void CreateQuestionGrid(int[,] qGrid, int emptyCell)
 	{
 		List<Vector2Int> cells = new List<Vector2Int>();
 		for (int r = 0; r < MainGame.Cell_Number; r++)
@@ -297,7 +320,7 @@ public class GenerateGrid
 	/// デバッグ用：グリッドの内容をコンソールに出力します。
 	/// </summary>
 	/// <param name="grid">デバッグログに表示したいグリッド</param>
-	public void DebugGrid(int[,] grid)
+	private void DebugGrid(int[,] grid)
 	{
 		string s = "";
 		for (int r = 0; r < MainGame.Cell_Number; r++)

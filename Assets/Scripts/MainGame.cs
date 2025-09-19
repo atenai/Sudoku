@@ -73,20 +73,7 @@ public class MainGame : MonoBehaviour
 		if (GameManager.SingletonInstance.GetSetting() is MainGameSetting mainGameSetting)
 		{
 			//問題生成
-
-			// 1. 完全な数独を生成
-			mainGameLogicFacade.CreateAnswerGrid(0, 0, answerGrid);
-			Debug.Log("<color=red>答えを生成しました！</color>");
-			mainGameLogicFacade.DebugGrid(answerGrid);
-
-			// 2. 完全解をコピーして問題用にする
-			System.Array.Copy(answerGrid, questionGrid, answerGrid.Length);
-
-			// 3. マスを1つずつ消して唯一解を保つ
-			int emptyCells = mainGameLogicFacade.EmptyCell(mainGameSetting.Difficulty);
-			mainGameLogicFacade.CreateQuestionGrid(questionGrid, emptyCells);
-			Debug.Log("<color=blue>問題を生成しました！</color>");
-			mainGameLogicFacade.DebugGrid(questionGrid);
+			mainGameLogicFacade.CreateGrid(answerGrid, questionGrid, mainGameSetting);
 
 			//マスUIを生成
 			mainGameUIFacade.CreateCell(answerGrid, questionGrid, (row, col) => OnCellSelected(row, col));
@@ -109,7 +96,6 @@ public class MainGame : MonoBehaviour
 				OnNumberInput(number);
 				ClearCellSelected();
 			});
-
 
 			mainGameUIFacade.ClearButtonInitialize(() =>
 			{

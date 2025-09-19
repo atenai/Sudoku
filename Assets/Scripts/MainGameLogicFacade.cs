@@ -17,24 +17,9 @@ public class MainGameLogicFacade
 	private Result result = new Result();
 	private MainGameInput mainGameInput = new MainGameInput();
 
-	public int EmptyCell(MainGameSetting.DifficultyType difficultyType)
+	public void CreateGrid(int[,] answerGrid, int[,] questionGrid, MainGameSetting mainGameSetting)
 	{
-		return generateGrid.EmptyCell(difficultyType);
-	}
-
-	public void CreateAnswerGrid(int row, int col, int[,] aGrid)
-	{
-		generateGrid.CreateAnswerGrid(row, col, aGrid);
-	}
-
-	public void CreateQuestionGrid(int[,] qGrid, int emptyCell)
-	{
-		generateGrid.CreateQuestionGrid(qGrid, emptyCell);
-	}
-
-	public void DebugGrid(int[,] grid)
-	{
-		generateGrid.DebugGrid(grid);
+		generateGrid.CreateGrid(answerGrid, questionGrid, mainGameSetting);
 	}
 
 	public bool CheckAnswer(int answerNumber, int inputNumber)
