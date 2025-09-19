@@ -122,24 +122,36 @@ public class Board : MonoBehaviour
 		cellButton.ViewCurrentColor();
 	}
 
-	public void OldSelectHighlight(int oldRow, int oldCol)
+	/// <summary>
+	/// セルのハイライトを消す
+	/// </summary>
+	/// <param name="row"></param>
+	/// <param name="col"></param>
+	public void OldSelectHighlight(int row, int col)
 	{
 		//前回の選択を解除
-		if (0 <= oldRow && 0 <= oldCol)
+		if (0 <= row && 0 <= col)
 		{
-			cells[oldRow, oldCol]?.SetHighlight(false);
+			cells[row, col].SetHighlight(false);
 		}
 	}
 
 	/// <summary>
-	/// 指定セルをハイライト（前回は解除）
+	/// セルをハイライトする
 	/// </summary>
-	public void SetSelectedHighlight(int currentRow, int currentCol)
+	/// <param name="row"></param>
+	/// <param name="col"></param>
+	public void SetSelectedHighlight(int row, int col)
 	{
 		//今回の選択をハイライト
-		cells[currentRow, currentCol]?.SetHighlight(true);
+		cells[row, col].SetHighlight(true);
 	}
 
+	/// <summary>
+	/// 関連するセルをハイライトする
+	/// </summary>
+	/// <param name="currentRow"></param>
+	/// <param name="currentCol"></param>
 	public void HighlightRelatedCells(int currentRow, int currentCol)
 	{
 		for (var r = 0; r < MainGame.Cell_Number; r++)
@@ -152,16 +164,16 @@ public class Board : MonoBehaviour
 
 				if (isSameRow || isSameCol || isSameBlock)
 				{
-					cells[r, c]?.SetRelatedHighlight(true);
-					cells[r, c]?.ViewCurrentColor();
-					cells[r, c]?.transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0), 0.5f, 10, 1).SetLoops(-1, LoopType.Restart).SetEase(Ease.Linear);
+					cells[r, c].SetRelatedHighlight(true);
+					cells[r, c].ViewCurrentColor();
+					cells[r, c].transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0), 0.5f, 10, 1).SetLoops(-1, LoopType.Restart).SetEase(Ease.Linear);
 				}
 				else
 				{
-					cells[r, c]?.SetRelatedHighlight(false);
-					cells[r, c]?.ViewCurrentColor();
-					cells[r, c]?.transform.DOKill();
-					cells[r, c]?.transform.localScale.Set(1, 1, 1);
+					cells[r, c].SetRelatedHighlight(false);
+					cells[r, c].ViewCurrentColor();
+					cells[r, c].transform.DOKill();
+					cells[r, c].transform.localScale.Set(1, 1, 1);
 				}
 			}
 		}

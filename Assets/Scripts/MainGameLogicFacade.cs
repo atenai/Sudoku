@@ -16,6 +16,7 @@ public class MainGameLogicFacade
 	private Judge judge = new Judge();
 	private Result result = new Result();
 	private MainGameInput mainGameInput = new MainGameInput();
+	private Timer timer = new Timer();
 
 	public void CreateGrid(int[,] answerGrid, int[,] questionGrid, MainGameSetting mainGameSetting)
 	{
@@ -37,9 +38,9 @@ public class MainGameLogicFacade
 		result.Correct(isAllCorrect);
 	}
 
-	public void InCorrect(ref int missCount, int failNumber)
+	public bool InCorrect(ref int missCount, int failNumber)
 	{
-		result.InCorrect(ref missCount, failNumber);
+		return result.InCorrect(ref missCount, failNumber);
 	}
 
 	public bool IsAllCorrect(int[,] cGrid, int[,] aGrid)
@@ -55,5 +56,25 @@ public class MainGameLogicFacade
 	public int HintCount(MainGameSetting.DifficultyType difficultyType)
 	{
 		return mainGameInput.HintCount(difficultyType);
+	}
+
+	public void InitTimerSystem(MainGameSetting.DifficultyType difficultyType)
+	{
+		timer.InitTimerSystem(difficultyType);
+	}
+
+	public bool UpdateTimerSystem()
+	{
+		return timer.UpdateTimerSystem();
+	}
+
+	public int GetMinute()
+	{
+		return timer.GetMinute();
+	}
+
+	public float GetSeconds()
+	{
+		return timer.GetSeconds();
 	}
 }

@@ -89,6 +89,10 @@ public class MainGame : MonoBehaviour
 			hintCount = mainGameLogicFacade.HintCount(mainGameSetting.Difficulty);
 			mainGameUIFacade.SetHintCount(hintCount);
 
+			//タイマーシステムを初期化
+			mainGameLogicFacade.InitTimerSystem(mainGameSetting.Difficulty);
+			mainGameUIFacade.SetTimerText(mainGameLogicFacade.GetMinute(), mainGameLogicFacade.GetSeconds());
+
 			//ボタンにイベントを登録	
 			mainGameUIFacade.InputNumberButtonInitialize((int number) =>
 			{
@@ -118,6 +122,19 @@ public class MainGame : MonoBehaviour
 		else
 		{
 			Debug.LogError("メインゲームに必要な値を取得できませんでした。");
+		}
+	}
+
+	private void Update()
+	{
+		if (mainGameLogicFacade.UpdateTimerSystem())
+		{
+			mainGameUIFacade.SetTimerText(mainGameLogicFacade.GetMinute(), mainGameLogicFacade.GetSeconds());
+		}
+		else
+		{
+			Debug.Log("<color=red>ゲームオーバー！</color>");
+			//ゲームオーバー処理
 		}
 	}
 

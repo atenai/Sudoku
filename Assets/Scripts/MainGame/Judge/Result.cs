@@ -45,14 +45,16 @@ public class Result
 	/// </summary>
 	/// <param name="missCount">ミスカウント</param>
 	/// <param name="failNumber">失敗できる数</param>
-	public void InCorrect(ref int missCount, int failNumber)
+	public bool InCorrect(ref int missCount, int failNumber)
 	{
 		Debug.Log("<color=red>不正解！</color>");
 		missCount++;
 		if (failNumber <= missCount)
 		{
 			Debug.Log("<color=red>ゲームオーバー！</color>");
+			return true;
 		}
+		return false;
 	}
 
 	/// <summary>

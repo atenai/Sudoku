@@ -41,6 +41,11 @@ public class MainGameUIFacade : MonoBehaviour
 	/// </summary>
 	[SerializeField] private MemoButton memoButton;
 
+	/// <summary>
+	/// タイマーUI
+	/// </summary>
+	[SerializeField] private TimerUI timerUI;
+
 	public void CreateCell(int[,] aGrid, int[,] qGrid, UnityAction<int, int> unityAction)
 	{
 		board.CreateCell(aGrid, qGrid, unityAction);
@@ -117,5 +122,10 @@ public class MainGameUIFacade : MonoBehaviour
 	public void SetHintCount(int hintCount)
 	{
 		hintUI.SetHintCount(hintCount);
+	}
+
+	public void SetTimerText(int minute, float seconds)
+	{
+		timerUI.SetTimerText(minute, seconds);
 	}
 }
