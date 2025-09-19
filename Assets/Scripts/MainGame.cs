@@ -102,16 +102,14 @@ public class MainGame : MonoBehaviour
 			hintCount = mainGameLogicFacade.HintCount(mainGameSetting.Difficulty);
 			mainGameUIFacade.SetHintCount(hintCount);
 
-			//ボタンにイベントを登録
-			for (int i = 0; i < mainGameUIFacade.GetInputNumberButtonsLength(); i++)
+			//ボタンにイベントを登録	
+			mainGameUIFacade.InputNumberButtonInitialize((int number) =>
 			{
-				mainGameUIFacade.InputNumberButtonInitialize(i, (int number) =>
-				{
-					Debug.Log($"入力ボタンがクリックされました: {number}");
-					OnNumberInput(number);
-					ClearCellSelected();
-				});
-			}
+				Debug.Log($"入力ボタンがクリックされました: {number}");
+				OnNumberInput(number);
+				ClearCellSelected();
+			});
+
 
 			mainGameUIFacade.ClearButtonInitialize(() =>
 			{

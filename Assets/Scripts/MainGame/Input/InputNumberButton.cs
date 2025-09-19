@@ -8,12 +8,11 @@ using UnityEngine.Events;
 public class InputNumberButton : MonoBehaviour
 {
 	[SerializeField] private Button button;
-	[SerializeField] private int number;
 
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	public void Initialize(UnityAction<int> unityAction)
+	public void Initialize(int number, UnityAction<int> unityAction)
 	{
 		button.onClick.AddListener(() => unityAction(number));
 	}

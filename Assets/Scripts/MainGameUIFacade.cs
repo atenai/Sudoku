@@ -86,9 +86,12 @@ public class MainGameUIFacade : MonoBehaviour
 		missUI.SetFailNumber(failNumber);
 	}
 
-	public void InputNumberButtonInitialize(int index, UnityAction<int> unityAction)
+	public void InputNumberButtonInitialize(UnityAction<int> unityAction)
 	{
-		inputNumberButtons[index].Initialize(unityAction);
+		for (int i = 0; i < GetInputNumberButtonsLength(); i++)
+		{
+			inputNumberButtons[i].Initialize(i + 1, unityAction);
+		}
 	}
 
 	public int GetInputNumberButtonsLength()
