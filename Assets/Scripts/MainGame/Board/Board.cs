@@ -10,11 +10,6 @@ using DG.Tweening;
 public class Board : MonoBehaviour
 {
 	/// <summary>
-	/// ボードのトランスフォーム
-	/// </summary>
-	[SerializeField] private Transform boardTransform;
-
-	/// <summary>
 	/// 各マスのプレハブ
 	/// </summary>
 	[SerializeField] private GameObject cellButtonPrefab;
@@ -141,16 +136,12 @@ public class Board : MonoBehaviour
 	/// </summary>
 	public void SetSelectedHighlight(int currentRow, int currentCol)
 	{
-		if (cells == null) { return; }
-
 		//今回の選択をハイライト
 		cells[currentRow, currentCol]?.SetHighlight(true);
 	}
 
 	public void HighlightRelatedCells(int currentRow, int currentCol)
 	{
-		if (cells == null) { return; }
-
 		for (var r = 0; r < MainGame.Cell_Number; r++)
 		{
 			for (var c = 0; c < MainGame.Cell_Number; c++)
