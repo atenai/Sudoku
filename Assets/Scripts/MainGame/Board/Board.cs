@@ -73,9 +73,7 @@ public class Board : MonoBehaviour
 	/// <param name="isCorrect"></param>
 	public void ShowNumber(int row, int col, int inputNumber, bool isCorrect)
 	{
-		if (cells == null) { return; }
 		CellButton cellButton = cells[row, col];
-		if (cellButton == null) { return; }
 
 		cellButton.SetNumber(inputNumber);
 		if (isCorrect)
@@ -102,14 +100,15 @@ public class Board : MonoBehaviour
 	/// <param name="col"></param>
 	public void ClearNumber(int row, int col)
 	{
-		if (cells == null) { return; }
-		CellButton cellButton = cells[row, col];
-		if (cellButton == null) { return; }
+		if (0 <= row && 0 <= col)
+		{
+			CellButton cellButton = cells[row, col];
 
-		cellButton.SetNumber(0);
-		cellButton.SetCurrentColorType(CellButton.ColorType.Normal);
-		cellButton.SetOldColorType(CellButton.ColorType.Normal);
-		cellButton.ViewCurrentColor();
+			cellButton.SetNumber(0);
+			cellButton.SetCurrentColorType(CellButton.ColorType.Normal);
+			cellButton.SetOldColorType(CellButton.ColorType.Normal);
+			cellButton.ViewCurrentColor();
+		}
 	}
 
 	/// <summary>
@@ -120,9 +119,7 @@ public class Board : MonoBehaviour
 	/// <param name="number"></param>
 	public void ToggleMemo(int row, int col, int number)
 	{
-		if (cells == null) { return; }
 		CellButton cellButton = cells[row, col];
-		if (cellButton == null) { return; }
 
 		cellButton.SetMemoNumber(number);
 		cellButton.SetCurrentColorType(CellButton.ColorType.Normal);
@@ -132,8 +129,6 @@ public class Board : MonoBehaviour
 
 	public void OldSelectHighlight(int oldRow, int oldCol)
 	{
-		if (cells == null) { return; }
-
 		//前回の選択を解除
 		if (0 <= oldRow && 0 <= oldCol)
 		{
