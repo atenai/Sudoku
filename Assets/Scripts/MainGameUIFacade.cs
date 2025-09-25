@@ -93,15 +93,10 @@ public class MainGameUIFacade : MonoBehaviour
 
 	public void InputNumberButtonInitialize(UnityAction<int> unityAction)
 	{
-		for (int i = 0; i < GetInputNumberButtonsLength(); i++)
+		for (int i = 0; i < inputNumberButtons.Length; i++)
 		{
 			inputNumberButtons[i].Initialize(i + 1, unityAction);
 		}
-	}
-
-	public int GetInputNumberButtonsLength()
-	{
-		return inputNumberButtons.Length;
 	}
 
 	public void ClearButtonInitialize(UnityAction unityAction)
