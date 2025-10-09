@@ -5,6 +5,10 @@ using UnityEngine;
 /// <summary>
 /// タイトルロジッククラス
 /// </summary>
+/// <remarks>
+/// タイトルのロジックを管理
+/// MVPパターンのModel（モデル）を担当
+/// </remarks>
 public class TitleLogic
 {
 	private const string MainGame_Scene_Name = "MainGameScene";

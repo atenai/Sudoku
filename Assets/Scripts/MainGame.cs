@@ -5,7 +5,7 @@ using UnityEngine;
 /// メインゲームクラス
 /// </summary>
 /// <remarks>
-/// 数独のシステム全体を管理
+/// 数独のやり取りを管理
 /// MVPパターンのPresenter（プレゼンター）を担当
 /// </remarks>
 public class MainGame : MonoBehaviour
@@ -49,14 +49,25 @@ public class MainGame : MonoBehaviour
 	/// 現在のセル
 	/// </summary>
 	private int currentRow = -1;
+
+	/// <summary>
+	/// 現在のセル
+	/// </summary>
 	private int currentCol = -1;
 
 	/// <summary>
 	/// 以前のセル
 	/// </summary>
 	private int oldRow = -1;
+
+	/// <summary>
+	/// 以前のセル
+	/// </summary>
 	private int oldCol = -1;
 
+	/// <summary>
+	/// ヒント数
+	/// </summary>
 	private int hintCount = 5;
 
 	/// <summary>
@@ -151,8 +162,8 @@ public class MainGame : MonoBehaviour
 	/// <summary>
 	/// セルが選択されたときの処理
 	/// </summary>
-	/// <param name="row"></param>
-	/// <param name="col"></param>
+	/// <param name="row">行</param>
+	/// <param name="col">列</param>
 	private void OnCellSelected(int newRow, int newCol)
 	{
 		currentRow = newRow;
@@ -213,6 +224,9 @@ public class MainGame : MonoBehaviour
 		mainGameUIFacade.ShowNumber(currentRow, currentCol, inputNumber, isCorrect);
 	}
 
+	/// <summary>
+	/// 選択中のマスにヒントを使用する
+	/// </summary>
 	private void UseSelectHint()
 	{
 		if (currentRow < 0 || currentCol < 0) { return; }//マスが選択されていない状態なら切り上げ

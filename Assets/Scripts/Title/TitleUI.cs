@@ -5,6 +5,13 @@ using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 
+/// <summary>
+/// タイトルUIクラス
+/// </summary>
+/// <remarks>
+/// タイトルのUIを管理
+/// MVPパターンのView（ビュー）を担当
+/// </remarks>
 public class TitleUI : MonoBehaviour
 {
 	[SerializeField] TextMeshProUGUI titleText;
@@ -22,8 +29,6 @@ public class TitleUI : MonoBehaviour
 	public Button EasyButton => easyButton;
 	public Button NormalButton => normalButton;
 	public Button HardButton => hardButton;
-
-	private Vector3 defaultScale;
 
 	/// <summary>
 	/// 初期化処理

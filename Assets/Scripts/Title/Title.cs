@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// タイトルクラス
+/// </summary>
+/// <remarks>
+/// タイトルのやり取りを管理
+/// MVPパターンのPresenter（プレゼンター）を担当
+/// </remarks>
 public class Title : MonoBehaviour
 {
 	[SerializeField] TitleUI titleUI;
