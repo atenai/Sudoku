@@ -6,6 +6,7 @@ using UnityEngine;
 /// </summary>
 /// <remarks>
 /// 数独のシステム全体を管理
+/// MVPパターンのPresenter（プレゼンター）を担当
 /// </remarks>
 public class MainGame : MonoBehaviour
 {

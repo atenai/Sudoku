@@ -4,6 +4,15 @@ using UnityEngine;
 using UnityEngine.Events;
 using System;
 
+/// <summary>
+/// メインゲームUIファサードクラス
+/// </summary>
+/// <remarks>
+/// ファサードパターンを使用したクラス
+/// 各サブクラスをここにまとめて、リストとして外部に公開する
+/// 数独のUI機能を管理
+/// MVPパターンのView（ビュー）を担当
+/// </remarks>
 public class MainGameUIFacade : MonoBehaviour
 {
 	/// <summary>
