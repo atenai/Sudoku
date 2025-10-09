@@ -6,6 +6,10 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// ゲームマネージャークラス
 /// </summary>
+/// <remarks>
+/// シーンの切り替えや、シーン間で必要な値の受け渡しを管理
+/// シングルトンパターンを担当
+/// </remarks>
 public class GameManager : MonoBehaviour
 {
 	//シングルトンで作成（ゲーム中に１つのみにする）
