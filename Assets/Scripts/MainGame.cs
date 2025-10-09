@@ -147,6 +147,7 @@ public class MainGame : MonoBehaviour
 		{
 			mainGameUIFacade.SetTimerText(0, 0f);
 			Debug.Log("<color=red>ゲームオーバー！</color>");
+			GameManager.SingletonInstance.ChangeScene(new GameOverSetting(), GameManager.SingletonInstance.GameOver_Scene_Name);
 		}
 	}
 
@@ -210,6 +211,7 @@ public class MainGame : MonoBehaviour
 			if (mainGameLogicFacade.IsAllCorrect(questionGrid, answerGrid))
 			{
 				Debug.Log("<color=green>ゲームクリアー！</color>");
+				GameManager.SingletonInstance.ChangeScene(new GameClearSetting(), GameManager.SingletonInstance.GameClear_Scene_Name);
 			}
 		}
 		else
@@ -217,6 +219,7 @@ public class MainGame : MonoBehaviour
 			if (mainGameLogicFacade.InCorrect(ref missCount, failNumber))
 			{
 				Debug.Log("<color=red>ゲームオーバー！</color>");
+				GameManager.SingletonInstance.ChangeScene(new GameOverSetting(), GameManager.SingletonInstance.GameOver_Scene_Name);
 			}
 			mainGameUIFacade.SetMissCount(missCount);
 		}
@@ -238,6 +241,7 @@ public class MainGame : MonoBehaviour
 		if (mainGameLogicFacade.IsAllCorrect(questionGrid, answerGrid))
 		{
 			Debug.Log("<color=green>ゲームクリアー！</color>");
+			GameManager.SingletonInstance.ChangeScene(new GameClearSetting(), GameManager.SingletonInstance.GameClear_Scene_Name);
 		}
 		mainGameUIFacade.ShowNumber(currentRow, currentCol, correctNumber, true);
 

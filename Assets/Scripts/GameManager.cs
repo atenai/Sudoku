@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// ゲームマネージャークラス
+/// </summary>
 public class GameManager : MonoBehaviour
 {
 	//シングルトンで作成（ゲーム中に１つのみにする）
 	private static GameManager singletonInstance = null;
 	public static GameManager SingletonInstance => singletonInstance;
+
+	public readonly string Title_Scene_Name = "TitleScene";
+	public readonly string MainGame_Scene_Name = "MainGameScene";
+	public readonly string GameClear_Scene_Name = "GameClearScene";
+	public readonly string GameOver_Scene_Name = "GameOverScene";
 
 	private ISetting setting;
 

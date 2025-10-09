@@ -11,14 +11,12 @@ using UnityEngine;
 /// </remarks>
 public class TitleLogic
 {
-	private const string MainGame_Scene_Name = "MainGameScene";
-
 	/// <summary>
 	/// イージーボタンを押した際の処理
 	/// </summary>
 	public void OnClickEasyButton()
 	{
-		GameManager.SingletonInstance.ChangeScene(new MainGameSetting(MainGameSetting.DifficultyType.Easy), MainGame_Scene_Name);
+		GameManager.SingletonInstance.ChangeScene(new MainGameSetting(MainGameSetting.DifficultyType.Easy), GameManager.SingletonInstance.MainGame_Scene_Name);
 	}
 
 	/// <summary>
@@ -26,7 +24,7 @@ public class TitleLogic
 	/// </summary>
 	public void OnClickNormalButton()
 	{
-		GameManager.SingletonInstance.ChangeScene(new MainGameSetting(MainGameSetting.DifficultyType.Normal), MainGame_Scene_Name);
+		GameManager.SingletonInstance.ChangeScene(new MainGameSetting(MainGameSetting.DifficultyType.Normal), GameManager.SingletonInstance.MainGame_Scene_Name);
 	}
 
 	/// <summary>
@@ -34,6 +32,6 @@ public class TitleLogic
 	/// </summary>
 	public void OnClickHardButton()
 	{
-		GameManager.SingletonInstance.ChangeScene(new MainGameSetting(MainGameSetting.DifficultyType.Hard), MainGame_Scene_Name);
+		GameManager.SingletonInstance.ChangeScene(new MainGameSetting(MainGameSetting.DifficultyType.Hard), GameManager.SingletonInstance.MainGame_Scene_Name);
 	}
 }
